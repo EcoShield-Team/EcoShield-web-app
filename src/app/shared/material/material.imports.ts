@@ -17,5 +17,5 @@ export const MATERIAL_IMPORTS = [
   MatInputModule,
   MatSnackBarModule,
   MatDialogModule,
-  MatTableModule
+  MatTableModule,
 ];

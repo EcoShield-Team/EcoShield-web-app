@@ -1,27 +1,14 @@
 <section class="history-section">
   <h2 class="section-title">Historial reciente</h2>
+
   <div class="history-list">
-    @for (item of historyItems(); track item.title; let i = $index) {
-      <div class="history-item">
-        <div class="history-item-info">
-          <mat-icon class="history-item-icon">image</mat-icon>
-          <div>
-            <h4 class="history-item-title">{{ item.title }}</h4>
-            <p class="history-item-subtitle">{{ item.subtitle }}</p>
-          </div>
-        </div>
-        <div class="history-item-actions">
-          <span [class]="item.statusClass" class="history-item-status">{{ item.status }}</span>
-          <button mat-button class="history-item-button">Ver detalle</button>
-        </div>
-      </div>
-      @if (i < historyItems().length - 1) {
-        <mat-divider></mat-divider>
-      }
+    @for (item of historyItems(); track item.title) {
+      <app-history-item [item]="item"></app-history-item>
     }
   </div>
+
   <div class="history-footer">
-    <button mat-button class="history-view-all-button">
+    <button mat-button class="history-view-all-button" routerLink="/home/history">
       Ver todo el historial <mat-icon>arrow_forward</mat-icon>
     </button>
   </div>
