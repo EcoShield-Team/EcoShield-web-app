@@ -1,1 +1,38 @@
-<p>recomendaciones works!</p>
+<app-header></app-header>
+
+<div class="recommendation-page">
+  <header class="reco-header">
+    <h2 class="reco-header__title">Recomendaciones de hoy</h2>
+  </header>
+
+  <main>
+
+    <div>
+      <app-tip-del-dia></app-tip-del-dia>
+
+      <section class="news-section">
+        <h2 class="news-section__title">Noticias que te pueden ayudar</h2>
+        <app-noticias-list></app-noticias-list>
+      </section>
+
+      <section class="feedback-section">
+        <h2 class="feedback-section__title">¿Qué tan útil le pareció esta información?</h2>
+
+        <div class="feedback-buttons">
+          <button mat-stroked-button class="feedback-btn">
+            <mat-icon>sentiment_very_dissatisfied</mat-icon>
+            Poco
+          </button>
+          <button mat-stroked-button class="feedback-btn">
+            <mat-icon>sentiment_neutral</mat-icon>
+            Regular
+          </button>
+          <button mat-stroked-button color="primary" class="feedback-btn feedback-btn--selected">
+            <mat-icon>sentiment_very_satisfied</mat-icon>
+            Mucho
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
