@@ -1,0 +1,156 @@
+.feedback-card {
+  background-color: #FEFAF8;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 3rem 4rem;
+  max-width: 1300px;
+  width: 95%;
+  margin: 2.5rem auto;
+}
+
+/* Título */
+.feedback-card h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.feedback-card hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+/* Formulario: items alineados a la izquierda */
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: flex-start; /* importante: mantiene todo a la izquierda */
+}
+
+/* Cada grupo ocupa todo el ancho disponible pero limitado por max-width */
+.form-group {
+  width: 100%;
+  max-width: 920px; /* controla ancho general de campos */
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #111827;
+  font-size: 1.05rem;
+}
+
+/* Estrellas alineadas a la izquierda */
+.stars {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start; /* explícito: izquierda */
+}
+
+.star {
+  font-size: 2.3rem;
+  color: #d1d5db;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.1s;
+}
+
+.star:hover,
+.star.active {
+  color: #fbbf24;
+  transform: scale(1.08);
+}
+
+/* Tipos de feedback: más separación pero alineado a la izquierda */
+.feedback-types {
+  display: flex;
+  justify-content: flex-start;
+  gap: 3.5rem;
+  color: #1f2937;
+  font-size: 1.05rem;
+  flex-wrap: wrap;
+}
+
+.feedback-types input[type="radio"] {
+  transform: scale(1.18);
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+/* Textarea: ocupa mismo ancho que los grupos, alineado a la izquierda */
+textarea {
+  width: 100%;
+  max-width: 920px; /* mismo ancho que .form-group */
+  height: 110px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 1.05rem;
+  font-family: 'Inter', sans-serif;
+  resize: none;
+  outline: none;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin: 0; /* QUITAR auto que centraba */
+  display: block;
+}
+
+textarea:focus {
+  border-color: #9ca3af;
+  box-shadow: 0 0 0 3px rgba(217, 228, 195, 0.22);
+}
+
+/* Contador: mismo ancho que textarea y alineado a la izquierda */
+.char-counter {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  width: 100%;
+  max-width: 920px;
+  margin: 0; /* QUITAR auto que centraba */
+}
+
+/* Botón: match exacto del ancho del textarea y alineado a la izquierda */
+.submit-btn {
+  background-color: #d9e4c3;
+  border: none;
+  border-radius: 26px;
+  padding: 1.05rem 1.5rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.08s;
+  width: 100%;
+  max-width: 920px; /* MISMO ancho que textarea y .form-group */
+  text-align: center; /* texto centrado dentro del botón */
+  margin-top: 0.4rem; /* separación suave sobre el botón */
+}
+
+.submit-btn:hover {
+  background-color: #cddbb0;
+  transform: translateY(-2px);
+}
+
+/* Ajustes responsive: mantener relación ancho/alto en pantallas pequeñas */
+@media (max-width: 1024px) {
+  .feedback-card {
+    padding: 2rem 2.5rem;
+    width: 95%;
+    max-width: 1000px;
+  }
+
+  .form-group, textarea, .char-counter, .submit-btn {
+    max-width: 100%; /* ocupan todo el ancho disponible en móvil */
+  }
+
+  .feedback-types {
+    gap: 1.5rem;
+  }
+}
+
