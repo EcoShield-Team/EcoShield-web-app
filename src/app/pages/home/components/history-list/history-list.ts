@@ -1,9 +1,11 @@
 import {Component, signal} from '@angular/core';
 import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
+import {RouterLink} from '@angular/router';
+import {HistoryItem} from '../../../../features/history/components/history-item/history-item';
 
 @Component({
   selector: 'app-history-list',
-  imports: [MATERIAL_IMPORTS],
+  imports: [MATERIAL_IMPORTS, RouterLink, HistoryItem],
   templateUrl: './history-list.html',
   styleUrl: './history-list.css',
 })
