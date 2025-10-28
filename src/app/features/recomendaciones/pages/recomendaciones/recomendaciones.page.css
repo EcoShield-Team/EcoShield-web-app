@@ -1,0 +1,93 @@
+:host {
+  --color-primary: #2e7d32;
+  --color-text-primary: #333;
+  --color-text-secondary: #666;
+  --color-border: #e0e0e0;
+  --color-card-background: #ffffff;
+  --color-highlight-bg: #e6f7eb;
+}
+
+/* 1. MEJORA: Centra tu contenido y dale un ancho máximo */
+.recommendation-page {
+  max-width: 960px;
+  margin: 24px auto; /* Centra la página horizontalmente */
+  padding: 0 16px;
+}
+
+/* 2. MEJORA: Aumenta el tamaño del título principal */
+.reco-header__title {
+  font-size: 1.75rem; /* 28px, más grande que los otros títulos */
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text-primary);
+  /* Asegúrate de que la cabecera tenga espacio inferior */
+  margin-bottom: 40px;
+}
+
+/* (Si todavía tienes el toggle, este estilo lo redondea) */
+.reco-header__toggles {
+  border-radius: 20px !important;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+/* 3. MEJORA: Añade más espacio vertical entre secciones */
+.news-section {
+  margin-top: 48px; /* Aumenta el espacio */
+}
+
+.feedback-section {
+  margin-top: 48px; /* Aumenta el espacio */
+}
+
+.news-section__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: var(--color-text-primary);
+}
+
+/* 4. MEJORA: Estiliza mejor los botones de feedback */
+.feedback-section {
+  padding: 32px 24px;
+  background-color: var(--color-card-background);
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra sutil */
+}
+.feedback-section__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  color: var(--color-text-primary);
+}
+.feedback-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.feedback-btn {
+  border-radius: 20px !important; /* ¡Botones redondeados! */
+  padding: 8px 24px !important;
+  font-weight: 500;
+}
+/* MEJORA: Fondo de color para el botón seleccionado */
+.feedback-btn--selected {
+  background-color: var(--color-highlight-bg);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .reco-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .feedback-buttons {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+}
