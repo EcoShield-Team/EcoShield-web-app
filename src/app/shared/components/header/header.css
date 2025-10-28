@@ -1,0 +1,99 @@
+/* Navbar general */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFDF2; /* tono crema */
+  padding: 0.5rem 2rem;
+  box-shadow: none;
+  border-bottom: 1px solid #e5e7eb;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- IZQUIERDA --- */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: #2E2E2E;
+}
+
+/* --- CENTRO --- */
+.navbar-center {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #2E2E2E;
+  text-transform: none;
+}
+
+.nav-link.active {
+  color: #0B8A3A;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  color: #0B8A3A;
+}
+
+/* --- DERECHA --- */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-button mat-icon {
+  color: #2E2E2E;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: 1px solid #e5e7eb;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #2E2E2E;
+}
+
+.user-chip:hover {
+  background-color: #f9fafb;
+}
+
+.user-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .navbar-center {
+    order: 3;
+  }
+}

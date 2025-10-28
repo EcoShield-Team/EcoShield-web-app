@@ -1,1 +1,27 @@
-<p>header works!</p>
+<mat-toolbar class="navbar" color="transparent">
+  <!-- Logo -->
+  <div class="navbar-left">
+    <img ngSrc="/assets/images/logo/ecoshield-logo.svg" alt="EcoShield Logo" class="navbar-logo" height="500"
+         width="500">
+    <span class="navbar-brand">ECOSHIELD</span>
+  </div>
+
+  <!-- Navegación central -->
+  <div class="navbar-center">
+    <button mat-button class="nav-link active">Inicio</button>
+    <button mat-button class="nav-link">Capturas</button>
+    <button mat-button class="nav-link">Comunidad</button>
+  </div>
+
+  <!-- Acciones de usuario -->
+  <div class="navbar-right">
+    <button mat-icon-button class="icon-button" aria-label="Notificaciones">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
+    <button mat-button class="user-chip" aria-label="Mi cuenta">
+      <mat-icon>account_circle</mat-icon>
+      <span class="user-name">Mi cuenta</span>
+    </button>
+  </div>
+</mat-toolbar>

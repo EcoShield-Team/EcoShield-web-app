@@ -1,0 +1,48 @@
+/* --- Notas de lanzamiento --- */
+.release-notes-section {
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.release-notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.release-version-badge {
+  background-color: #e5e7eb;
+  color: #374151;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.release-notes-description {
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.release-notes-list {
+  color: #4b5563;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.release-notes-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.realese-notes-view-all-button {
+  color: #16a34a;
+  font-weight: 600;
+}

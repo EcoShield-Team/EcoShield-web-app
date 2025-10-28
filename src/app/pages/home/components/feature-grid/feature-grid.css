@@ -1,0 +1,57 @@
+/* --- Feature cards --- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.feature-card {
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+  transition: 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.06);
+}
+
+.feature-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feature-card-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+}
+
+.color-green { color: #22c55e; }
+.color-blue { color: #3b82f6; }
+.color-purple { color: #a855f7; }
+.color-yellow { color: #eab308; }
+.color-indigo { color: #6366f1; }
+.color-pink { color: #ec4899; }
+
+.feature-card-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.feature-card-description {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.feature-card-arrow {
+  color: #9ca3af;
+}

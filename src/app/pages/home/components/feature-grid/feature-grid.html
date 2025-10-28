@@ -1,0 +1,16 @@
+<section class="feature-grid">
+  @for (card of featureCards(); track card.title) {
+    <mat-card class="feature-card">
+      <mat-card-content class="feature-card-content">
+        <div class="feature-card-info">
+          <mat-icon [class]="'feature-icon ' + card.color">{{ card.icon }}</mat-icon>
+          <div>
+            <h3 class="feature-card-title">{{ card.title }}</h3>
+            <p class="feature-card-description">{{ card.description }}</p>
+          </div>
+        </div>
+        <mat-icon class="feature-card-arrow">chevron_right</mat-icon>
+      </mat-card-content>
+    </mat-card>
+  }
+</section>
