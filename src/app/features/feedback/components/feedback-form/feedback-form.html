@@ -1,1 +1,38 @@
-<p>feedback-form works!</p>
+<div class="feedback-card">
+  <h2>Feedback</h2>
+  <hr />
+
+  <form class="feedback-form">
+    <!-- Puntuación -->
+    <div class="form-group">
+      <label>Púntuanos</label>
+      <div class="stars">
+        <span class="star material-icons">star</span>
+        <span class="star material-icons">star</span>
+        <span class="star material-icons">star</span>
+        <span class="star material-icons">star</span>
+        <span class="star material-icons">star</span>
+      </div>
+    </div>
+
+    <!-- Tipo de feedback -->
+    <div class="form-group">
+      <label>Tipo de feedback</label>
+      <div class="feedback-types">
+        <label><input type="radio" name="type" checked> Problemas con la app</label>
+        <label><input type="radio" name="type"> Mejoras sugeridas</label>
+        <label><input type="radio" name="type"> Opinión general</label>
+      </div>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="form-group">
+      <label>Comentarios</label>
+      <textarea maxlength="300" placeholder="Escribe tus comentarios..."></textarea>
+      <div class="char-counter">0/300</div>
+    </div>
+
+    <!-- Botón -->
+    <button type="button" class="submit-btn">Enviar</button>
+  </form>
+</div>
