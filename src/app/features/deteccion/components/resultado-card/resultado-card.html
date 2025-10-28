@@ -5,7 +5,7 @@
 
   <div class="imagen-wrapper">
     <img
-      src="assets/enfermedades/podredumbre_fresa.jpg"
+      src="/assets/images/deteccion/fresa.jpg"
       alt="Cultivo analizado"
       class="imagen-cultivo"
     />
@@ -23,31 +23,40 @@
     <button [class.active]="tab === 'prevencion'" (click)="tab = 'prevencion'">Prevención</button>
   </div>
 
-  <div class="texto" *ngIf="tab === 'sintomas'">
-    <p>
-      Los frutos afectados muestran manchas marrones acuosas que luego se cubren de un moho gris.
-      Las flores y tallos pueden marchitarse debido a la infección del hongo.
-    </p>
-  </div>
+  @if (tab === 'sintomas') {
+    <div class="texto">
+      <p>
+        Los frutos afectados muestran manchas marrones acuosas que luego se cubren de un moho gris.
+        Las flores y tallos pueden marchitarse debido a la infección del hongo.
+      </p>
+    </div>
+  }
 
-  <div class="texto" *ngIf="tab === 'tratamiento'">
-    <p>
-      Retirar y eliminar los frutos infectados, mejorar la ventilación y aplicar fungicidas a base
-      de iprodiona o fenhexamida según recomendación técnica.
-    </p>
-  </div>
+  @if (tab === 'tratamiento') {
+    <div class="texto">
+      <p>
+        Retirar y eliminar los frutos infectados, mejorar la ventilación y aplicar fungicidas a base
+        de iprodiona o fenhexamida según recomendación técnica.
+      </p>
+    </div>
+  }
 
-  <div class="texto" *ngIf="tab === 'causas'">
-    <p>
-      Se debe principalmente a la alta humedad y a la falta de ventilación. El hongo
-      <em>Botrytis cinerea</em> prospera en condiciones húmedas y frías.
-    </p>
-  </div>
+  @if (tab === 'causas') {
+    <div class="texto">
+      <p>
+        Se debe principalmente a la alta humedad y a la falta de ventilación. El hongo
+        <em>Botrytis cinerea</em> prospera en condiciones húmedas y frías.
+      </p>
+    </div>
+  }
 
-  <div class="texto" *ngIf="tab === 'prevencion'">
-    <p>
-      Mantener el cultivo ventilado, eliminar restos de cosecha y controlar el riego. También se
-      recomienda espaciar las plantas y usar coberturas protectoras para reducir humedad.
-    </p>
-  </div>
+  @if (tab === 'prevencion') {
+    <div class="texto">
+      <p>
+        Mantener el cultivo ventilado, eliminar restos de cosecha y controlar el riego. También se
+        recomienda espaciar las plantas y usar coberturas protectoras para reducir humedad.
+      </p>
+    </div>
+  }
+
 </div>
