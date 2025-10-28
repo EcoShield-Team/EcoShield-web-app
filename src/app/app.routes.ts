@@ -11,5 +11,8 @@ export const routes: Routes = [
   {path: 'deteccion', loadChildren: () =>
       import('./features/deteccion/deteccion.routes').then(m => m.DETECCION_ROUTES)},
 
+  {path: 'recomendaciones', loadChildren: () =>
+      import('./features/recomendaciones/recomendaciones.routes').then(m => m.RECOMENDACIONES_ROUTES)},
+
   { path: '**', component: NotFoundPage}
 ];
