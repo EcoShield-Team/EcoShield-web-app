@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import {DropzoneUpload} from '../../components/dropzone-upload/dropzone-upload';
+import {Header} from '../../../../shared/components/header/header';
 
 @Component({
-  selector: 'app-detector',
-  imports: [],
+  selector: 'app-detector-page',
   templateUrl: './detector.page.html',
-  styleUrl: './detector.page.css',
+  styleUrls: ['./detector.page.css'],
+  imports: [
+    DropzoneUpload,
+    Header
+  ]
 })
-export class DetectorPage {
-
-}
+export class DetectorPage {}

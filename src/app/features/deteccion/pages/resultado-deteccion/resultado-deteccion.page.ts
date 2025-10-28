@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import {ResultadoCard} from '../../components/resultado-card/resultado-card';
+import {Header} from '../../../../shared/components/header/header';
 
 @Component({
-  selector: 'app-resultado-deteccion',
-  imports: [],
+  selector: 'app-resultado-deteccion-page',
   templateUrl: './resultado-deteccion.page.html',
-  styleUrl: './resultado-deteccion.page.css',
+  styleUrls: ['./resultado-deteccion.page.css'],
+  imports: [
+    ResultadoCard,
+    Header
+  ]
 })
-export class ResultadoDeteccionPage {
-
-}
+export class ResultadoDeteccionPage {}
