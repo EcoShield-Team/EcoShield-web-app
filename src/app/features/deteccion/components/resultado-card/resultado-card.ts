@@ -2,10 +2,13 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-resultado-card',
-  imports: [],
   templateUrl: './resultado-card.html',
-  styleUrl: './resultado-card.css',
+  styleUrls: ['./resultado-card.css'],
 })
 export class ResultadoCard {
+  // 👉 Esta propiedad debe existir para que tu HTML la reconozca
+  tab: string = 'sintomas';
 
+  // (Opcional) puedes guardar también el resultado
+  resultado: string = 'Podredumbre Gris';
 }

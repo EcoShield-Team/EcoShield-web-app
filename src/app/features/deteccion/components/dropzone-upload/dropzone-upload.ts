@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-dropzone-upload',
-  imports: [],
   templateUrl: './dropzone-upload.html',
-  styleUrl: './dropzone-upload.css',
+  styleUrls: ['./dropzone-upload.css'],
+  imports: [
+    MATERIAL_IMPORTS,
+    RouterLink
+  ]
 })
-export class DropzoneUpload {
-
-}
+export class DropzoneUpload{}

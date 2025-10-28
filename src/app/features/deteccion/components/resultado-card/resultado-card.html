@@ -1,1 +1,53 @@
-<p>resultado-card works!</p>
+<div class="resultado-container">
+  <h2>Resultado del detector</h2>
+
+  <div class="alerta">¡Problema detectado!</div>
+
+  <div class="imagen-wrapper">
+    <img
+      src="assets/enfermedades/podredumbre_fresa.jpg"
+      alt="Cultivo analizado"
+      class="imagen-cultivo"
+    />
+  </div>
+
+  <h3>Enfermedad detectada</h3>
+  <p class="sub">Debemos tomar medidas para la fresa</p>
+  <h4>Podredumbre Gris</h4>
+  <p><em>Botrytis cinerea Pers.</em></p>
+
+  <div class="tabs">
+    <button [class.active]="tab === 'sintomas'" (click)="tab = 'sintomas'">Síntomas</button>
+    <button [class.active]="tab === 'tratamiento'" (click)="tab = 'tratamiento'">Tratamiento</button>
+    <button [class.active]="tab === 'causas'" (click)="tab = 'causas'">Causas</button>
+    <button [class.active]="tab === 'prevencion'" (click)="tab = 'prevencion'">Prevención</button>
+  </div>
+
+  <div class="texto" *ngIf="tab === 'sintomas'">
+    <p>
+      Los frutos afectados muestran manchas marrones acuosas que luego se cubren de un moho gris.
+      Las flores y tallos pueden marchitarse debido a la infección del hongo.
+    </p>
+  </div>
+
+  <div class="texto" *ngIf="tab === 'tratamiento'">
+    <p>
+      Retirar y eliminar los frutos infectados, mejorar la ventilación y aplicar fungicidas a base
+      de iprodiona o fenhexamida según recomendación técnica.
+    </p>
+  </div>
+
+  <div class="texto" *ngIf="tab === 'causas'">
+    <p>
+      Se debe principalmente a la alta humedad y a la falta de ventilación. El hongo
+      <em>Botrytis cinerea</em> prospera en condiciones húmedas y frías.
+    </p>
+  </div>
+
+  <div class="texto" *ngIf="tab === 'prevencion'">
+    <p>
+      Mantener el cultivo ventilado, eliminar restos de cosecha y controlar el riego. También se
+      recomienda espaciar las plantas y usar coberturas protectoras para reducir humedad.
+    </p>
+  </div>
+</div>
