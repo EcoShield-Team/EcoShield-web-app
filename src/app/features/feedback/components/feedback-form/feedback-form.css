@@ -3,10 +3,11 @@
   border: 1px solid #e5e7eb;
   border-radius: 16px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-  padding: 3rem 4rem;
-  max-width: 1300px;
-  width: 95%;
-  margin: 2.5rem auto;
+  padding: 2rem 4rem;
+
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 1rem;
 }
 
 /* Título */
@@ -24,18 +25,18 @@
   margin-bottom: 2rem;
 }
 
-/* Formulario: items alineados a la izquierda */
+/* Formulario */
 .feedback-form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  align-items: flex-start; /* importante: mantiene todo a la izquierda */
+  align-items: flex-start;
 }
 
-/* Cada grupo ocupa todo el ancho disponible pero limitado por max-width */
+/* Cada grupo ocupa todo el ancho disponible pero limitado */
 .form-group {
   width: 100%;
-  max-width: 920px; /* controla ancho general de campos */
+  max-width: 920px;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -47,11 +48,11 @@
   font-size: 1.05rem;
 }
 
-/* Estrellas alineadas a la izquierda */
+/* Estrellas */
 .stars {
   display: flex;
   gap: 1rem;
-  justify-content: flex-start; /* explícito: izquierda */
+  justify-content: flex-start;
 }
 
 .star {
@@ -67,7 +68,7 @@
   transform: scale(1.08);
 }
 
-/* Tipos de feedback: más separación pero alineado a la izquierda */
+/* Tipos de feedback */
 .feedback-types {
   display: flex;
   justify-content: flex-start;
@@ -83,10 +84,18 @@
   cursor: pointer;
 }
 
-/* Textarea: ocupa mismo ancho que los grupos, alineado a la izquierda */
-textarea {
+/* === TEXTAREA & BOTÓN IGUALADOS === */
+textarea,
+.submit-btn {
   width: 100%;
-  max-width: 920px; /* mismo ancho que .form-group */
+  max-width: 920px;
+  box-sizing: border-box;
+  margin: 0;
+  display: block;
+}
+
+/* Textarea */
+textarea {
   height: 110px;
   border: 1px solid #d1d5db;
   border-radius: 10px;
@@ -97,8 +106,6 @@ textarea {
   font-size: 1rem;
   line-height: 1.5;
   transition: border-color 0.2s, box-shadow 0.2s;
-  margin: 0; /* QUITAR auto que centraba */
-  display: block;
 }
 
 textarea:focus {
@@ -106,30 +113,27 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(217, 228, 195, 0.22);
 }
 
-/* Contador: mismo ancho que textarea y alineado a la izquierda */
+/* Contador */
 .char-counter {
   text-align: right;
   font-size: 0.85rem;
   color: #9ca3af;
   width: 100%;
   max-width: 920px;
-  margin: 0; /* QUITAR auto que centraba */
 }
 
-/* Botón: match exacto del ancho del textarea y alineado a la izquierda */
+/* Botón */
 .submit-btn {
   background-color: #d9e4c3;
   border: none;
-  border-radius: 26px;
+  border-radius: 10px;
   padding: 1.05rem 1.5rem;
   font-weight: 600;
   font-size: 1.05rem;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.08s;
-  width: 100%;
-  max-width: 920px; /* MISMO ancho que textarea y .form-group */
-  text-align: center; /* texto centrado dentro del botón */
-  margin-top: 0.4rem; /* separación suave sobre el botón */
+  text-align: center;
+  margin-top: 0.4rem;
 }
 
 .submit-btn:hover {
@@ -137,20 +141,20 @@ textarea:focus {
   transform: translateY(-2px);
 }
 
-/* Ajustes responsive: mantener relación ancho/alto en pantallas pequeñas */
+/* Responsive */
 @media (max-width: 1024px) {
   .feedback-card {
     padding: 2rem 2.5rem;
-    width: 95%;
-    max-width: 1000px;
   }
 
-  .form-group, textarea, .char-counter, .submit-btn {
-    max-width: 100%; /* ocupan todo el ancho disponible en móvil */
+  .form-group,
+  textarea,
+  .char-counter,
+  .submit-btn {
+    max-width: 100%;
   }
 
   .feedback-types {
     gap: 1.5rem;
   }
 }
-

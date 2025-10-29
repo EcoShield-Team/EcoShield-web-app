@@ -1,13 +1,15 @@
 <app-header></app-header>
 
-<div class="recommendation-page">
-  <header class="reco-header">
-    <h2 class="reco-header__title">Recomendaciones de hoy</h2>
-  </header>
+<section class="recommendations-container">
+  <div class="recommendations-wrapper">
 
-  <main>
+    <app-breadcrumb></app-breadcrumb>
 
-    <div>
+    <header class="reco-header">
+      <h2 class="reco-header__title">Recomendaciones de hoy</h2>
+    </header>
+
+    <main>
       <app-tip-del-dia></app-tip-del-dia>
 
       <section class="news-section">
@@ -33,6 +35,7 @@
           </button>
         </div>
       </section>
-    </div>
-  </main>
-</div>
+    </main>
+
+  </div>
+</section>
