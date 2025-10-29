@@ -7,21 +7,34 @@
   --color-highlight-bg: #e6f7eb;
 }
 
-/* 1. MEJORA: Centra tu contenido y dale un ancho máximo */
-.recommendation-page {
-  max-width: 960px;
-  margin: 24px auto; /* Centra la página horizontalmente */
-  padding: 0 16px;
+.recommendations-container {
+  background:
+    radial-gradient(circle at 10px 10px, rgba(145, 190, 120, 0.15) 2px, transparent 0),
+    radial-gradient(circle at 30px 30px, rgba(100, 160, 100, 0.1) 2px, transparent 0),
+    #FFFDF2;
+  background-size: 40px 40px;
+
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* Centra el wrapper horizontalmente */
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-/* 2. MEJORA: Aumenta el tamaño del título principal */
+.recommendations-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px; /* Mantenemos el mismo ancho para consistencia */
+}
+
 .reco-header__title {
-  font-size: 1.75rem; /* 28px, más grande que los otros títulos */
+  font-size: 1.75rem; /* 28px */
   font-weight: 600;
-  margin: 0;
   color: var(--color-text-primary);
-  /* Asegúrate de que la cabecera tenga espacio inferior */
-  margin-bottom: 40px;
+  /* El breadcrumb ya dará espacio, pero mantenemos un margen inferior */
+  margin: 1rem 0;
 }
 
 /* (Si todavía tienes el toggle, este estilo lo redondea) */
@@ -31,54 +44,63 @@
   border: 1px solid var(--color-border);
 }
 
-/* 3. MEJORA: Añade más espacio vertical entre secciones */
 .news-section {
-  margin-top: 48px; /* Aumenta el espacio */
+  margin-top: 32px; /* Espacio entre secciones */
 }
 
 .feedback-section {
-  margin-top: 48px; /* Aumenta el espacio */
+  margin-top: 32px; /* Espacio entre secciones */
 }
 
 .news-section__title {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 24px; /* Ajustado de 40px a 24px */
   color: var(--color-text-primary);
 }
 
-/* 4. MEJORA: Estiliza mejor los botones de feedback */
+/* Estilos de la tarjeta de feedback */
 .feedback-section {
   padding: 32px 24px;
   background-color: var(--color-card-background);
   border-radius: 12px;
   text-align: center;
   border: 1px solid var(--color-border);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra sutil */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
+
 .feedback-section__title {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 24px 0;
   color: var(--color-text-primary);
 }
+
 .feedback-buttons {
   display: flex;
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
 }
+
 .feedback-btn {
-  border-radius: 20px !important; /* ¡Botones redondeados! */
+  border-radius: 20px !important;
   padding: 8px 24px !important;
   font-weight: 500;
 }
-/* MEJORA: Fondo de color para el botón seleccionado */
+
 .feedback-btn--selected {
   background-color: var(--color-highlight-bg);
 }
 
 /* Media Queries */
+@media (max-width: 1024px) {
+  /* Ahora el responsive lo controla el wrapper */
+  .recommendations-wrapper {
+    max-width: 95%;
+  }
+}
+
 @media (max-width: 768px) {
   .reco-header {
     flex-direction: column;

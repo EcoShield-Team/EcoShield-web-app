@@ -2,10 +2,11 @@ import {Component, computed, signal} from '@angular/core';
 import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 import {HistoryItem} from '../../components/history-item/history-item';
 import {Header} from '../../../../shared/components/header/header';
+import {Breadcrumb} from '../../../../shared/components/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-history',
-  imports: [MATERIAL_IMPORTS, HistoryItem, Header],
+  imports: [MATERIAL_IMPORTS, HistoryItem, Header, Breadcrumb],
   templateUrl: './history.page.html',
   styleUrl: './history.page.css',
 })
@@ -20,7 +21,7 @@ export class HistoryPage {
   ]);
 
   page = signal(1);
-  perPage = 3;
+  perPage = 5;
   totalPages = computed(() => Array(Math.ceil(this.items().length / this.perPage)).fill(0));
 
   paginatedHistory = computed(() => {

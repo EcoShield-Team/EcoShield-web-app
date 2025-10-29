@@ -1,0 +1,10 @@
+<nav class="breadcrumb">
+  @for (crumb of breadcrumbs; track crumb.label; let last = $last) {
+    @if (!last) {
+      <a [routerLink]="crumb.url">{{ crumb.label }}</a>
+      <mat-icon>chevron_right</mat-icon>
+    } @else {
+      <span class="active">{{ crumb.label }}</span>
+    }
+  }
+</nav>

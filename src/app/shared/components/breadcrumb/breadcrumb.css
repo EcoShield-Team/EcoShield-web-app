@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+  text-align: left;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: #16a34a;
+}
+
+mat-icon {
+  font-size: 20px;
+  color: #9ca3af;
+}
+
+.breadcrumb .active {
+  color: #16a34a;
+  font-weight: 600;
+}
