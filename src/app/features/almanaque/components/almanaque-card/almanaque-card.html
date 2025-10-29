@@ -1,0 +1,17 @@
+<mat-card class="almanaque-card" [routerLink]="item.route">
+  <div class="card-image-container">
+
+    <img [src]="item.rutaDeImagen" [alt]="'Imagen de ' + item.nombre" class="card-image">
+
+    @if (item.reciente) {
+      <span class="status afectado">
+        AFECTADO RECIENTEMENTE
+      </span>
+    }
+  </div>
+
+  <div class="card-content">
+    <p class="card-subtype">{{ item.subtipo }}</p>
+    <h4 class="card-name">{{ item.nombre }}</h4>
+  </div>
+</mat-card>

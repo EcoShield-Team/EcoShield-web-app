@@ -16,4 +16,8 @@ export const HOME_ROUTES: Routes = [
   {path: 'recomendaciones', loadChildren: () =>
       import('../../features/recomendaciones/recomendaciones.routes').then(m => m.RECOMENDACIONES_ROUTES)},
 
+  { path: 'almanaque', loadChildren: () =>
+      import('../../features/almanaque/almanaque.routes').then(m => m.ALMANAQUE_ROUTES)
+  },
+
 ];
