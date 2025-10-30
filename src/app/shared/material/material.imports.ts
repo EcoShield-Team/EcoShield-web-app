@@ -7,6 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
 
 export const MATERIAL_IMPORTS = [
   MatButtonModule,
@@ -18,4 +19,6 @@ export const MATERIAL_IMPORTS = [
   MatSnackBarModule,
   MatDialogModule,
   MatTableModule,
+  MatDialogModule,
+  MatMenuModule
 ];

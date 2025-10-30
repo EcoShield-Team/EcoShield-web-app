@@ -1,0 +1,84 @@
+.creator-card {
+  background-color: #fefcf9;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.creator-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.creator-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.creator-input {
+  flex: 1;
+  border: 1px solid #e5e7eb;
+  background-color: #f9f9f9;
+  outline: none;
+  font-size: 1rem;
+  border-radius: 99px;
+  padding: 0.8rem 1rem;
+  font-family: 'Inter', sans-serif;
+  color: #4b5563;
+}
+.creator-input:hover {
+  background-color: #f3f3f3;
+}
+
+.creator-divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 0;
+}
+
+.creator-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.creator-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  color: #4b5563;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+}
+.action-btn mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+.action-btn:hover {
+  background-color: #f3f3f3;
+}
+
+.post-btn {
+  border-radius: 99px;
+  font-weight: 600;
+}
+
+
+.preview {
+  max-height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-top: 0.5rem;
+}

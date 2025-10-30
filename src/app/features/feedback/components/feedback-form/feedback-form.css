@@ -10,7 +10,6 @@
   margin-top: 1rem;
 }
 
-/* Título */
 .feedback-card h2 {
   font-size: 1.8rem;
   font-weight: 600;
@@ -25,7 +24,6 @@
   margin-bottom: 2rem;
 }
 
-/* Formulario */
 .feedback-form {
   display: flex;
   flex-direction: column;
@@ -33,7 +31,6 @@
   align-items: flex-start;
 }
 
-/* Cada grupo ocupa todo el ancho disponible pero limitado */
 .form-group {
   width: 100%;
   max-width: 920px;
@@ -48,7 +45,6 @@
   font-size: 1.05rem;
 }
 
-/* Estrellas */
 .stars {
   display: flex;
   gap: 1rem;
@@ -68,7 +64,6 @@
   transform: scale(1.08);
 }
 
-/* Tipos de feedback */
 .feedback-types {
   display: flex;
   justify-content: flex-start;
@@ -84,7 +79,6 @@
   cursor: pointer;
 }
 
-/* === TEXTAREA & BOTÓN IGUALADOS === */
 textarea,
 .submit-btn {
   width: 100%;
@@ -94,7 +88,6 @@ textarea,
   display: block;
 }
 
-/* Textarea */
 textarea {
   height: 110px;
   border: 1px solid #d1d5db;
@@ -113,7 +106,6 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(217, 228, 195, 0.22);
 }
 
-/* Contador */
 .char-counter {
   text-align: right;
   font-size: 0.85rem;
@@ -122,7 +114,6 @@ textarea:focus {
   max-width: 920px;
 }
 
-/* Botón */
 .submit-btn {
   background-color: #d9e4c3;
   border: none;
@@ -141,7 +132,6 @@ textarea:focus {
   transform: translateY(-2px);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .feedback-card {
     padding: 2rem 2.5rem;

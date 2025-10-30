@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<section class="comunidad-container">
+  <div class="comunidad-wrapper">
+    <app-breadcrumb></app-breadcrumb>
+
+    <h2 class="page-title">Foro de la comunidad</h2>
+
+    <div class="content-layout">
+      <app-sidebar-left></app-sidebar-left>
+
+      <div class="feed-column">
+        <app-post-creator></app-post-creator>
+
+        @for (post of posts(); track post.postId) {
+          <app-post-card [post]="post"></app-post-card>
+        }
+      </div>
+
+      <div class="sidebar-right-column">
+        <app-sidebar-search></app-sidebar-search>
+        <app-sidebar-recomendaciones></app-sidebar-recomendaciones>
+        <app-sidebar-tendencias></app-sidebar-tendencias>
+      </div>
+    </div>
+  </div>
+</section>

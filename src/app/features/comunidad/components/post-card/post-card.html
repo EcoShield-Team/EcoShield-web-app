@@ -1,0 +1,37 @@
+<div class="post-card" (click)="verDetalle()">
+  <div class="post-header">
+    <img [src]="post.usuario.usuarioFotoPerfil" alt="avatar" class="avatar" />
+    <div class="user-info">
+      <h3>
+        {{ post.usuario.usuarioNombre }}
+        <span class="subtitle">· {{ post.usuario.usuarioPais || 'Filadelfia' }}</span>
+      </h3>
+      <p class="fecha">{{ post.postFecha | date: 'short' }}</p>
+    </div>
+    <button mat-icon-button class="more-btn">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+  </div>
+
+  <h4 class="titulo">{{ post.postTitulo }}</h4>
+  <p class="descripcion">{{ post.postDescripcion }}</p>
+  <a href="#" class="translate-link">Traducir al inglés</a>
+
+  @if (post.postFoto) {
+    <img [src]="post.postFoto" alt="foto del post" class="imagen" />
+  }
+
+  <div class="post-footer">
+    <button mat-button class="footer-btn">
+      <mat-icon>thumb_up_off_alt</mat-icon> <span>12</span>
+    </button>
+    <button mat-button class="footer-btn">
+      <mat-icon>chat_bubble_outline</mat-icon>
+      <span>3</span>
+    </button>
+    <button mat-button class="footer-btn">
+      <mat-icon>share</mat-icon>
+      <span>Compartir</span>
+    </button>
+  </div>
+</div>

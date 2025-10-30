@@ -1,0 +1,37 @@
+<div class="creator-card">
+  <div class="creator-header">
+    <img src="/assets/images/deteccion/fresa.jpg" alt="Tu perfil" class="creator-avatar" />
+    <input type="text" placeholder="¿Qué está pasando, User?" class="creator-input" />
+  </div>
+
+  <hr class="creator-divider" />
+
+  <div class="creator-footer">
+    <div class="creator-actions">
+      <button mat-button class="action-btn" (click)="fileInput.click()">
+        <mat-icon>image_outlined</mat-icon>
+        <span>Foto/video</span>
+      </button>
+      <input
+        #fileInput
+        type="file"
+        hidden
+        accept="image/*"
+        (change)="onFileSelected($event)"
+      />
+
+      <button mat-button class="action-btn">
+        <mat-icon>sentiment_satisfied</mat-icon>
+        <span>Sentimiento/actividad</span>
+      </button>
+    </div>
+
+    <button mat-flat-button color="primary" [disabled]="true" class="post-btn">
+      Postear
+    </button>
+  </div>
+
+  @if (previewUrl()) {
+    <img [src]="previewUrl()" alt="preview" class="preview" />
+  }
+</div>

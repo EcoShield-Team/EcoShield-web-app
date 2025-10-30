@@ -1,0 +1,29 @@
+.sidebar-search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #fefaf8;
+  border: 1px solid #e5e7eb;
+  border-radius: 99px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-search mat-icon {
+  color: #6b7280;
+  font-size: 24px;
+}
+
+.sidebar-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.sidebar-search input::placeholder {
+  color: #9ca3af;
+}
