@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import {Header} from "../../shared/components/header/header";
 
 @Component({
   selector: 'app-not-found',
-  imports: [],
+    imports: [
+        Header
+    ],
   templateUrl: './not-found.page.html',
   styleUrl: './not-found.page.css',
 })
