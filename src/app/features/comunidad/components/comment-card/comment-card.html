@@ -1,0 +1,10 @@
+<div class="comment-card">
+  <div class="header">
+    <img [src]="comment.usuario.usuarioFotoPerfil" alt="perfil" />
+    <div>
+      <h4>{{ comment.usuario.usuarioNombre }}</h4>
+      <span>{{ comment.fecha | date: 'short' }}</span>
+    </div>
+  </div>
+  <p>{{ comment.texto }}</p>
+</div>

@@ -6,9 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./resultado-card.css'],
 })
 export class ResultadoCard {
-  // 👉 Esta propiedad debe existir para que tu HTML la reconozca
   tab: string = 'sintomas';
 
-  // (Opcional) puedes guardar también el resultado
   resultado: string = 'Podredumbre Gris';
 }

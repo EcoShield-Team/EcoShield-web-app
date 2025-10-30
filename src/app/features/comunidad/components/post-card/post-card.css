@@ -1,0 +1,116 @@
+.post-card {
+  background-color: #fefcf9;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.post-card:hover {
+  background-color: #f9f9f7;
+}
+
+.post-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  position: relative;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.subtitle {
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.fecha {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+.more-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  color: #6b7280;
+}
+
+.titulo {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 0.8rem;
+  color: #111827;
+}
+
+.descripcion {
+  margin: 0.5rem 0;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.translate-link {
+  font-size: 0.9rem;
+  color: #15803d;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+.translate-link:hover {
+  text-decoration: underline;
+}
+
+.imagen {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 0.8rem;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 0.8rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 0.8rem;
+}
+
+.footer-btn {
+  color: #4b5563;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+}
+.footer-btn mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+.footer-btn:hover {
+  background-color: #f3f3f3;
+}

@@ -1,10 +1,16 @@
-/* --- Notas de lanzamiento --- */
 .release-notes-section {
   background-color: #fff;
   border: 1px solid #eaeaea;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 1rem;
 }
 
 .release-notes-header {
@@ -45,4 +51,10 @@
 .realese-notes-view-all-button {
   color: #16a34a;
   font-weight: 600;
+  transition: background-color 0.2s ease;
+  border-radius: 8px;
+}
+
+.realese-notes-view-all-button:hover {
+  background-color: #f0fdf4;
 }

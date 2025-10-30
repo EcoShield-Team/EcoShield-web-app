@@ -4,7 +4,6 @@
   --color-border: #e0e0e0;
 }
 
-/* 1. La cuadrícula (grid) - Sigue igual */
 .news-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -22,7 +21,7 @@
 img[mat-card-image] {
   width: 100%;
   height: 160px;
-  object-fit: cover; /* Muy importante para que la imagen no se deforme */
+  object-fit: cover;
   display: block;
 }
 
@@ -44,7 +43,6 @@ img[mat-card-image] {
   line-height: 1.4;
   margin: 4px 0 0 0;
   color: var(--color-text-primary);
-  /* Truncar texto a 2 líneas */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -53,7 +51,6 @@ img[mat-card-image] {
   min-height: calc(1rem * 1.4 * 2);
 }
 
-/* 5. Responsividad (Sigue igual) */
 @media (max-width: 900px) {
   .news-grid {
     grid-template-columns: repeat(2, 1fr);

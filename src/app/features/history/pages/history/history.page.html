@@ -1,30 +1,33 @@
 <app-header></app-header>
 
-<section class="history-page">
-  <app-breadcrumb></app-breadcrumb>
-  <h1 class="page-title">Historial reciente</h1>
+<section class="history-bg-container">
 
-  <div class="history-container">
-    @for (item of paginatedHistory(); track item.title) {
-      <app-history-item [item]="item"></app-history-item>
-    }
-  </div>
+  <div class="history-wrapper">
+    <app-breadcrumb></app-breadcrumb>
+    <h1 class="page-title">Historial reciente</h1>
 
-  <div class="pagination">
-    <button mat-icon-button (click)="prevPage()" [disabled]="page() === 1">
-      <mat-icon>chevron_left</mat-icon>
-    </button>
+    <div class="history-container">
+      @for (item of paginatedHistory(); track item.title) {
+        <app-history-item [item]="item"></app-history-item>
+      }
+    </div>
 
-    @for (p of totalPages(); track $index; let i = $index) {
-      <span
-        [class.active]="page() === i + 1"
-        (click)="goToPage(i + 1)">
-      {{ i + 1 }}
-    </span>
-    }
+    <div class="pagination">
+      <button mat-icon-button (click)="prevPage()" [disabled]="page() === 1">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
 
-    <button mat-icon-button (click)="nextPage()" [disabled]="page() === totalPages().length">
-      <mat-icon>chevron_right</mat-icon>
-    </button>
-  </div>
-</section>
+      @for (p of totalPages(); track $index; let i = $index) {
+        <span
+          [class.active]="page() === i + 1"
+          (click)="goToPage(i + 1)">
+        {{ i + 1 }}
+      </span>
+      }
+
+      <button mat-icon-button (click)="nextPage()" [disabled]="page() === totalPages().length">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+  </div> </section>

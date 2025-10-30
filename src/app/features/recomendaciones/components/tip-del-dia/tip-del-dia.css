@@ -88,12 +88,10 @@
   text-decoration: underline;
 }
 
-/* Estilo para los botones del footer */
 .reco-action-btn {
   border-radius: 20px !important;
 }
 
-/* Media Query */
 @media (max-width: 768px) {
   .reco-card {
     flex-direction: column;

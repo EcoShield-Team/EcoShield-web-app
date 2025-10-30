@@ -1,19 +1,15 @@
 <mat-toolbar class="navbar" color="transparent">
-  <!-- Logo -->
   <div class="navbar-left">
-    <img ngSrc="/assets/images/logo/ecoshield-logo.svg" alt="EcoShield Logo" class="navbar-logo" height="500"
-         width="500">
-    <span class="navbar-brand">ECOSHIELD</span>
+    <img ngSrc="/assets/images/logo/ecoshield-logo.svg" alt="EcoShield Logo" class="navbar-logo"
+         height="40" width="40"> <span class="navbar-brand">ECOSHIELD</span>
   </div>
 
-  <!-- Navegación central -->
-  <div class="navbar-center">
+  <div class="navbar-center desktop-nav">
     <button mat-button class="nav-link active" routerLink="/home">Inicio</button>
     <button mat-button class="nav-link" routerLink="/not-found">Capturas</button>
-    <button mat-button class="nav-link" routerLink="/not-found">Comunidad</button>
+    <button mat-button class="nav-link" routerLink="/comunidad">Comunidad</button>
   </div>
 
-  <!-- Acciones de usuario -->
   <div class="navbar-right">
     <button mat-icon-button class="icon-button" aria-label="Notificaciones">
       <mat-icon>notifications</mat-icon>
@@ -23,5 +19,24 @@
       <mat-icon>account_circle</mat-icon>
       <span class="user-name">Mi cuenta</span>
     </button>
+
+    <button mat-icon-button class="mobile-menu-button" [matMenuTriggerFor]="mobileMenu" aria-label="Abrir menú">
+      <mat-icon>menu</mat-icon>
+    </button>
   </div>
 </mat-toolbar>
+
+<mat-menu #mobileMenu="matMenu">
+  <button mat-menu-item routerLink="/home">
+    <mat-icon>home</mat-icon>
+    <span>Inicio</span>
+  </button>
+  <button mat-menu-item routerLink="/not-found">
+    <mat-icon>camera_alt</mat-icon>
+    <span>Capturas</span>
+  </button>
+  <button mat-menu-item routerLink="/comunidad">
+    <mat-icon>group</mat-icon>
+    <span>Comunidad</span>
+  </button>
+</mat-menu>

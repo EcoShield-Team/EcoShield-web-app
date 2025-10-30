@@ -16,7 +16,7 @@
 
   min-height: 100vh;
   display: flex;
-  justify-content: center; /* Centra el wrapper horizontalmente */
+  justify-content: center;
   padding: 1.5rem 1rem;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
@@ -26,18 +26,16 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 900px; /* Mantenemos el mismo ancho para consistencia */
+  max-width: 900px;
 }
 
 .reco-header__title {
-  font-size: 1.75rem; /* 28px */
+  font-size: 1.75rem;
   font-weight: 600;
   color: var(--color-text-primary);
-  /* El breadcrumb ya dará espacio, pero mantenemos un margen inferior */
   margin: 1rem 0;
 }
 
-/* (Si todavía tienes el toggle, este estilo lo redondea) */
 .reco-header__toggles {
   border-radius: 20px !important;
   overflow: hidden;
@@ -45,21 +43,20 @@
 }
 
 .news-section {
-  margin-top: 32px; /* Espacio entre secciones */
+  margin-top: 32px;
 }
 
 .feedback-section {
-  margin-top: 32px; /* Espacio entre secciones */
+  margin-top: 32px;
 }
 
 .news-section__title {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 24px; /* Ajustado de 40px a 24px */
+  margin-bottom: 24px;
   color: var(--color-text-primary);
 }
 
-/* Estilos de la tarjeta de feedback */
 .feedback-section {
   padding: 32px 24px;
   background-color: var(--color-card-background);
@@ -93,9 +90,7 @@
   background-color: var(--color-highlight-bg);
 }
 
-/* Media Queries */
 @media (max-width: 1024px) {
-  /* Ahora el responsive lo controla el wrapper */
   .recommendations-wrapper {
     max-width: 95%;
   }
