@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<div class="almanaque-container">
+
+  <div class="breadcrumb">
+    EcoShield > Almanaque de Enfermedades y plantas
+  </div>
+
+  <div class="search-bar-main">
+    <input type="text" placeholder="Ingresa el nombre de la plaga o enfermedad">
+  </div>
+
+  <div class="content-wrapper">
+
+    <div class="filter-sidebar">
+      <app-filter-sidebar></app-filter-sidebar>
+    </div>
+
+    <div class="results-area">
+
+      <h2>Enfermedades</h2>
+      <div class="cards-grid">
+        @for (enfermedad of enfermedades(); track enfermedad.nombre) {
+          <app-almanaque-card [item]="enfermedad"></app-almanaque-card>
+        }
+      </div>
+      <button class="more-button">Buscar más...</button>
+
+      <h2 class="section-title">Plagas</h2>
+      <div class="cards-grid">
+        @for (plaga of plagas(); track plaga.nombre) {
+          <app-almanaque-card [item]="plaga"></app-almanaque-card>
+        }
+      </div>
+      <button class="more-button">Buscar más...</button>
+
+    </div>
+  </div>
+
+</div>
