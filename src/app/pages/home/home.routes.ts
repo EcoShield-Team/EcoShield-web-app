@@ -18,4 +18,9 @@ export const HOME_ROUTES: Routes = [
 
   {path: 'comunidad', loadChildren: () =>
       import('../../features/comunidad/comunidad.routes').then(m => m.COMUNIDAD_ROUTES)},
+
+  { path: 'almanaque', loadChildren: () =>
+      import('../../features/almanaque/almanaque.routes').then(m => m.ALMANAQUE_ROUTES)
+  },
+
 ];
