@@ -2,66 +2,61 @@
   background-color: #FEFAF8;
   border: 1px solid #e5e7eb;
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-  padding: 2rem 4rem 3rem 4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem 5rem;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .feedback-card h2 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #111827;
-  margin-top: 0;
   margin-bottom: 0.5rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 2px solid #d1d5db;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1.5rem;
 }
 
 .feedback-form {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 1.5rem;
   align-items: flex-start;
-  margin-top: 1rem;
 }
 
 .form-group {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  margin-bottom: 1.5rem;
-}
-
-.form-group:last-of-type {
-  margin-bottom: 0;
+  gap: 0.5rem;
 }
 
 .form-group label {
   font-weight: 500;
   color: #111827;
-  font-size: 1.05rem;
-  margin-bottom: 0.1rem;
+  font-size: 0.95rem;
 }
 
 .stars {
   display: flex;
   gap: 0.5rem;
   justify-content: flex-start;
-  margin-top: 0.1rem;
-  margin-bottom: 0; /* Espacio manejado por el margin-bottom del form-group */
 }
 
 .star {
-  font-size: 2.1rem;
+  font-size: 2rem;
   color: #d1d5db;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: color 0.2s, transform 0.1s;
+}
+
+.star:hover {
+  transform: scale(1.08);
 }
 
 .star.active {
   color: #fbbf24;
-  transform: none;
 }
 
 .feedback-types {
@@ -69,65 +64,60 @@
   justify-content: flex-start;
   gap: 2.5rem;
   color: #1f2937;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   flex-wrap: wrap;
-  margin-top: 0.4rem;
+}
+
+.feedback-types label {
+  font-weight: 400;
+  cursor: pointer;
 }
 
 .feedback-types input[type="radio"] {
-  transform: scale(1.1);
-  margin-right: 0.4rem;
-  accent-color: #15803d;
+  margin-right: 0.5rem;
+  accent-color: #6a9e59;
+  cursor: pointer;
 }
 
+/* Área de Comentarios (Textarea) - AJUSTES CLAVE */
 textarea {
-  width: 100%;
-  height: 110px;
+  width: 95%; /* CLAVE: Asegura la alineación con el botón y la división */
+  height: 100px; /* ALTURA REDUCIDA (menos alto) */
   border: 1px solid #d1d5db;
-  border-radius: 10px;
-  padding: 1rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  resize: vertical;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-family: 'Inter', sans-serif;
+  resize: none;
   outline: none;
-  margin-bottom: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 textarea:focus {
-  border-color: #15803d;
-  box-shadow: 0 0 0 2px rgba(21, 128, 61, 0.2);
+  border-color: #9ca3af;
+  box-shadow: 0 0 0 2px rgba(217, 228, 195, 0.5);
 }
 
 .char-counter {
   text-align: right;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #9ca3af;
   width: 100%;
-  margin-top: 0.1rem;
-}
-
-.text-error {
-  color: #dc2626;
-  font-size: 0.85rem;
-  margin-top: 0.1rem;
-  font-weight: 500;
-  width: 100%;
-  text-align: left;
 }
 
 .submit-btn {
   background-color: #d9e4c3;
-  color: #1f2937;
   border: none;
-  border-radius: 26px;
-  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.08s;
-  width: 100%;
+  transition: background-color 0.2s, transform 0.08s, opacity 0.2s;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  width: 100%;
 }
 
 .submit-btn:hover:not(:disabled) {
@@ -136,7 +126,30 @@ textarea:focus {
 }
 
 .submit-btn:disabled {
-  background-color: #e5e7eb;
-  color: #9ca3af;
+  background-color: #d9e4c3;
+  opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+}
+
+.text-error {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 0.1rem;
+}
+
+@media (max-width: 1150px) {
+  .feedback-card {
+    padding: 2.5rem;
+  }
+
+  .feedback-types {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .feedback-card {
+    padding: 1.5rem;
+  }
 }

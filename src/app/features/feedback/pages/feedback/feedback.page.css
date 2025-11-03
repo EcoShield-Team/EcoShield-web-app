@@ -1,45 +1,98 @@
 .feedback-container {
+  /* Fondo y patrón */
   background:
     radial-gradient(circle at 10px 10px, rgba(145, 190, 120, 0.15) 2px, transparent 0),
     radial-gradient(circle at 30px 30px, rgba(100, 160, 100, 0.1) 2px, transparent 0),
     #FFFDF2;
   background-size: 40px 40px;
 
-  min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-
+  /* Centrado */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 1.5rem 2rem 0.1rem 2rem;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+  min-height: calc(100vh - 64px);
+  font-family: 'Inter', sans-serif;
 }
 
+/* ANCHO: Mantenemos 850px para el formulario y su contenedor */
+.feedback-container .w-full {
+  max-width: 850px;
+  /* El contenedor del formulario NO debe tener padding horizontal que afecte el ancho total. */
+}
 
+/* Breadcrumb: ALINEACIÓN CORREGIDA */
+/* El padding horizontal del formulario (5rem) debe restarse del ancho total
+   para alinear el texto del breadcrumb con el contenido interno de la tarjeta.
+   Usaremos un margen negativo para desplazarlo hacia el borde de la card.
+   Sin embargo, la forma más limpia es hacer que el breadcrumb respete el mismo
+   max-width que el formulario, y **usar un margen a la izquierda** que compense
+   el padding de la tarjeta.
+*/
 .breadcrumb {
+  margin-bottom: 0.5rem; /* Más cerca de la tarjeta */
   font-size: 0.95rem;
   color: #6b7280;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto 1rem auto;
-  padding-left: 4rem;
+  max-width: 850px;
+  align-self: center;
+
+  /* ESTOS MÁRGENES Y PADDINGS SON CLAVE PARA LA ALINEACIÓN */
+  /* Compensamos el padding horizontal de 5rem (80px) de la card */
+  padding-left: 5rem;
+  box-sizing: border-box;
 }
 
-.crumb {
+.breadcrumb .crumb {
+  color: #6b7280;
+  transition: color 0.15s;
+}
+
+/* Reactividad: EcoShield (Home) con cursor: pointer */
+.breadcrumb .crumb:first-child {
   cursor: pointer;
-  transition: color 0.2s;
 }
 
-.crumb:hover {
-  color: #15803d;
+.breadcrumb .crumb:hover {
+  color: #4b863d;
 }
 
-.crumb.active {
-  color: #15803d;
+.breadcrumb .crumb.active {
+  color: #4b863d;
   font-weight: 500;
-  cursor: default;
 }
 
-.form-wrapper, app-feedback-form {
-  max-width: 900px;
+/* Overlay de carga (sin cambios) */
+.loading-overlay {
+  /* ... estilos ... */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4b863d;
+  border-radius: 16px;
+}
+
+@media (max-width: 1000px) {
+  .feedback-container .w-full,
+  .breadcrumb {
+    max-width: 95%;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+  }
+
+  /* Resetear el padding de alineación en móviles/tablets */
+  .breadcrumb {
+    padding-left: 0;
+  }
 }
