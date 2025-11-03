@@ -79,10 +79,9 @@
   cursor: pointer;
 }
 
-/* Área de Comentarios (Textarea) - AJUSTES CLAVE */
 textarea {
-  width: 95%; /* CLAVE: Asegura la alineación con el botón y la división */
-  height: 100px; /* ALTURA REDUCIDA (menos alto) */
+  width: 95%;
+  height: 100px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   padding: 0.8rem;
