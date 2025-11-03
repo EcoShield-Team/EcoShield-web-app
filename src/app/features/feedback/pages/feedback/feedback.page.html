@@ -1,8 +1,32 @@
 <app-header></app-header>
 
-<section class="feedback-container">
-  <div class="feedback-wrapper">
-    <app-breadcrumb></app-breadcrumb>
-    <app-feedback-form></app-feedback-form>
+<div class="feedback-container">
+  <div class="breadcrumb">
+    <span class="crumb">EcoShield</span> &gt;
+    <span class="crumb active">Feedback</span>
   </div>
-</section>
+
+  @if (currentState === 'form' || currentState === 'loading') {
+    <div class="w-full max-w-lg relative">
+      @if (currentState === 'loading') {
+        <div class="loading-overlay">Cargando...</div>
+      }
+      <app-feedback-form (feedbackSubmit)="handleFeedbackSubmit($event)"></app-feedback-form>
+    </div>
+  }
+
+  @if (currentState === 'success' && lastResponse) {
+    <app-feedback-success
+      [response]="lastResponse"
+      (restart)="startNewFeedback()">
+    </app-feedback-success>
+  }
+
+  @if (currentState === 'error') {
+    <app-feedback-error
+      [errorMessage]="lastError"
+      (restart)="startNewFeedback()">
+    </app-feedback-error>
+  }
+</div>
+

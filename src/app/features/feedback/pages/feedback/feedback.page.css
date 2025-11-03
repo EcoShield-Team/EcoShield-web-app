@@ -4,27 +4,42 @@
     radial-gradient(circle at 30px 30px, rgba(100, 160, 100, 0.1) 2px, transparent 0),
     #FFFDF2;
   background-size: 40px 40px;
-  display: flex;
-  justify-content: center;
-  padding: 1.5rem 1rem;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
 
-.feedback-wrapper {
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.5rem 2rem 0.1rem 2rem;
+}
+
+
+.breadcrumb {
+  font-size: 0.95rem;
+  color: #6b7280;
   width: 100%;
   max-width: 900px;
+  margin: 0 auto 1rem auto;
+  padding-left: 4rem;
 }
 
-app-feedback-form {
-  width: 100%;
-  display: block;
+.crumb {
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-@media (max-width: 1024px) {
-  .feedback-wrapper {
-    max-width: 95%;
-  }
+.crumb:hover {
+  color: #15803d;
+}
+
+.crumb.active {
+  color: #15803d;
+  font-weight: 500;
+  cursor: default;
+}
+
+.form-wrapper, app-feedback-form {
+  max-width: 900px;
 }
