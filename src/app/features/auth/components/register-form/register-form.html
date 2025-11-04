@@ -1,0 +1,164 @@
+<div class="form-error-slot">
+  @if (formError) {
+    <div class="form-error">{{ formError }}</div>
+  }
+</div>
+
+<div class="form-header">
+  <div class="form-logo-wrapper">
+    <img src="assets/images/logo/ecoshield-icon.png" alt="EcoShield Logo" />
+    <span class="logo-text">ECOSHIELD</span>
+  </div>
+
+  <h3 class="form-title">Crear una cuenta</h3>
+</div>
+
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="onRegisterSubmit()"
+  class="form-container"
+  [class.form-submitted]="showFieldErrors"
+>
+
+  <!-- NOMBRE + PAÍS (misma línea) -->
+  <div class="form-row">
+    <mat-form-field appearance="outline" class="form-input-field half" floatLabel="auto">
+      <mat-label>Nombre completo</mat-label>
+      <input
+        matInput
+        formControlName="fullName"
+        autocomplete="name"
+      />
+      @if (showFieldErrors && fullName?.invalid) {
+        <mat-error>El nombre es requerido.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-input-field half" floatLabel="auto">
+      <mat-label>País</mat-label>
+      <mat-select formControlName="country">
+        @for (c of countries; track c.code) {
+          <mat-option [value]="c.code">{{ c.name }}</mat-option>
+        }
+      </mat-select>
+      @if (showFieldErrors && country?.invalid) {
+        <mat-error>El país es requerido.</mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+
+  <!-- CORREO -->
+  <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
+    <mat-label>Correo electrónico</mat-label>
+    <input
+      matInput
+      formControlName="email"
+      type="email"
+      autocomplete="email"
+    />
+    @if (showFieldErrors && email?.invalid) {
+      <mat-error>
+        @if (email?.errors?.['required']) {
+          El correo es requerido.
+        }
+        @if (email?.errors?.['email']) {
+          El formato del correo no es válido.
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <!-- CONTRASEÑA -->
+  <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
+    <mat-label>Contraseña</mat-label>
+    <input
+      matInput
+      [type]="hidePassword ? 'password' : 'text'"
+      formControlName="password"
+      autocomplete="new-password"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="hidePassword = !hidePassword"
+      [attr.aria-label]="'Mostrar u ocultar contraseña'"
+    >
+      <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+
+    @if (showFieldErrors && password?.invalid) {
+      <mat-error>
+        @if (password?.errors?.['required']) {
+          La contraseña es requerida.
+        }
+        @if (password?.errors?.['minlength']) {
+          Debe tener al menos 6 caracteres.
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <!-- CONFIRMAR CONTRASEÑA -->
+  <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
+    <mat-label>Confirmar contraseña</mat-label>
+    <input
+      matInput
+      [type]="hideConfirm ? 'password' : 'text'"
+      formControlName="confirmPassword"
+      autocomplete="new-password"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="hideConfirm = !hideConfirm"
+      [attr.aria-label]="'Mostrar u ocultar contraseña'"
+    >
+      <mat-icon>{{ hideConfirm ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+
+    @if (showFieldErrors && confirmPassword?.invalid) {
+      <mat-error>
+        @if (confirmPassword?.errors?.['required']) {
+          Este campo es requerido.
+        }
+        @if (confirmPassword?.errors?.['mismatch']) {
+          Las contraseñas no coinciden.
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <!-- BOTÓN -->
+  <button
+    type="submit"
+    class="form-submit-button"
+    [disabled]="registerForm.invalid || isLoading"
+  >
+    @if (!isLoading) {
+      Registrarme
+    } @else {
+      Registrando...
+    }
+  </button>
+</form>
+
+<!-- FOOTER -->
+<div class="form-footer-links">
+
+  <span class="form-text-small">
+    Al registrarte, aceptas nuestros
+    <a href="#" class="form-link">Términos de servicio</a> y nuestra
+    <a href="#" class="form-link">Política de privacidad</a>.
+  </span>
+
+  <span class="form-text-small">
+  ¿Ya tienes una cuenta?
+  <a href="#" class="form-link" (click)="onBackToLogin($event)">
+    Inicia sesión
+  </a>
+</span>
+
+</div>
