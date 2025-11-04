@@ -1,12 +1,36 @@
-.container {
-  padding: 40px;
-  text-align: center;
-  background-color: #faf8ee;
-  min-height: 80vh;
+.detector-bg-container {
+  background:
+    radial-gradient(circle at 10px 10px, rgba(145, 190, 120, 0.15) 2px, transparent 0),
+    radial-gradient(circle at 30px 30px, rgba(100, 160, 100, 0.1) 2px, transparent 0),
+    #FFFDF2;
+  background-size: 40px 40px;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-h2 {
-  color: #333;
-  font-weight: 600;
-  margin-bottom: 30px;
+.detector-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .detector-wrapper {
+    max-width: 95%;
+  }
+  .page-title {
+    font-size: 1.5rem;
+  }
 }
