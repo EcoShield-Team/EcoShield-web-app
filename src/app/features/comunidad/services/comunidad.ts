@@ -12,9 +12,8 @@ export class Comunidad {
   private readonly http = inject(HttpClient);
   private readonly API_BASE_URL = `${environment.apiURl}/posts`;
 
-  //Recuerda cambiar el token, prende la api, inicia sesión o crea un usuario y reemplaza el token de abajo
-  private readonly TEST_JWT_TOKEN =
-    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnZXJhZG9AZXhhbXBsZS5jb20iLCJpYXQiOjE3NjIyNTE3NjgsImV4cCI6MTc2MjI1ODk2OCwicm9sZSI6IlJPTEVfVVNFUiJ9.8Fk1OnTvMg4fssnUx-n3899p04eqJB_6_5dJ-RfF_2yfAT6oVR95gw7QLzUiaOeGVh_lQtG6NpnmBvmmGJBtWA';
+  // 🔐 Token de prueba (puedes dejarlo en environment)
+  private readonly TEST_JWT_TOKEN = environment.token;
 
   private get authHeaders(): HttpHeaders {
     return new HttpHeaders({
@@ -22,10 +21,32 @@ export class Comunidad {
     });
   }
 
-  createPost(request: PostRequest, file?: File): Observable<PostResponse> {
-    const formData = this.buildFormData(request, file);
+  getUsuarioFromToken(): { usuarioCorreo: string; usuarioRol: string; usuarioNombre: string } | null {
+    try {
+      const token = this.TEST_JWT_TOKEN;
+      if (!token) return null;
+
+      const payloadBase64 = token.split('.')[1];
+      const decodedPayload = JSON.parse(atob(payloadBase64));
+
+      return {
+        usuarioCorreo: decodedPayload.sub,
+        usuarioRol: decodedPayload.rol,
+        usuarioNombre: decodedPayload.sub.split('@')[0],
+      };
+    } catch (e) {
+      console.error('Error al decodificar token:', e);
+      return null;
+    }
+  }
+
+  createPost(data: PostRequest, imagen?: File): Observable<PostResponse> {
+    const formData = new FormData();
+    formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+    if (imagen) formData.append('imagen', imagen);
+
     return this.http.post<PostResponse>(this.API_BASE_URL, formData, {
-      headers: this.authHeaders
+      headers: this.authHeaders,
     });
   }
 

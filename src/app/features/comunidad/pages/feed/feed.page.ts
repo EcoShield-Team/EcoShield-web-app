@@ -30,14 +30,18 @@ export class FeedPage {
 
   constructor(private comunidadService: Comunidad) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadPosts();
   }
 
-  loadPosts() {
+  loadPosts(): void {
     this.comunidadService.getAll().subscribe({
       next: (data) => this.posts.set(data),
-      error: (err) => console.error('Error al cargar posts', err),
+      error: (err) => console.error('Error al cargar posts:', err),
     });
+  }
+
+  agregarPost(newPost: PostResponse): void {
+    this.posts.update((prev) => [newPost, ...prev]);
   }
 }
