@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import {EnfermedadDetail, EnfermedadList} from '../../../core/models/enfermedad.model';
 import {PlagaDetail, PlagaList} from '../../../core/models/plaga.model';
 import {observableToBeFn} from 'rxjs/internal/testing/TestScheduler';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlmanaqueService {
-  private apiUrl = 'http://localhost:8080/almanaque';
+  private readonly apiUrl = `${environment.apiURl}/almanaque`;
 
   constructor(private http: HttpClient) {}
 
