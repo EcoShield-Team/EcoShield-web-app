@@ -1,0 +1,226 @@
+.detail-container {
+  background-color: #faf8ee;
+  padding: 0 20px 20px 20px;
+  min-height: 90vh;
+}
+
+app-breadcrumb {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  display: block;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.detail-content-wrapper {
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.left-column {
+  flex-basis: 40%;
+  min-width: 350px;
+}
+
+.right-column {
+  flex-basis: 60%;
+}
+
+.main-image-box {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.detail-main-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.related-diseases-box {
+  background-color: #f7f7f5;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+.related-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.related-cards-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.related-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.disease-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+  word-break: break-word;
+}
+
+.scientific-name {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.tabs-navigation {
+  display: flex;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #555;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  color: #333;
+}
+
+.tab-button.active {
+  color: #6a994e;
+  border-bottom: 2px solid #6a994e;
+  font-weight: bold;
+}
+
+.description-block {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+
+
+.control-item {
+  cursor: pointer;
+  color: #4a90e2;
+  font-size: 0.95rem;
+}
+
+.control-item .icon {
+  margin-right: 5px;
+}
+
+.action-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-share {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.social-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+.social-icon.facebook { background-color: #1877f2; }
+.social-icon.twitter { background-color: #000000; }
+.social-icon.linkedin { background-color: #0077b5; }
+.social-icon.pinterest { background-color: #e60023; }
+
+.social-icon.dots {
+  background-color: #6c757d;
+}
+.social-icon.dots:hover {
+  transform: scale(1.1);
+  background-color: #495057;
+}
+
+.favorite-button {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.favorite-button:hover {
+  background-color: #ccc;
+}
+
+.social-share {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-icon {
+  background-color: #ccc;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.social-dots {
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+}
+
+.loading, .error {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 50px;
+  font-size: 1.2rem;
+}

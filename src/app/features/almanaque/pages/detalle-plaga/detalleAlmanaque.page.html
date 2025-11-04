@@ -1,0 +1,69 @@
+<app-header></app-header>
+
+<app-breadcrumb></app-breadcrumb>
+
+<div *ngIf="loading">Cargando...</div>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<div *ngIf="!loading && !errorMessage" class="detail-container">
+  <div class="detail-content-wrapper">
+    <div class="left-column">
+      <div class="main-image-box">
+        <img [src]="foto" [alt]="nombre" class="detail-main-image">
+      </div>
+
+      <div class="related-diseases-box" *ngIf=" relacionadas && relacionadas.length > 0">
+        <h3 class="related-title">
+          {{ tipo === 'plaga' ? 'Plagas relacionadas' : 'Enfermedades relacionadas' }}
+        </h3>
+        <div class="related-cards-grid">
+          <div *ngFor="let r of relacionadas" class="related-card">
+            <img [src]="getFotoRelacionado(r)" [alt]="getNombreRelacionado(r)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <h1 class="disease-title">{{ nombre }}</h1>
+      <p class="scientific-name">{{ nombreCientifico }}</p>
+
+      <div class="tabs-navigation">
+        <button (click)="setTab('sintomas')" [class.active]="activeTab==='sintomas'" class="tab-button">Síntomas</button>
+        <button (click)="setTab('tratamiento')" [class.active]="activeTab==='tratamiento'" class="tab-button">Tratamiento</button>
+        <button (click)="setTab('causas')" [class.active]="activeTab==='causas'" class="tab-button">Causas</button>
+        <button (click)="setTab('prevencion')" [class.active]="activeTab==='prevencion'" class="tab-button">Prevención</button>
+      </div>
+
+      <div class="description-block">
+        <p *ngIf="activeTab==='sintomas'">{{ descripcion.sintomas }}</p>
+        <p *ngIf="activeTab==='tratamiento'">{{ descripcion.tratamiento }}</p>
+        <p *ngIf="activeTab==='causas'">{{ descripcion.causas }}</p>
+        <p *ngIf="activeTab==='prevencion'">{{ descripcion.prevencion }}</p>
+      </div>
+
+      <div class="action-footer">
+        <button class="favorite-button">Guardar en favoritos</button>
+        <div class="social-share">
+          <a href="#" class="social-icon facebook" (click)="$event.preventDefault()">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-icon twitter" (click)="$event.preventDefault()">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a href="#" class="social-icon linkedin" (click)="$event.preventDefault()">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-icon pinterest" (click)="$event.preventDefault()">
+            <i class="fab fa-pinterest-p"></i>
+          </a>
+          <a href="#" class="social-icon dots" (click)="$event.preventDefault()">
+            <i class="fas fa-ellipsis-h"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

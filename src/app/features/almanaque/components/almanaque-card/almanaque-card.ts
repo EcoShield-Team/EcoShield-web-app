@@ -1,17 +1,19 @@
 import {Component, Input} from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 import {RouterLink} from '@angular/router';
-import {MatCard} from '@angular/material/card';
-import {ItemAlmanaque} from '../../pages/almanaque/almanaque.page';
 
 @Component({
   selector: 'app-almanaque-card',
-  imports: [
-    RouterLink,
-    MatCard
-  ],
+  standalone: true,
+  imports: [CommonModule, MatCardModule, RouterLink],
   templateUrl: './almanaque-card.html',
-  styleUrl: './almanaque-card.css',
+  styleUrls: ['./almanaque-card.css'],
 })
 export class AlmanaqueCard {
-  @Input({ required: true }) item!: ItemAlmanaque;
+  @Input() id!: number;
+  @Input() nombre!: string;
+  @Input() tipo!: 'plaga' | 'enfermedad';
+  @Input() subtipo!: string;
+  @Input() imagen!: string;
 }

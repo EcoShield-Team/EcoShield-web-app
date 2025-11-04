@@ -1,47 +1,126 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Header } from '../../../../shared/components/header/header';
 import { AlmanaqueCard } from '../../components/almanaque-card/almanaque-card';
 import { FilterSidebar } from '../../components/filter-sidebar/filter-sidebar';
-
-export interface ItemAlmanaque {
-  tipo: 'Enfermedad' | 'Plaga';
-  subtipo: string;
-  nombre: string;
-  rutaDeImagen: string;
-  reciente: boolean;
-  route: string;
-}
+import { AlmanaqueService} from '../../services/almanaque';
+import { EnfermedadList} from '../../../../core/models/enfermedad.model';
+import { PlagaList} from '../../../../core/models/plaga.model';
+import {Breadcrumb} from '../../../../shared/components/breadcrumb/breadcrumb';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-almanaque',
-  imports: [
-    Header,
-    AlmanaqueCard,
-    FilterSidebar,
-    CommonModule
-  ],
+  standalone: true,
+  imports: [CommonModule, HttpClientModule, Header, AlmanaqueCard, FilterSidebar, Breadcrumb, FormsModule],
   templateUrl: './almanaque.page.html',
-  styleUrl: './almanaque.page.css',
+  styleUrls: ['./almanaque.page.css'],
 })
+export class AlmanaquePage implements OnInit {
+  enfermedades: EnfermedadList[] = [];
+  plagas: PlagaList[] = [];
+  searchTerm: string = '';
+  loading: boolean = false;
+  ordenSeleccionada: string = 'NOMBRE_ASC'
 
-export class AlmanaquePage implements OnInit { //
-  private items: ItemAlmanaque[] = [
-    { tipo: 'Enfermedad', subtipo: 'Hongo', nombre: 'Oídio', rutaDeImagen: 'assets/images/almanaque/oidio.jpg', reciente: true, route: 'oidio' },
-    { tipo: 'Enfermedad', subtipo: 'Hongo', nombre: 'Podredumbre Gris', rutaDeImagen: 'assets/images/almanaque/pobredumbre-gris.jpeg', reciente: false, route: 'podredumbre-gris' },
-    { tipo: 'Enfermedad', subtipo: 'Bacteria', nombre: 'Xanthomonas fragariae', rutaDeImagen: 'assets/images/almanaque/xanthomonas.jpeg', reciente: false, route: 'xanthomonas' },
-    { tipo: 'Enfermedad', subtipo: 'Hongo', nombre: 'Aracnosis', rutaDeImagen: 'assets/images/almanaque/aracnosis.jpeg', reciente: true, route: 'antracnosis' },
-    { tipo: 'Plaga', subtipo: 'Insecto', nombre: 'Araña roja', rutaDeImagen: 'assets/images/almanaque/arana-roja.jpeg', reciente: true, route: 'arana-roja' },
-    { tipo: 'Plaga', subtipo: 'Insecto', nombre: 'Trips', rutaDeImagen: 'assets/images/almanaque/trips.jpeg', reciente: false, route: 'trips' },
-  ];
+  constructor(private almanaqueService: AlmanaqueService) {}
 
+  ngOnInit(): void {
+    this.cargarDatos();
+  }
 
-  enfermedades = signal<ItemAlmanaque[]>([]);
-  plagas = signal<ItemAlmanaque[]>([]);
+  cargarDatos() {
+    this.almanaqueService.getEnfermedades().subscribe({
+      next: (data) => {
+        this.enfermedades = data;
+      },
+      error: (err) => console.error('Error cargando enfermedades', err),
+    });
 
+    this.almanaqueService.getPlagas().subscribe({
+      next: (data) => {
+        this.plagas = data;
+      },
+      error: (err) => console.error('Error cargando plagas', err),
+    });
+  }
 
-  ngOnInit() {
-    this.enfermedades.set(this.items.filter(item => item.tipo === 'Enfermedad'));
-    this.plagas.set(this.items.filter(item => item.tipo === 'Plaga'));
+  aplicarFiltro(event: { category: string, value: string }) {
+    switch (event.category) {
+      case 'tipo':
+        this.almanaqueService.getEnfermedadesTipo(event.value)
+          .subscribe(data => this.enfermedades = data);
+        this.almanaqueService.getPlagasTipo(event.value)
+          .subscribe(data => this.plagas = data);
+        break;
+
+      case 'temporada':
+        this.almanaqueService.getEnfermedadesTemporada(event.value)
+          .subscribe(data => this.enfermedades = data);
+        this.almanaqueService.getPlagasTemporada(event.value)
+          .subscribe(data => this.plagas = data);
+        break;
+
+      case 'severidad':
+        this.almanaqueService.getEnfermedadesSeveridad(event.value)
+          .subscribe(data => this.enfermedades = data);
+        this.almanaqueService.getPlagasSeveridad(event.value)
+          .subscribe(data => this.plagas = data);
+        break;
+    }
+  }
+
+  resetFiltros() {
+    this.cargarDatos();
+  }
+
+  ordenarASCDESC() {
+    const orden = this.ordenSeleccionada;
+
+    if (orden === 'NOMBRE_ASC') {
+      this.almanaqueService.getEnfermedadesOrdenadasASC().subscribe({
+        next: (data) => this.enfermedades = data,
+        error: (err) => console.error('Error ordenando enfermedades ASC', err)
+      });
+
+      this.almanaqueService.getPlagasOrdenadasASC().subscribe({
+        next: (data) => this.plagas = data,
+        error: (err) => console.error('Error ordenando plagas ASC', err)
+      });
+
+    }
+    else if (orden === 'NOMBRE_DESC') {
+      this.almanaqueService.getEnfermedadesOrdenadasDESC().subscribe({
+        next: (data) => this.enfermedades = data,
+        error: (err) => console.error('Error ordenando enfermedades DESC', err)
+      });
+
+      this.almanaqueService.getPlagasOrdenadasDESC().subscribe({
+        next: (data) => this.plagas = data,
+        error: (err) => console.error('Error ordenando plagas DESC', err)
+      });
+    }
+  }
+
+  buscarEnAlmanaque() {
+    const termino = this.searchTerm.trim();
+    if (termino.length === 0) {
+      this.cargarDatos();
+      return;
+    }
+
+    this.loading = true;
+
+    this.almanaqueService.getEnfermedadesPorNombre(termino.toLowerCase()).subscribe({
+      next: enfermedades => this.enfermedades = enfermedades,
+      error: err => console.error(err),
+      complete: () => this.loading = false
+    });
+
+    this.almanaqueService.getPlagasPorNombre(termino.toLowerCase()).subscribe({
+      next: plagas => this.plagas = plagas,
+      error: err => console.error(err)
+    });
   }
 }

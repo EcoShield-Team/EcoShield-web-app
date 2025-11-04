@@ -1,20 +1,61 @@
 <div class="filter-container">
 
+  <!-- Filtro Tipo -->
   <div class="filter-group">
-    <p class="filter-label">Tipo</p>
-    <span class="filter-dropdown-icon"></span>
+    <div class="filter-header" (click)="toggleSection('tipo')">
+      <p class="filter-label">Tipo</p>
+      <span class="filter-dropdown-icon" [class.open]="openSection === 'tipo'">&#9664;</span>
+    </div>
+
+    <div class="filter-content" [class.is-open]="openSection === 'tipo'">
+      <ul class="filter-options-list">
+        <li *ngFor="let tipo of tipos" (click)="onFilterSelect('tipo', tipo)">
+          {{ tipo }}
+        </li>
+      </ul>
+    </div>
   </div>
+
   <hr>
 
+  <!-- Filtro Temporada -->
   <div class="filter-group">
-    <p class="filter-label">Temporada</p>
-    <span class="filter-dropdown-icon"></span>
+    <div class="filter-header" (click)="toggleSection('temporada')">
+      <p class="filter-label">Temporada</p>
+      <span class="filter-dropdown-icon" [class.open]="openSection === 'temporada'">&#9664;</span>
+    </div>
+
+    <div class="filter-content" [class.is-open]="openSection === 'temporada'">
+      <ul class="filter-options-list">
+        <li *ngFor="let temp of temporadas" (click)="onFilterSelect('temporada', temp)">
+          {{ temp }}
+        </li>
+      </ul>
+    </div>
   </div>
+
   <hr>
 
+  <!-- Filtro Severidad -->
   <div class="filter-group">
-    <p class="filter-label">Severidad</p>
-    <span class="filter-dropdown-icon"></span>
+    <div class="filter-header" (click)="toggleSection('severidad')">
+      <p class="filter-label">Severidad</p>
+      <span class="filter-dropdown-icon" [class.open]="openSection === 'severidad'">&#9664;</span>
+    </div>
+
+    <div class="filter-content" [class.is-open]="openSection === 'severidad'">
+      <ul class="filter-options-list">
+        <li *ngFor="let sev of severidades" (click)="onFilterSelect('severidad', sev)">
+          {{ sev }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Reset Filter -->
+  <div class="reset-button-container">
+    <button class="reset-filters-button" (click)="resetFiltros()">Deshacer filtros</button>
   </div>
 
 </div>
