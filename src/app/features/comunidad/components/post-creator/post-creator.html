@@ -1,10 +1,31 @@
 <div class="creator-card">
   <div class="creator-header">
-    <img src="/assets/images/deteccion/fresa.jpg" alt="Tu perfil" class="creator-avatar" />
-    <input type="text" placeholder="¿Qué está pasando, User?" class="creator-input" />
+    <img
+      src="/assets/images/user-placeholder.jpg"
+      alt="Tu perfil"
+      class="creator-avatar"
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="titulo"
+      placeholder="Título de tu publicación"
+      class="creator-input"
+    />
   </div>
 
-  <hr class="creator-divider" />
+  <textarea
+    [(ngModel)]="descripcion"
+    placeholder="Escribe una descripción detallada..."
+    class="creator-textarea"
+    rows="3"
+  ></textarea>
+
+  @if (previewUrl()) {
+    <div class="preview-wrapper">
+      <img [src]="previewUrl()" alt="preview" class="preview" />
+    </div>
+  }
 
   <div class="creator-footer">
     <div class="creator-actions">
@@ -19,19 +40,20 @@
         accept="image/*"
         (change)="onFileSelected($event)"
       />
-
-      <button mat-button class="action-btn">
-        <mat-icon>sentiment_satisfied</mat-icon>
-        <span>Sentimiento/actividad</span>
-      </button>
     </div>
 
-    <button mat-flat-button color="primary" [disabled]="true" class="post-btn">
-      Postear
+    <button
+      mat-flat-button
+      color="primary"
+      class="post-btn"
+      [disabled]="!titulo || !descripcion || cargando()"
+      (click)="publicar()"
+    >
+      @if (cargando()) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        Publicar
+      }
     </button>
   </div>
-
-  @if (previewUrl()) {
-    <img [src]="previewUrl()" alt="preview" class="preview" />
-  }
 </div>
