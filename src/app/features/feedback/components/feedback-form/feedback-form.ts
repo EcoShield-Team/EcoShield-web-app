@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import {FeedbackRequest} from '../../../../core/models/feedback.model';
 import {FeedbackTipo} from '../../../../core/models/enums.model';
 import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class FeedbackForm {
   feedbackTipos = Object.values(FeedbackTipo);
 
   private fb: FormBuilder = inject(FormBuilder);
+  private router: Router = inject(Router);
 
   constructor() {
     this.feedbackForm = this.fb.group({
@@ -45,6 +47,10 @@ export class FeedbackForm {
       this.feedbackForm.markAsPristine();
       this.feedbackForm.markAsUntouched();
     }
+  }
+
+  goToAdminList(): void {
+    this.router.navigate(['/home/feedback/admin-list']);
   }
 }
 

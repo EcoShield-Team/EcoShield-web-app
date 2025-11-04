@@ -2,10 +2,8 @@
 
 <section class="feedback-container">
   <div class="feedback-wrapper">
-    <!-- Breadcrumb -->
     <app-breadcrumb></app-breadcrumb>
 
-    <!-- Formulario -->
     @if (currentState === 'form' || currentState === 'loading') {
       <div class="feedback-card-wrapper">
         @if (currentState === 'loading') {

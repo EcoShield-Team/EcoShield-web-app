@@ -1,3 +1,7 @@
+:host {
+  font-family: 'Inter', sans-serif;
+}
+
 .feedback-container {
   background:
     radial-gradient(circle at 10px 10px, rgba(145, 190, 120, 0.15) 2px, transparent 0),
@@ -19,7 +23,6 @@
   max-width: 900px;
 }
 
-/* Breadcrumb con mismo ancho del formulario */
 app-breadcrumb {
   display: block;
   width: 100%;
@@ -28,10 +31,11 @@ app-breadcrumb {
   color: #6b7280;
 }
 
-/* Contenedor del form + loading overlay */
 .feedback-card-wrapper {
   position: relative;
   width: 100%;
+  animation: fadeInSlideUp 0.5s ease-out forwards;
+  opacity: 0;
 }
 
 .loading-overlay {
@@ -52,5 +56,16 @@ app-breadcrumb {
 @media (max-width: 1024px) {
   .feedback-wrapper {
     max-width: 95%;
+  }
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
