@@ -1,11 +1,25 @@
-.error-box {
-  background-color: #ef4444;
-  color: white;
-  padding: 1rem 1.25rem;
-  border-radius: 8px;
-  font-weight: 500;
+.status-card {
+  max-width: 500px;
+  margin: 3rem auto;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  max-width: 400px;
-  margin: 1rem auto;
+  padding: 20px;
 }
+.error-card {
+  border-left: 5px solid #ef4444;
+  background-color: #fef2f2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.error-detail {
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: #991b1b;
+}
+.mat-card-title {
+  color: #991b1b;
+  font-weight: 700;
+}
+.mat-card-actions {
+  justify-content: center;
+  padding-bottom: 0;
+}
+

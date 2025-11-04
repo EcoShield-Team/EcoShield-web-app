@@ -1,38 +1,58 @@
-<div class="feedback-card">
+<mat-card class="feedback-card">
   <h2>Feedback</h2>
-  <hr />
 
-  <form class="feedback-form">
-    <!-- Puntuación -->
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="feedback-form">
     <div class="form-group">
-      <label>Púntuanos</label>
+      <label>Púntuanos ({{ feedbackForm.get('feedbackRating')?.value || 0 }}/5)</label>
       <div class="stars">
-        <span class="star material-icons">star</span>
-        <span class="star material-icons">star</span>
-        <span class="star material-icons">star</span>
-        <span class="star material-icons">star</span>
-        <span class="star material-icons">star</span>
+        @for (i of [1, 2, 3, 4, 5]; track i) {
+          <span
+            class="star material-icons"
+            (click)="feedbackForm.get('feedbackRating')?.setValue(i)"
+            [class.active]="i <= (feedbackForm.get('feedbackRating')?.value || 0)">
+            star
+          </span>
+        }
       </div>
+      @if (feedbackForm.get('feedbackRating')?.invalid && feedbackForm.get('feedbackRating')?.touched) {
+        <span class="text-error">La puntuación es requerida.</span>
+      }
     </div>
 
-    <!-- Tipo de feedback -->
     <div class="form-group">
       <label>Tipo de feedback</label>
       <div class="feedback-types">
-        <label><input type="radio" name="type" checked> Problemas con la app</label>
-        <label><input type="radio" name="type"> Mejoras sugeridas</label>
-        <label><input type="radio" name="type"> Opinión general</label>
+        @for (tipo of feedbackTipos; track tipo) {
+          <label>
+            <input type="radio" [value]="tipo" formControlName="feedbackTipo">
+            {{ getDisplayTipo(tipo) }}
+          </label>
+        }
       </div>
+      @if (feedbackForm.get('feedbackTipo')?.invalid && feedbackForm.get('feedbackTipo')?.touched) {
+        <span class="text-error">Debes seleccionar un tipo de feedback.</span>
+      }
     </div>
 
-    <!-- Comentarios -->
     <div class="form-group">
       <label>Comentarios</label>
-      <textarea maxlength="300" placeholder="Escribe tus comentarios..."></textarea>
-      <div class="char-counter">0/300</div>
+      <textarea
+        formControlName="feedbackDescripcion"
+        placeholder="Escribe tus comentarios..."
+        maxlength="500"></textarea>
+      <div class="char-counter">
+        {{ feedbackForm.get('feedbackDescripcion')?.value?.length || 0 }}/500
+      </div>
+      @if (feedbackForm.get('feedbackDescripcion')?.hasError('required') && feedbackForm.get('feedbackDescripcion')?.touched) {
+        <span class="text-error">Los comentarios son obligatorios.</span>
+      }
+      @if (feedbackForm.get('feedbackDescripcion')?.hasError('maxlength')) {
+        <span class="text-error">Máximo de 500 caracteres excedido.</span>
+      }
     </div>
 
-    <!-- Botón -->
-    <button type="button" class="submit-btn">Enviar</button>
+    <button type="submit" [disabled]="feedbackForm.invalid" class="submit-btn">
+      Enviar
+    </button>
   </form>
-</div>
+</mat-card>
