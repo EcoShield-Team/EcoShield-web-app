@@ -14,5 +14,8 @@ export const routes: Routes = [
       import('./pages/about/about.routes').then(m => m.ABOUT_ROUTES)
   },
 
+  { path: 'auth', loadChildren: () =>
+      import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
+  },
   { path: '**', component: NotFoundPage}
 ];
