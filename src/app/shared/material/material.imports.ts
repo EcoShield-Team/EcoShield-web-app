@@ -11,6 +11,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 export const MATERIAL_IMPORTS = [
   MatButtonModule,
@@ -27,4 +28,5 @@ export const MATERIAL_IMPORTS = [
   MatExpansionModule,
   MatFormFieldModule,
   MatSelectModule,
+  MatProgressSpinnerModule
 ];

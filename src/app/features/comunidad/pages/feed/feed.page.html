@@ -10,7 +10,7 @@
       <app-sidebar-left></app-sidebar-left>
 
       <div class="feed-column">
-        <app-post-creator></app-post-creator>
+        <app-post-creator (postCreated)="agregarPost($event)"></app-post-creator>
 
         @for (post of posts(); track post.postId) {
           <app-post-card [post]="post"></app-post-card>
