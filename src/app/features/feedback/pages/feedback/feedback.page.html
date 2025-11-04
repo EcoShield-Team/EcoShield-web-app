@@ -2,7 +2,31 @@
 
 <section class="feedback-container">
   <div class="feedback-wrapper">
+    <!-- Breadcrumb -->
     <app-breadcrumb></app-breadcrumb>
-    <app-feedback-form></app-feedback-form>
+
+    <!-- Formulario -->
+    @if (currentState === 'form' || currentState === 'loading') {
+      <div class="feedback-card-wrapper">
+        @if (currentState === 'loading') {
+          <div class="loading-overlay">Cargando...</div>
+        }
+        <app-feedback-form (feedbackSubmit)="handleFeedbackSubmit($event)"></app-feedback-form>
+      </div>
+    }
+
+    @if (currentState === 'success' && lastResponse) {
+      <app-feedback-success
+        [response]="lastResponse"
+        (restart)="startNewFeedback()">
+      </app-feedback-success>
+    }
+
+    @if (currentState === 'error') {
+      <app-feedback-error
+        [errorMessage]="lastError"
+        (restart)="startNewFeedback()">
+      </app-feedback-error>
+    }
   </div>
 </section>

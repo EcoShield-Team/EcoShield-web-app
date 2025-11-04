@@ -5,9 +5,11 @@
   </div>
 
   <div class="navbar-center desktop-nav">
-    <button mat-button class="nav-link active" routerLink="/home">Inicio</button>
-    <button mat-button class="nav-link" routerLink="/not-found">Capturas</button>
-    <button mat-button class="nav-link" routerLink="/comunidad">Comunidad</button>
+    <button mat-button class="nav-link" routerLink="/home" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">Inicio</button>
+    <button mat-button class="nav-link" routerLink="/not-found" routerLinkActive="active">Capturas</button>
+    <button mat-button class="nav-link" routerLink="/home/comunidad" routerLinkActive="active">Comunidad</button>
+    <button mat-button class="nav-link" routerLink="/about" routerLinkActive="active">Nosotros</button>
   </div>
 
   <div class="navbar-right">
@@ -27,15 +29,18 @@
 </mat-toolbar>
 
 <mat-menu #mobileMenu="matMenu">
-  <button mat-menu-item routerLink="/home">
+  <button mat-menu-item routerLink="/home" routerLinkActive="active-menu-item"
+          [routerLinkActiveOptions]="{exact: true}">
     <mat-icon>home</mat-icon>
     <span>Inicio</span>
   </button>
-  <button mat-menu-item routerLink="/not-found">
+
+  <button mat-menu-item routerLink="/not-found" routerLinkActive="active-menu-item">
     <mat-icon>camera_alt</mat-icon>
     <span>Capturas</span>
   </button>
-  <button mat-menu-item routerLink="/comunidad">
+
+  <button mat-menu-item routerLink="/home/comunidad" routerLinkActive="active-menu-item">
     <mat-icon>group</mat-icon>
     <span>Comunidad</span>
   </button>

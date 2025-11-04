@@ -11,6 +11,6 @@ export class AuthRedirectGuard implements CanActivate {
       this.router.navigate(['/home']);
       return false;
     }
-    return true; // Permite ver la landing si no hay sesión
+    return true;
   }
 }

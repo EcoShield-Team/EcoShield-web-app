@@ -1,11 +1,25 @@
-.success-box {
-  background-color: #1f2937;
-  color: #f9fafb;
-  padding: 1rem 1.25rem;
-  border-radius: 8px;
-  font-weight: 500;
+.status-card {
+  max-width: 500px;
+  margin: 3rem auto;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  max-width: 400px;
-  margin: 1rem auto;
+  padding: 20px;
 }
+.success-card {
+  border-left: 5px solid #10b981;
+  background-color: #f0fdf4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.detail-text {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #4b5563;
+}
+.mat-card-title {
+  color: #065f46;
+  font-weight: 700;
+}
+.mat-card-actions {
+  justify-content: center;
+  padding-bottom: 0;
+}
+

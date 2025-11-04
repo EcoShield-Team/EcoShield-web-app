@@ -1,0 +1,206 @@
+@keyframes scroll-x-images {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.features-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: 3.5rem;
+  padding-bottom: 4.2rem;
+}
+
+.features-row-1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.feature-card {
+  border-radius: 50px;
+  padding: 1.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: 100%
+}
+
+.card-content h1, .feature-card h2, .feature-card p {
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0;
+}
+
+.card-content p {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  line-height: 1.2;
+}
+
+.card-almanaque {
+  background-color: #9aff92;
+  color: #064e3b;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-start;
+}
+.book-image {
+  position: absolute;
+  top: -65px;
+  left: -35px;
+  width: 500px;
+  height: auto;
+  z-index: 2;
+}
+.almanaque-text {
+  padding-top: 350px;
+}
+
+.almanaque-text h1{
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+.almanaque-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.gallery-item {
+  background: rgba(255,255,255,0.6);
+  border-radius: 25px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.insect-row img {
+  width: 100%;
+  height: auto;
+}
+
+.gallery-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.gallery-img {
+  width: 150%;
+  height: auto;
+}
+
+.card-foro {
+  background-color: #9492FF;
+  color: #312e81;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.foro-text h1{
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+.forum-image {
+  width: 100%;
+  height: auto;
+  border-radius: 35px;
+}
+
+/*DESDE ACA COMENZAMOS LOS CAMBIOS*/
+
+.features-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: stretch;
+  gap: 2rem;
+  width: 100%;
+}
+
+.card-historial {
+  background-color: #d9e9f9;
+  color: #1e3a8a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 3rem 1.5rem;
+}
+.history-icon {
+  font-size: 20rem;
+  width: 20rem;
+  height: 20rem;
+}
+
+.card-recomendaciones {
+  background-color: #f9e9d9;
+  color: #7c2d12;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.recommend-ticker {
+  overflow: hidden;
+  margin: 2rem 0;
+  border-radius: 25px;
+}
+
+.recommend-content {
+  display: flex;
+  align-items: center;
+  animation: scroll-x-images 15s linear infinite;
+  box-sizing: border-box;
+  width: 950px;
+}
+
+.recommend-content img {
+  height: 350px;
+  width: auto;
+  flex-shrink: 0;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  margin-right: 2.5rem;
+}
+
+.card-recomendaciones .card-content {
+  padding: 3rem 0 3rem;
+}
+
+.card-recomendaciones h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.card-recomendaciones p {
+  font-size: 1.3rem;
+  line-height: 1.4;
+  max-width: 90%;
+}
+
+
+@media (max-width: 992px) {
+  .features-row-1 {
+    grid-template-columns: 1fr;
+  }
+  .card-almanaque {
+    grid-template-columns: 1fr;
+  }
+  .almanaque-text {
+    padding-top: 150px;
+    text-align: center;
+  }
+  .book-image {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

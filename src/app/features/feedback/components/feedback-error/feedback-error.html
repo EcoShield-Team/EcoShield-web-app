@@ -1,3 +1,12 @@
-<div class="error-box">
-  Has excedido el límite de caracteres
-</div>
+<mat-card class="status-card error-card">
+  <mat-card-title>Error al Registrar Feedback</mat-card-title>
+  <mat-card-content>
+    <p class="text-lg my-4">Hubo un problema al intentar conectar con el servidor.</p>
+    <p class="error-detail">Detalle: {{ errorMessage || 'Error de red o token JWT inválido.' }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="warn" (click)="restart.emit()">
+      Volver al Formulario
+    </button>
+  </mat-card-actions>
+</mat-card>
