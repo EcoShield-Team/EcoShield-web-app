@@ -1,0 +1,92 @@
+<app-header></app-header>
+
+<section class="admin-feedback-container-section">
+  <div class="admin-feedback-wrapper">
+
+    <app-breadcrumb></app-breadcrumb>
+
+    <div class="admin-feedback-content">
+      <h1>Gestión de Feedback (Administradores)</h1>
+
+      <div class="filter-controls">
+        <div class="search-group">
+          <input type="number"
+                 #usuarioIdInput
+                 placeholder="Buscar por ID de Usuario"
+                 class="search-input">
+          <button class="search-btn"
+                  (click)="searchByUsuarioId(usuarioIdInput.valueAsNumber)">
+            Buscar Usuario
+          </button>
+        </div>
+
+        <div class="filter-group">
+          <select #tipoSelect
+                  (change)="filterByTipo(tipoSelect.value)"
+                  class="filter-select">
+
+            <option value="">Filtrar por Tipo</option>
+
+            @for (tipo of feedbackTipos; track tipo) {
+              <option [value]="tipo">{{ tipo }}</option>
+            }
+          </select>
+        </div>
+
+        <button class="reload-btn" (click)="loadAdminFeedbacks()">
+          Ver Todos
+        </button>
+      </div>
+
+      <ng-container *ngIf="accessDenied">
+        <div class="alert alert-danger">
+          <p><strong>Acceso Denegado (Error 403).</strong> No tienes los permisos necesarios para ver esta información.</p>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!accessDenied">
+        <ng-container *ngIf="(feedbackList$ | async) as feedbacks">
+
+          <div *ngIf="feedbacks.length === 0 && currentSearchTerm !== null" class="no-data">
+            <p>No se encontraron feedbacks con el filtro actual.</p>
+          </div>
+          <div *ngIf="feedbacks.length === 0 && currentSearchTerm === null" class="no-data">
+            <p>No hay feedbacks para mostrar.</p>
+          </div>
+
+          <table *ngIf="feedbacks.length > 0" class="feedback-table">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Usuario ID</th>
+              <th>Tipo</th>
+              <th>Puntuación</th>
+              <th>Comentarios</th>
+              <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let feedback of feedbacks">
+              <td>{{ feedback.feedbackId }}</td>
+              <td>{{ feedback.usuarioId }}</td>
+              <td>{{ feedback.feedbackTipo }}</td>
+              <td>{{ feedback.feedbackRating }} / 5</td>
+              <td data-label="Comentarios">{{ feedback.feedbackDescripcion }}</td>
+              <td>
+                <button
+                  class="delete-btn"
+                  (click)="deleteFeedback(feedback.feedbackId)"
+                  title="Eliminar Feedback"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+      </ng-container>
+
+    </div>
+  </div>
+</section>

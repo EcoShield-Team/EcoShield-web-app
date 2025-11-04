@@ -9,14 +9,41 @@
   margin-top: 1rem;
 }
 
-.feedback-card h2 {
+.feedback-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1rem;
+}
+
+.feedback-header-container h2 {
   font-size: 1.8rem;
   font-weight: 600;
   color: #111827;
-  margin-bottom: 1rem;
+  margin: 0;
+  padding-bottom: 0;
+  border-bottom: none;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 1rem;
+}
+
+.admin-settings-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4CAF50;
+  font-size: 28px;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+}
+
+.admin-settings-btn:hover {
+  color: #388E3C;
+  transform: rotate(20deg);
 }
 
 .feedback-form {

@@ -1,5 +1,16 @@
 <mat-card class="feedback-card">
-  <h2>Feedback</h2>
+  <div class="feedback-header-container">
+    <h2>Feedback</h2>
+
+    <button
+      class="admin-settings-btn"
+      (click)="goToAdminList()"
+      title="Gestionar Feedbacks"
+      aria-label="Gestionar Feedbacks"
+    >
+      <mat-icon>settings</mat-icon>
+    </button>
+  </div>
 
   <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="feedback-form">
     <div class="form-group">
