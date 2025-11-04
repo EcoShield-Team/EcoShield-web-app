@@ -32,7 +32,6 @@ interface TeamMember {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutPage {
-  // Lista de miembros del equipo con Signals
   teamMembers = signal<TeamMember[]>([
     {
       name: 'Gerardo Chavez',

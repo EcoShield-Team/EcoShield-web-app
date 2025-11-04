@@ -12,7 +12,6 @@ export class Comunidad {
   private readonly http = inject(HttpClient);
   private readonly API_BASE_URL = `${environment.apiURl}/posts`;
 
-  // 🔐 Token de prueba (puedes dejarlo en environment)
   private readonly TEST_JWT_TOKEN = environment.token;
 
   private get authHeaders(): HttpHeaders {

@@ -46,20 +46,17 @@
   line-height: normal;
 }
 
-/* Efecto hover sutil */
 .nav-button:hover {
-  background-color: #e2e4e7; /* Un gris un poco más oscuro al hacer hover */
-  /* Puedes ajustar el background-image para que el ruido sea menos visible o diferente al hacer hover si lo deseas */
+  background-color: #e2e4e7;
 }
 
-/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
   .landing-navbar {
     padding: 0.5rem 1rem;
   }
 
   .nav-button {
-    padding: 0.5rem 0.9rem; /* Ajustar padding para pantallas pequeñas */
+    padding: 0.5rem 0.9rem;
     font-size: 0.9rem;
   }
 

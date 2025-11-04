@@ -2,7 +2,6 @@
   display: block;
 }
 
-/* --- CARD INTERNA DORADA --- */
 .cta-container {
   background-image: url('/assets/images/landing/fondos/Rectangle 336.png');
   background-size: cover;
@@ -26,7 +25,6 @@
   overflow: hidden;
 }
 
-/* --- CAPA DE SUAVIZADO (efecto sutil tipo "grain") --- */
 .cta-container::before {
   content: "";
   position: absolute;
@@ -36,7 +34,6 @@
   pointer-events: none;
 }
 
-/* --- TIPOGRAFÍA --- */
 .cta-pretitle {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 600;
@@ -65,7 +62,6 @@
   margin-bottom: 2.5rem;
 }
 
-/* --- BOTÓN --- */
 .cta-button {
   background-color: #0b0b0b;
   color: #ffffff;
@@ -84,7 +80,6 @@
   transform: scale(1.05);
 }
 
-/* --- DISCLAIMER --- */
 .cta-disclaimer {
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
@@ -94,7 +89,6 @@
   max-width: 700px;
 }
 
-/* --- RESPONSIVIDAD --- */
 @media (max-width: 992px) {
   .cta-container {
     padding: 3.5rem 2rem;

@@ -42,7 +42,6 @@
   transform: rotate(-90deg);
 }
 
-/* Contenido colapsable */
 .filter-content {
   max-height: 0;
   overflow: hidden;
@@ -57,7 +56,6 @@
   padding: 10px 20px;
 }
 
-/* Lista interna */
 .filter-options-list {
   list-style: none;
   padding: 0;

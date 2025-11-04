@@ -1,13 +1,10 @@
-/* ============================
-   CONTENEDOR PRINCIPAL
-   ============================ */
 :host {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 380px;
   max-width: calc(100vw - 40px);
-  padding: 18px 32px 30px;  /* antes 28px 32px 22px → más arriba */
+  padding: 18px 32px 30px;
   border-radius: 24px;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -21,10 +18,6 @@
   }
 }
 
-/* ============================
-   LOGO + TÍTULO
-   ============================ */
-/* quitamos un poco de espacio extra arriba del logo */
 .form-logo-wrapper {
   display: flex;
   flex-direction: column;
@@ -63,7 +56,7 @@
 
 .form-input-field {
   width: 100%;
-  max-width: 340px;  /* igual que el botón / links / error */
+  max-width: 340px;
 }
 
 
@@ -72,9 +65,7 @@
   padding-bottom: 10px;
   width: 300px;
 }
-/* ============================
-   BOTÓN
-   ============================ */
+
 .form-submit-button {
   width: 100%;
   max-width: 280px;
@@ -102,20 +93,16 @@
   cursor: default;
 }
 
-/* ============================
-   ERROR GENERAL ABAJO
-   ============================ */
-/* Slot que SIEMPRE ocupa espacio, tenga o no error */
+
 .form-error-slot {
   width: 100%;
-  height: 40px;              /* altura reservada */
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;        /* espacio bajo el error / slot */
+  margin-bottom: 4px;
 }
 
-/* Caja del mensaje de error */
 .form-error {
   width: 100%;
   padding: 8px 10px;
@@ -133,10 +120,6 @@
   to { opacity: 1; }
 }
 
-
-/* ============================
-   LINKS FOOTER
-   ============================ */
 .form-footer-links {
   display: flex;
   justify-content: space-between;

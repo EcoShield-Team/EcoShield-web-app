@@ -19,7 +19,6 @@
   class="form-container"
   [class.form-submitted]="showFieldErrors"
 >
-  <!-- CAMPO: CORREO -->
   <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
     <mat-label>Correo electrónico</mat-label>
     <input
@@ -40,7 +39,6 @@
     }
   </mat-form-field>
 
-  <!-- CAMPO: CONTRASEÑA -->
   <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
     <mat-label>Contraseña</mat-label>
     <input
@@ -54,7 +52,6 @@
     }
   </mat-form-field>
 
-  <!-- BOTÓN -->
   <button
     type="submit"
     class="form-submit-button"
@@ -68,7 +65,6 @@
   </button>
 </form>
 
-<!-- LINKS -->
 <div class="form-footer-links">
   <a href="#" class="form-link" (click)="goToForgotPassword($event)">¿Olvidaste tu contraseña?</a>
   <a href="#" class="form-link" (click)="goToRegister($event)">Regístrate</a>

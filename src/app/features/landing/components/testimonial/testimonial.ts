@@ -29,12 +29,8 @@ export class Testimonial implements OnInit, AfterViewInit {
     const context = this.el.nativeElement;
     const triggerEl = context.querySelector('.testimonial-grid');
 
-    // --- ¡ANIMACIÓN CORREGIDA Y SIMPLIFICADA! ---
-
-    // 1. Columna 1 (plantas 1, 3, 5) se mueve HACIA ARRIBA
-    //    Para "más movimiento", aumenté el valor de -150 a -250
     gsap.to(context.querySelector('#plant-col-1'), {
-      y: -1500, // <-- MÁS MOVIMIENTO (hacia arriba)
+      y: -1500,
       ease: "none",
       scrollTrigger: {
         trigger: triggerEl,
@@ -44,10 +40,8 @@ export class Testimonial implements OnInit, AfterViewInit {
       }
     });
 
-    // 2. Columna 2 (plantas 2, 4, 6) se mueve HACIA ABAJO
-    //    Usamos un valor 'y' positivo para moverla en la dirección opuesta
     gsap.to(context.querySelector('#plant-col-2'), {
-      y: -500, // <-- MÁS MOVIMIENTO (hacia arriba)
+      y: -500,
       ease: "none",
       scrollTrigger: {
         trigger: triggerEl,

@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
-
-// 👇 Importamos la lista ya construida
 import { countryList, CountryOption } from '../../../../shared/utils/country-list';
 
 @Component({
@@ -31,11 +29,9 @@ export class RegisterForm {
   hidePassword = true;
   hideConfirm = true;
 
-  // Lista completa de países (código ISO + nombre)
   countries: CountryOption[] = countryList;
 
 
-  // getters para el template
   get fullName() { return this.registerForm.get('fullName'); }
   get country()  { return this.registerForm.get('country'); }
   get email()    { return this.registerForm.get('email'); }
@@ -67,7 +63,6 @@ export class RegisterForm {
 
     const formValue = this.registerForm.value;
     console.log('Payload listo para backend:', formValue);
-    // formValue.country -> 'PE', 'MX', etc.
 
     setTimeout(() => {
       this.isLoading = false;

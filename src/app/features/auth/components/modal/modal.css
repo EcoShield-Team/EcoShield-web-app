@@ -1,17 +1,9 @@
-/* auth/components/modal/modal.component.css */
-
-:host {
-  /* Opcional: define una fuente por defecto si quieres */
-  /* font-family: 'Montserrat', sans-serif; */
-}
-
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  /* Fondo oscuro semi-transparente */
   background-color: rgba(30, 30, 30, 0.7);
   display: flex;
   align-items: center;
@@ -42,12 +34,12 @@
   border: none;
   cursor: pointer;
   padding: 8px;
-  color: #333; /* Color oscuro para fondo claro */
+  color: #333;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1010; /* Por si el form tiene elementos con z-index */
+  z-index: 1010;
 }
 .modal-close:hover {
   background-color: rgba(0, 0, 0, 0.05);

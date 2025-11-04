@@ -1,6 +1,3 @@
-/* ============================
-   CONTENEDOR DEL COMPONENTE
-   ============================ */
 :host {
   display: flex;
   flex-direction: column;
@@ -13,9 +10,6 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* ============================
-   ERROR GENERAL ARRIBA
-   ============================ */
 .form-error-slot {
   width: 100%;
   max-width: 360px;
@@ -37,9 +31,6 @@
   text-align: center;
 }
 
-/* ============================
-   HEADER (LOGO + TÍTULO)
-   ============================ */
 .form-header {
   display: flex;
   flex-direction: column;
@@ -77,26 +68,22 @@
   margin: 0;
 }
 
-/* ============================
-   FORMULARIO
-   ============================ */
 .form-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px; /* más compacto que antes (10px → 8px) */
+  gap: 6px;
   width: 100%;
   max-width: 360px;
 }
 
-/* FILA DOBLE (Nombre + País) */
 .form-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  gap: 8px; /* espacio horizontal entre los 2 inputs */
+  gap: 8px;
   width: 100%;
   max-width: 360px;
 }
@@ -106,30 +93,25 @@
   min-width: 0;
 }
 
-/* todos los mat-form-field ocupan el mismo ancho */
 .form-input-field {
   width: 100%;
 }
 
-/* Ajuste general del field (input + select) */
 :host ::ng-deep .mat-mdc-form-field {
   width: 100%;
 }
 
-/* caja visual de los campos */
 :host ::ng-deep .mat-mdc-text-field-wrapper {
   border-radius: 8px;
   background-color: #fff;
   padding: 0 12px;
 }
 
-/* altura interna → más compacto que el default */
 :host ::ng-deep .mat-mdc-form-field-infix {
   padding-top: 6px;
   padding-bottom: 6px;
 }
 
-/* borde gris suave por defecto */
 :host ::ng-deep
 .mat-mdc-form-field-appearance-outline .mdc-notched-outline__leading,
 :host ::ng-deep
@@ -139,7 +121,6 @@
   border-color: #d6cdc8;
 }
 
-/* borde verde al focus */
 :host ::ng-deep
 .mat-mdc-form-field-appearance-outline.mat-focused .mdc-notched-outline__leading,
 :host ::ng-deep
@@ -153,13 +134,11 @@
   box-sizing: border-box;
   width: 100%;
   position: relative;
-  margin-top: 0;           /* elimina espacio extra arriba del hint */
-  height: 12px;        /* antes ~20px → más compacto */
+  margin-top: 0;
+  height: 12px;
   line-height: 1;
 }
 
-
-/* icono del ojito */
 mat-icon {
   color: #5f6368;
 }
@@ -168,13 +147,10 @@ mat-icon:hover {
   color: #1b5e20;
 }
 
-/* ============================
-   BOTÓN
-   ============================ */
 .form-submit-button {
   width: 100%;
   max-width: 260px;
-  height: 36px; /* un poco más bajo (40 → 38) */
+  height: 36px;
   margin-top: 5px;
   border: none;
   border-radius: 10px;
@@ -198,9 +174,6 @@ mat-icon:hover {
   cursor: not-allowed;
 }
 
-/* ============================
-   FOOTER
-   ============================ */
 .form-footer-links {
   margin-bottom: 15px;
   display: flex;
@@ -243,9 +216,6 @@ mat-icon:hover {
   width: 100%;
 }
 
-/* ============================
-   RESPONSIVE (por si abren en móvil)
-   ============================ */
 @media (max-width: 640px) {
   .form-row {
     flex-direction: column;

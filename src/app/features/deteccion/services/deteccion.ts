@@ -11,7 +11,6 @@ export class Deteccion {
   private readonly http = inject(HttpClient);
   private readonly API_BASE_URL = `${environment.apiURl}/deteccion`;
 
-  //Recuerda cambiar el token, prende la api, inicia sesión o crea un usuario y reemplaza el token de abajo
   private readonly TEST_JWT_TOKEN = environment.token;
 
   private get authHeaders(): HttpHeaders {
