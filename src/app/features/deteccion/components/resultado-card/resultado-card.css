@@ -1,67 +1,113 @@
-.resultado-container {
-  background-color: #faf8ee;
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
+:host {
+  display: block;
+  font-family: 'Inter', sans-serif;
+}
+
+.resultado-card {
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .alerta {
   background-color: #d32f2f;
   color: white;
-  padding: 12px 0;
-  border-radius: 8px;
+  padding: 1rem;
   font-weight: 600;
-  font-size: 18px;
-  margin: 20px auto;
-  width: 100%;
-  max-width: 700px;
-}
-
-.tabs {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.tabs button {
-  background: #f2f2f2;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.tabs button:hover,
-.tabs button.active {
-  background-color: #37a864;
-  color: #fff;
-}
-
-.texto {
-  background-color: #d9d9d9;
-  padding: 18px;
-  border-radius: 10px;
-  margin-top: 15px;
-  color: #333;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 1.25rem;
+  text-align: center;
 }
 
 .imagen-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
 }
 
 .imagen-cultivo {
   width: 100%;
-  max-width: 700px;
-  border-radius: 10px;
+  display: block;
+  height: 100%;
   object-fit: cover;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  object-position: center;
+}
+
+.contenido-wrapper {
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.titulo-enfermedad h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+.titulo-enfermedad p {
+  font-style: italic;
+  color: #6b7280;
+  margin: 0;
+}
+
+.tabs-actions-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.acciones-info {
+  display: flex;
+  gap: 0.5rem;
+}
+.acciones-info button {
+  color: #16a34a;
+  font-weight: 500;
+  padding: 0 0.5rem;
+}
+.acciones-info button mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.tabs button {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  border-radius: 99px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.tabs button:hover {
+  background-color: #e5e7eb;
+}
+.tabs button.active {
+  background-color: #eef5e3;
+  color: #15803d;
+}
+
+.tab-content {
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.tab-content p {
+  margin: 0;
 }

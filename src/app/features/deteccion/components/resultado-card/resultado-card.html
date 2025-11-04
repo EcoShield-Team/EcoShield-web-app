@@ -1,8 +1,5 @@
-<div class="resultado-container">
-  <h2>Resultado del detector</h2>
-
+<div class="resultado-card">
   <div class="alerta">¡Problema detectado!</div>
-
   <div class="imagen-wrapper">
     <img
       src="/assets/images/deteccion/fresa.jpg"
@@ -11,52 +8,60 @@
     />
   </div>
 
-  <h3>Enfermedad detectada</h3>
-  <p class="sub">Debemos tomar medidas para la fresa</p>
-  <h4>Podredumbre Gris</h4>
-  <p><em>Botrytis cinerea Pers.</em></p>
+  <div class="contenido-wrapper">
 
-  <div class="tabs">
-    <button [class.active]="tab === 'sintomas'" (click)="tab = 'sintomas'">Síntomas</button>
-    <button [class.active]="tab === 'tratamiento'" (click)="tab = 'tratamiento'">Tratamiento</button>
-    <button [class.active]="tab === 'causas'" (click)="tab = 'causas'">Causas</button>
-    <button [class.active]="tab === 'prevencion'" (click)="tab = 'prevencion'">Prevención</button>
+    <div class="titulo-enfermedad">
+      <h4>Podredumbre Gris</h4>
+      <p><em>Botrytis cinerea Pers.</em></p>
+    </div>
+
+    <div class="tabs-actions-wrapper">
+      <div class="tabs">
+        <button [class.active]="tab === 'sintomas'" (click)="tab = 'sintomas'">Síntomas</button>
+        <button [class.active]="tab === 'tratamiento'" (click)="tab = 'tratamiento'">Tratamiento</button>
+        <button [class.active]="tab === 'causas'" (click)="tab = 'causas'">Causas</button>
+        <button [class.active]="tab === 'prevencion'" (click)="tab = 'prevencion'">Prevención</button>
+      </div>
+
+      <div class="acciones-info">
+        <button mat-button>
+          <mat-icon>translate</mat-icon>
+          Traducir
+        </button>
+        <button mat-button>
+          <mat-icon>volume_up</mat-icon>
+          Escuchar
+        </button>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      @if (tab === 'sintomas') {
+        <p>
+          Los frutos afectados muestran manchas marrones acuosas que luego se cubren de un moho gris.
+          Las flores y tallos pueden marchitarse debido a la infección del hongo.
+        </p>
+      }
+      @if (tab === 'tratamiento') {
+        <p>
+          Retirar y eliminar los frutos infectados, mejorar la ventilación y aplicar fungicidas a base
+          de iprodiona o fenhexamida según recomendación técnica.
+        </p>
+      }
+      @if (tab === 'causas') {
+        <p>
+          Se debe principalmente a la alta humedad y a la falta de ventilación. El hongo
+          <em>Botrytis cinerea</em> prospera en condiciones húmedas y frías.
+        </p>
+      }
+      @if (tab === 'prevencion') {
+        <p>
+          Las estrategias de control de la botrytis en fresa también incluyen una serie de medidas de
+          prevención encaminadas a ampliar los marcos de plantación para favorecer la entrada de aire y la
+          ventilación entre plantas y, muy especialmente, la destrucción de los restos de cosecha y de los
+          frutos dañados para evitar la posibilidad de nuevas infestaciones.
+        </p>
+      }
+    </div>
   </div>
-
-  @if (tab === 'sintomas') {
-    <div class="texto">
-      <p>
-        Los frutos afectados muestran manchas marrones acuosas que luego se cubren de un moho gris.
-        Las flores y tallos pueden marchitarse debido a la infección del hongo.
-      </p>
-    </div>
-  }
-
-  @if (tab === 'tratamiento') {
-    <div class="texto">
-      <p>
-        Retirar y eliminar los frutos infectados, mejorar la ventilación y aplicar fungicidas a base
-        de iprodiona o fenhexamida según recomendación técnica.
-      </p>
-    </div>
-  }
-
-  @if (tab === 'causas') {
-    <div class="texto">
-      <p>
-        Se debe principalmente a la alta humedad y a la falta de ventilación. El hongo
-        <em>Botrytis cinerea</em> prospera en condiciones húmedas y frías.
-      </p>
-    </div>
-  }
-
-  @if (tab === 'prevencion') {
-    <div class="texto">
-      <p>
-        Mantener el cultivo ventilado, eliminar restos de cosecha y controlar el riego. También se
-        recomienda espaciar las plantas y usar coberturas protectoras para reducir humedad.
-      </p>
-    </div>
-  }
-
 </div>

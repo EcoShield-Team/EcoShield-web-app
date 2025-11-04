@@ -44,7 +44,7 @@
 }
 .nav-link.active, .nav-link:hover {
   color: #0B8A3A;
-  font-weight: 600;
+  font-weight: 550;
 }
 
 .navbar-right {
@@ -107,5 +107,14 @@
 
   .navbar-right {
     gap: 0.5rem;
+  }
+
+  .mat-mdc-menu-item.active-menu-item {
+    color: #0B8A3A;
+    font-weight: 550;
+  }
+
+  .mat-mdc-menu-item.active-menu-item mat-icon {
+    color: #0B8A3A;
   }
 }

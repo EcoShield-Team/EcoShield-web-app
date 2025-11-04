@@ -1,0 +1,34 @@
+<div class="hero-container">
+
+  <img ngSrc="/assets/images/landing/recursos/1.svg"
+       alt="Hoja decorativa"
+       class="floating-leaf gsap-leaf"
+       width="450"
+       height="300"
+       priority>
+
+  <div class="hero-liquid-background">
+    <div class="hero-content-wrapper">
+
+      <div class="hero-left-content">
+        <h2 class="subtitle gsap-fade-up">Identifica instantáneamente la enfermedad o plaga de tu planta</h2>
+      </div>
+
+      <div class="hero-right-content">
+        <h1 class="main-title gsap-fade-up">TU GUARDIÁN PERSONAL DE PLANTAS</h1>
+        <p class="main-description gsap-fade-up">Nuestra IA analiza patrones, plagas y enfermedades al instante. Sube una foto de la hoja afectada para obtener tu diagnóstico y los pasos a seguir</p>
+
+        <div class="upload-box gsap-fade-up">
+          <input type="file" id="file-upload" (change)="onFileSelected($event)" accept="image/*">
+          <label for="file-upload" class="upload-overlay"></label>
+
+          <div class="upload-main-content">
+            <mat-icon class="upload-icon">upload_file</mat-icon>
+            <span class="upload-text">Sube tu foto</span>
+          </div>
+        </div>
+        <p class="upload-info gsap-fade-up">Prueba gratuita de la detección en plantas*</p>
+      </div>
+    </div>
+  </div>
+</div>
