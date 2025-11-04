@@ -1,0 +1,76 @@
+<div class="form-error-slot">
+  @if (loginError) {
+    <div class="form-error">
+      {{ loginError }}
+    </div>
+  }
+</div>
+
+<div class="form-logo-wrapper">
+  <img src="assets/images/logo/ecoshield-icon.png" alt="EcoShield Logo" />
+  <span class="logo-text">ECOSHIELD</span>
+</div>
+
+<h3 class="form-title">Iniciar Sesión en EcoShield</h3>
+
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onLoginSubmit()"
+  class="form-container"
+  [class.form-submitted]="showFieldErrors"
+>
+  <!-- CAMPO: CORREO -->
+  <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
+    <mat-label>Correo electrónico</mat-label>
+    <input
+      matInput
+      formControlName="email"
+      type="email"
+      autocomplete="email"
+    />
+    @if (showFieldErrors && email?.invalid) {
+      <mat-error>
+        @if (email?.errors?.['required']) {
+          El correo es requerido.
+        }
+        @if (email?.errors?.['email']) {
+          El formato del correo no es válido.
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <!-- CAMPO: CONTRASEÑA -->
+  <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
+    <mat-label>Contraseña</mat-label>
+    <input
+      matInput
+      formControlName="password"
+      type="password"
+      autocomplete="current-password"
+    />
+    @if (showFieldErrors && password?.invalid) {
+      <mat-error>La contraseña es requerida.</mat-error>
+    }
+  </mat-form-field>
+
+  <!-- BOTÓN -->
+  <button
+    type="submit"
+    class="form-submit-button"
+    [disabled]="loginForm.invalid || isLoading"
+  >
+    @if (!isLoading) {
+      Iniciar sesión
+    } @else {
+      Iniciando...
+    }
+  </button>
+</form>
+
+<!-- LINKS -->
+<div class="form-footer-links">
+  <a href="#" class="form-link" (click)="goToForgotPassword($event)">¿Olvidaste tu contraseña?</a>
+  <a href="#" class="form-link" (click)="goToRegister($event)">Regístrate</a>
+</div>
+

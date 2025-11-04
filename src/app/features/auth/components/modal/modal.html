@@ -1,0 +1,31 @@
+@if (showModal) {
+  <div class="modal-overlay" (click)="close()">
+
+    <div class="modal-content" (click)="$event.stopPropagation()">
+
+      <button class="modal-close" (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      @switch (currentView) {
+
+        @case ('login') {
+          <app-login-form
+            (navigateToRegister)="onNavigate('register')"
+            (navigateToForgot)="onNavigate('forgotPassword')">
+          </app-login-form>
+        }
+
+        @case ('register') {
+          <app-register-form
+            (backToLogin)="onNavigate('login')">
+          </app-register-form>
+        }
+
+        @case ('forgotPassword') {
+          <p>Formulario de Olvidé Contraseña (Próximamente)</p>
+        }
+      }
+    </div>
+  </div>
+}

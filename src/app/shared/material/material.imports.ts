@@ -9,6 +9,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 export const MATERIAL_IMPORTS = [
   MatButtonModule,
@@ -22,5 +24,7 @@ export const MATERIAL_IMPORTS = [
   MatTableModule,
   MatDialogModule,
   MatMenuModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatSelectModule,
 ];
