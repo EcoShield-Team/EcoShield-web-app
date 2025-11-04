@@ -9,34 +9,24 @@
     <div class="contenido-wrapper">
       <div class="titulo-enfermedad">
         <h4>{{ data.nombreDetectado }}</h4>
-        @if (data.tipoFicha === 'ENFERMEDAD') {
-          <p><em>{{ data.descripcion }}</em></p>
-        }
+        <p><em>{{ data.descripcion }}</em></p>
       </div>
 
-      <div class="tabs-actions-wrapper">
-        <div class="acciones-info">
-          <button mat-button>
-            <mat-icon>translate</mat-icon>
-            Traducir
-          </button>
-          <button mat-button>
-            <mat-icon>volume_up</mat-icon>
-            Escuchar
-          </button>
-        </div>
+      <div class="tabs">
+        <button (click)="tab='sintomas'" [class.active]="tab==='sintomas'">Síntomas</button>
+        <button (click)="tab='tratamiento'" [class.active]="tab==='tratamiento'">Tratamiento</button>
+        <button (click)="tab='causas'" [class.active]="tab==='causas'">Causas</button>
+        <button (click)="tab='prevencion'" [class.active]="tab==='prevencion'">Prevención</button>
       </div>
 
       <div class="tab-content">
-        <p>{{ data.descripcion }}</p>
-        <p><strong>Confianza:</strong> {{ (data.confianza * 100) | number: '1.0-0' }}%</p>
-        <p><strong>Tipo:</strong> {{ data.tipoFicha }}</p>
+        @switch (tab) {
+          @case ('sintomas') { <p>{{ data.sintomas || 'Información no disponible.' }}</p> }
+          @case ('tratamiento') { <p>{{ data.tratamiento || 'Información no disponible.' }}</p> }
+          @case ('causas') { <p>{{ data.causas || 'Información no disponible.' }}</p> }
+          @case ('prevencion') { <p>{{ data.prevencion || 'Información no disponible.' }}</p> }
+        }
       </div>
     </div>
-  </div>
-} @else {
-  <div class="resultado-card empty">
-    <div class="alerta">Sin resultados</div>
-    <p style="padding: 1rem; text-align: center;">Aún no se ha detectado ningún cultivo.</p>
   </div>
 }

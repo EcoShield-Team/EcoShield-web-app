@@ -1,4 +1,3 @@
-// auth/components/modal/modal.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { LoginForm } from '../login-form/login-form';
 import {RegisterForm} from '../register-form/register-form';
@@ -24,19 +23,16 @@ export class Modal {
 
   showModal = false;
 
-  // Abrir el modal en la vista indicada
   open(view: AuthView): void {
     this.currentView = view;
     this.showModal = true;
   }
 
-  // Cerrar el modal
   close(): void {
     this.showModal = false;
     this.modalClosed.emit();
   }
 
-  // Navegación interna (login → register, etc.)
   onNavigate(nextView: AuthView): void {
     console.log(`Cambiando vista a: ${nextView}`);
     this.currentView = nextView;

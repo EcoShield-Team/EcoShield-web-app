@@ -1,14 +1,24 @@
 <app-header></app-header>
 
 <section class="history-bg-container">
-
   <div class="history-wrapper">
     <app-breadcrumb></app-breadcrumb>
     <h1 class="page-title">Historial reciente</h1>
 
     <div class="history-container">
-      @for (item of paginatedHistory(); track item.title) {
-        <app-history-item [item]="item"></app-history-item>
+      @for (det of paginatedHistory(); track det.deteccionId) {
+        <app-history-item
+          [item]="{
+            title: det.nombreDetectado,
+            subtitle: 'Detectado el ' + (det.fecha | date:'mediumDate'),
+            status: det.tipoFicha === 'PLAGA' ? 'Plaga detectada' :
+                    det.tipoFicha === 'ENFERMEDAD' ? 'Enfermedad detectada' : 'Detección IA',
+            statusClass: det.tipoFicha === 'PLAGA' ? 'status-warning' :
+                         det.tipoFicha === 'ENFERMEDAD' ? 'status-danger' : 'status-info'
+          }">
+        </app-history-item>
+      } @empty {
+        <p class="no-history">No hay detecciones registradas.</p>
       }
     </div>
 
@@ -21,13 +31,13 @@
         <span
           [class.active]="page() === i + 1"
           (click)="goToPage(i + 1)">
-        {{ i + 1 }}
-      </span>
+          {{ i + 1 }}
+        </span>
       }
 
       <button mat-icon-button (click)="nextPage()" [disabled]="page() === totalPages().length">
         <mat-icon>chevron_right</mat-icon>
       </button>
     </div>
-
-  </div> </section>
+  </div>
+</section>

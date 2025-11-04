@@ -1,12 +1,8 @@
-/* --- Animación de la Marquesina (CSS) --- */
 @keyframes scroll-x {
   from {
     transform: translateX(0);
   }
   to {
-    /* * Animamos a -50% porque duplicamos el contenido
-     * (técnicamente lo cuadruplicamos, -25% también valdría)
-    */
     transform: translateX(-50%);
   }
 }
@@ -15,7 +11,6 @@
   background-color: #fff;
 }
 
-/* --- Cuadrícula de Contenido --- */
 .testimonial-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -61,7 +56,7 @@
 
 .plant-sub-column {
   display: grid;
-  gap: 2rem; /* Esto es el espacio VERTICAL entre las plantas */
+  gap: 2rem;
 }
 
 .plant-image {
@@ -69,15 +64,14 @@
   border-radius: 8px;
 }
 
-/* --- Responsividad --- */
 @media (max-width: 992px) {
   .testimonial-grid {
-    grid-template-columns: 1fr; /* Apila las columnas */
+    grid-template-columns: 1fr;
   }
 
   .testimonial-text {
     border-right: none;
-    border-bottom: 1px solid #cce5ff; /* Añade línea horizontal */
+    border-bottom: 1px solid #cce5ff;
   }
 
   .plant-column-inner {

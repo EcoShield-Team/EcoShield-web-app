@@ -84,11 +84,8 @@ export class DetalleAlmanaquePage implements OnInit {
   }
 
   getFotoRelacionado(r: any): string {
-    // Utilizamos la variable 'tipo' del componente para saber qué campo leer
     return this.tipo === 'plaga' ? r.plagaFoto : r.enfermedadFoto;
   }
-
-  //MÉTODOS PARA CARGAR DATOS
 
   private cargarPlaga() {
     this.almanaqueService.getPlagaById(this.id).subscribe({

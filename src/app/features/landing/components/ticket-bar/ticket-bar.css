@@ -1,8 +1,6 @@
-/* Añade esto a tu ticker-bar.css */
 :host {
   display: block;
-  /* Esto separa la barra del Hero */
-  margin-top: 4rem; /* Ajusta este valor como quieras */
+  margin-top: 4rem;
 }
 
 @keyframes scroll-x {

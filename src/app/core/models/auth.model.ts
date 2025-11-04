@@ -12,7 +12,7 @@ export interface RegisterRequest {
 
 export interface AuthResponse {
   token: string;
-  expiresAt: string; // Instant → string ISO
+  expiresAt: string;
   usuario: UsuarioAuth;
 }
 

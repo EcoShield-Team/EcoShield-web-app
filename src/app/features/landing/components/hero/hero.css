@@ -1,7 +1,6 @@
 :host {
   display: block;
-  /* Esto separa la barra del Hero */
-  margin-top: 2rem; /* Ajusta este valor como quieras */
+  margin-top: 2rem;
 }
 
 .hero-container {
@@ -32,7 +31,6 @@
   transform: rotate(15deg);
 }
 
-/* --- 4. Wrapper del Contenido --- */
 .hero-content-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -59,7 +57,6 @@
   max-width: 520px;
 }
 
-/* --- 6. Contenido Derecho --- */
 .hero-right-content {
   display: flex;
   flex-direction: column;

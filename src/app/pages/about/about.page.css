@@ -169,7 +169,7 @@
 
 @media (min-width: 1280px) {
   .team-grid {
-    grid-template-columns: repeat(5, 1fr); /* 5 columnas en escritorio */
+    grid-template-columns: repeat(5, 1fr);
     max-width: 1400px;
   }
 
