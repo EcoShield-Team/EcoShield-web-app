@@ -1,22 +1,15 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule, MatLabel, MatError, MatHint } from '@angular/material/form-field';
-import { MatInputModule, MatInput } from '@angular/material/input';
-import { MatSelectModule, MatSelect, MatOption } from '@angular/material/select';
 import {FeedbackRequest} from '../../../../core/models/feedback.model';
 import {FeedbackTipo} from '../../../../core/models/enums.model';
+import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 
 
 @Component({
   selector: 'app-feedback-form',
   standalone: true,
-  imports: [
-    CommonModule, ReactiveFormsModule, MatCardModule, MatButtonModule, MatFormFieldModule,
-    MatInputModule, MatSelectModule, MatInput, MatLabel, MatError, MatHint, MatSelect, MatOption
-  ],
+  imports: [CommonModule, ReactiveFormsModule, MATERIAL_IMPORTS],
   templateUrl: './feedback-form.html',
   styleUrls: ['./feedback-form.css']
 })

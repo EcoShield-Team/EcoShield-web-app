@@ -4,56 +4,39 @@
     radial-gradient(circle at 30px 30px, rgba(100, 160, 100, 0.1) 2px, transparent 0),
     #FFFDF2;
   background-size: 40px 40px;
-
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
   padding: 1.5rem 1rem;
   box-sizing: border-box;
-  min-height: calc(100vh - 64px);
   font-family: 'Inter', sans-serif;
+  min-height: calc(100vh - 64px);
 }
 
-.feedback-container .w-full {
-  max-width: 850px;
+.feedback-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
 }
 
-.breadcrumb {
+/* Breadcrumb con mismo ancho del formulario */
+app-breadcrumb {
+  display: block;
+  width: 100%;
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
   color: #6b7280;
+}
+
+/* Contenedor del form + loading overlay */
+.feedback-card-wrapper {
+  position: relative;
   width: 100%;
-  max-width: 850px;
-  align-self: center;
-
-  padding-left: 5rem;
-  box-sizing: border-box;
-}
-
-.breadcrumb .crumb {
-  color: #6b7280;
-  transition: color 0.15s;
-}
-
-.breadcrumb .crumb:first-child {
-  cursor: pointer;
-}
-
-.breadcrumb .crumb:hover {
-  color: #4b863d;
-}
-
-.breadcrumb .crumb.active {
-  color: #4b863d;
-  font-weight: 500;
 }
 
 .loading-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(2px);
   display: flex;
@@ -66,15 +49,8 @@
   border-radius: 16px;
 }
 
-@media (max-width: 1000px) {
-  .feedback-container .w-full,
-  .breadcrumb {
+@media (max-width: 1024px) {
+  .feedback-wrapper {
     max-width: 95%;
-    padding: 0 0.5rem;
-    box-sizing: border-box;
-  }
-
-  .breadcrumb {
-    padding-left: 0;
   }
 }

@@ -7,6 +7,7 @@ import {FeedbackSuccess} from '../../components/feedback-success/feedback-succes
 import {FeedbackError} from '../../components/feedback-error/feedback-error';
 import {Feedback} from '../../services/feedback';
 import {FeedbackRequest, FeedbackResponse} from '../../../../core/models/feedback.model';
+import {Breadcrumb} from '../../../../shared/components/breadcrumb/breadcrumb';
 
 
 @Component({
@@ -19,6 +20,7 @@ import {FeedbackRequest, FeedbackResponse} from '../../../../core/models/feedbac
     FeedbackForm,
     FeedbackSuccess,
     FeedbackError,
+    Breadcrumb,
   ],
   templateUrl: './feedback.page.html',
   styleUrls: ['./feedback.page.css'],

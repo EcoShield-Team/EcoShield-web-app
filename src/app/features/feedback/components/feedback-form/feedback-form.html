@@ -1,19 +1,15 @@
 <mat-card class="feedback-card">
   <h2>Feedback</h2>
-  <hr />
 
   <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="feedback-form">
-
     <div class="form-group">
       <label>Púntuanos ({{ feedbackForm.get('feedbackRating')?.value || 0 }}/5)</label>
-
       <div class="stars">
         @for (i of [1, 2, 3, 4, 5]; track i) {
           <span
             class="star material-icons"
             (click)="feedbackForm.get('feedbackRating')?.setValue(i)"
-            [class.active]="i <= (feedbackForm.get('feedbackRating')?.value || 0)"
-          >
+            [class.active]="i <= (feedbackForm.get('feedbackRating')?.value || 0)">
             star
           </span>
         }
@@ -28,11 +24,7 @@
       <div class="feedback-types">
         @for (tipo of feedbackTipos; track tipo) {
           <label>
-            <input
-              type="radio"
-              [value]="tipo"
-              formControlName="feedbackTipo"
-            >
+            <input type="radio" [value]="tipo" formControlName="feedbackTipo">
             {{ getDisplayTipo(tipo) }}
           </label>
         }
@@ -47,9 +39,7 @@
       <textarea
         formControlName="feedbackDescripcion"
         placeholder="Escribe tus comentarios..."
-        maxlength="500"
-      ></textarea>
-
+        maxlength="500"></textarea>
       <div class="char-counter">
         {{ feedbackForm.get('feedbackDescripcion')?.value?.length || 0 }}/500
       </div>
