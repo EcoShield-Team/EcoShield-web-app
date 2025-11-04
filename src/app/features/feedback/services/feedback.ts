@@ -14,7 +14,7 @@ export class Feedback {
 
   //Recuerda cambiar el token, prende la api, inicia sesión o crea un usuario y reemplaza el token de abajo
   private readonly TEST_JWT_TOKEN =
-    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmFAZWNvc2hpZWxkLmNvbSIsImlhdCI6MTc2MjIyNDc1MCwiZXhwIjoxNzYyMjMxOTUwLCJyb2xlIjoiUk9MRV9VU0VSIn0.sQMONSskAj2Fpq3kaW4zeyLKv0kf12ELJxiBGr63zKWUb1gAW_kAX0nR8k_5ZbAjn6_JPUgejaV0IOH_dM-Ekg';
+    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnZXJhZG9AZXhhbXBsZS5jb20iLCJpYXQiOjE3NjIyNTE3NjgsImV4cCI6MTc2MjI1ODk2OCwicm9sZSI6IlJPTEVfVVNFUiJ9.8Fk1OnTvMg4fssnUx-n3899p04eqJB_6_5dJ-RfF_2yfAT6oVR95gw7QLzUiaOeGVh_lQtG6NpnmBvmmGJBtWA';
 
   private get authHeaders(): HttpHeaders {
     return new HttpHeaders({

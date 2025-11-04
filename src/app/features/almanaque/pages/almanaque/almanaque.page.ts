@@ -25,7 +25,7 @@ export interface ItemAlmanaque {
   styleUrl: './almanaque.page.css',
 })
 
-export class AlmanaquePage implements OnInit { //
+export class AlmanaquePage implements OnInit {
   private items: ItemAlmanaque[] = [
     { tipo: 'Enfermedad', subtipo: 'Hongo', nombre: 'Oídio', rutaDeImagen: 'assets/images/almanaque/oidio.jpg', reciente: true, route: 'oidio' },
     { tipo: 'Enfermedad', subtipo: 'Hongo', nombre: 'Podredumbre Gris', rutaDeImagen: 'assets/images/almanaque/pobredumbre-gris.jpeg', reciente: false, route: 'podredumbre-gris' },

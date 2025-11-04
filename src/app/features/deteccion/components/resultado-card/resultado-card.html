@@ -1,67 +1,42 @@
-<div class="resultado-card">
-  <div class="alerta">¡Problema detectado!</div>
-  <div class="imagen-wrapper">
-    <img
-      src="/assets/images/deteccion/fresa.jpg"
-      alt="Cultivo analizado"
-      class="imagen-cultivo"
-    />
-  </div>
+@if (data) {
+  <div class="resultado-card">
+    <div class="alerta">¡Problema detectado!</div>
 
-  <div class="contenido-wrapper">
-
-    <div class="titulo-enfermedad">
-      <h4>Podredumbre Gris</h4>
-      <p><em>Botrytis cinerea Pers.</em></p>
+    <div class="imagen-wrapper">
+      <img [src]="data.fotoUrl" alt="Cultivo analizado" class="imagen-cultivo" />
     </div>
 
-    <div class="tabs-actions-wrapper">
-      <div class="tabs">
-        <button [class.active]="tab === 'sintomas'" (click)="tab = 'sintomas'">Síntomas</button>
-        <button [class.active]="tab === 'tratamiento'" (click)="tab = 'tratamiento'">Tratamiento</button>
-        <button [class.active]="tab === 'causas'" (click)="tab = 'causas'">Causas</button>
-        <button [class.active]="tab === 'prevencion'" (click)="tab = 'prevencion'">Prevención</button>
+    <div class="contenido-wrapper">
+      <div class="titulo-enfermedad">
+        <h4>{{ data.nombreDetectado }}</h4>
+        @if (data.tipoFicha === 'ENFERMEDAD') {
+          <p><em>{{ data.descripcion }}</em></p>
+        }
       </div>
 
-      <div class="acciones-info">
-        <button mat-button>
-          <mat-icon>translate</mat-icon>
-          Traducir
-        </button>
-        <button mat-button>
-          <mat-icon>volume_up</mat-icon>
-          Escuchar
-        </button>
+      <div class="tabs-actions-wrapper">
+        <div class="acciones-info">
+          <button mat-button>
+            <mat-icon>translate</mat-icon>
+            Traducir
+          </button>
+          <button mat-button>
+            <mat-icon>volume_up</mat-icon>
+            Escuchar
+          </button>
+        </div>
+      </div>
+
+      <div class="tab-content">
+        <p>{{ data.descripcion }}</p>
+        <p><strong>Confianza:</strong> {{ (data.confianza * 100) | number: '1.0-0' }}%</p>
+        <p><strong>Tipo:</strong> {{ data.tipoFicha }}</p>
       </div>
     </div>
-
-    <div class="tab-content">
-      @if (tab === 'sintomas') {
-        <p>
-          Los frutos afectados muestran manchas marrones acuosas que luego se cubren de un moho gris.
-          Las flores y tallos pueden marchitarse debido a la infección del hongo.
-        </p>
-      }
-      @if (tab === 'tratamiento') {
-        <p>
-          Retirar y eliminar los frutos infectados, mejorar la ventilación y aplicar fungicidas a base
-          de iprodiona o fenhexamida según recomendación técnica.
-        </p>
-      }
-      @if (tab === 'causas') {
-        <p>
-          Se debe principalmente a la alta humedad y a la falta de ventilación. El hongo
-          <em>Botrytis cinerea</em> prospera en condiciones húmedas y frías.
-        </p>
-      }
-      @if (tab === 'prevencion') {
-        <p>
-          Las estrategias de control de la botrytis en fresa también incluyen una serie de medidas de
-          prevención encaminadas a ampliar los marcos de plantación para favorecer la entrada de aire y la
-          ventilación entre plantas y, muy especialmente, la destrucción de los restos de cosecha y de los
-          frutos dañados para evitar la posibilidad de nuevas infestaciones.
-        </p>
-      }
-    </div>
   </div>
-</div>
+} @else {
+  <div class="resultado-card empty">
+    <div class="alerta">Sin resultados</div>
+    <p style="padding: 1rem; text-align: center;">Aún no se ha detectado ningún cultivo.</p>
+  </div>
+}

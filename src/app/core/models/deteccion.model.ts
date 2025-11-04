@@ -6,7 +6,10 @@ export interface DeteccionResponse {
   tipo: string;
   nombreDetectado: string;
   coordenadas: Region;
+  fichaId: number | null;
+  tipoFicha: 'PLAGA' | 'ENFERMEDAD' | null;
   fecha: string;
+
 }
 
 export interface Region {

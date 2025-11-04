@@ -1,14 +1,17 @@
-<div class="upload-box">
-  <div class="placeholder">
+<div class="upload-box" [class.loading]="cargando">
+  <div class="placeholder" *ngIf="!cargando">
     <mat-icon>cloud_upload</mat-icon>
+    <p>Arrastra o selecciona una imagen de tu cultivo</p>
+    <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+    <button mat-flat-button class="btn-upload" (click)="fileInput.click()">
+      <mat-icon>file_upload</mat-icon>
+      Navegar
+    </button>
+    <p *ngIf="error" class="error">{{ error }}</p>
   </div>
-  <p>Arrastra y suelta o carga la imagen de tu cultivo</p>
-  <p class="formats">
-    Formatos compatibles: <span>JPG, PNG, GIF, HEIC, PDF</span>
-  </p>
 
-  <button mat-flat-button class="btn-upload" [routerLink]="['/home/deteccion', 'resultado']">
-    <mat-icon>file_upload</mat-icon>
-    Navegar
-  </button>
+  <div *ngIf="cargando" class="loading-text">
+    <mat-icon>hourglass_top</mat-icon> Analizando imagen...
+  </div>
 </div>
+
