@@ -1,0 +1,39 @@
+<section class="climate-section">
+
+  @if (isLoading()) {
+    <div class="climate-left">
+      <i class="fa-solid fa-cloud climate-icon main"></i>
+      <div>
+        <h3 class="climate-location">Cargando clima...</h3>
+        <p class="climate-description">Detectando ubicación actual</p>
+      </div>
+    </div>
+  }
+  @else if (weather()) {
+    <div class="climate-left">
+      <i [class]="weather()!.weatherIcon + ' climate-icon main'"></i>
+      <div>
+        <h3 class="climate-location">{{ weather()!.location }}</h3>
+        <p class="climate-description">
+          {{ weather()!.description | titlecase }} —
+          {{ weather()!.tempMin }}°C / {{ weather()!.tempMax }}°C
+        </p>
+      </div>
+    </div>
+
+    <div class="climate-right">
+      <i [class]="weather()!.precipIcon + ' rain-icon'"></i>
+      <span class="rain-prob">{{ weather()!.rainProb }}</span>
+    </div>
+  }
+  @else {
+    <div class="climate-left">
+      <i class="fa-solid fa-triangle-exclamation climate-icon main"></i>
+      <div>
+        <h3 class="climate-location">No disponible</h3>
+        <p class="climate-description">No se pudo obtener el clima</p>
+      </div>
+    </div>
+  }
+
+</section>

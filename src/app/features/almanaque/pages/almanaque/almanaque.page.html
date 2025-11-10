@@ -1,60 +1,62 @@
 <app-header></app-header>
 
-<div class="fixed-controls-wrapper">
-  <app-breadcrumb></app-breadcrumb>
+<div class="almanaque-bg-container">
+  <div class="fixed-controls-wrapper">
+    <app-breadcrumb></app-breadcrumb>
 
-  <div class="search-bar-main">
-    <input
-      type="text"
-      placeholder="Ingresa el nombre de la plaga o enfermedad"
-      [(ngModel)]="searchTerm"
-      (input)="buscarEnAlmanaque()"
-    />
-  </div>
-
-  <div class="order-controls">
-    <span class="order-label">Ordenar por:</span>
-    <select class="order-select"
-            [(ngModel)]="ordenSeleccionada"
-            (change)="ordenarASCDESC()">
-      <option value="NOMBRE_ASC">Nombre (A-Z)</option>
-      <option value="NOMBRE_DESC">Nombre (Z-A)</option>
-    </select>
-  </div>
-</div>
-<div class="almanaque-container">
-
-  <div class="content-wrapper">
-    <div class="filter-sidebar">
-      <app-filter-sidebar
-        (filterChange)="aplicarFiltro($event)"
-        (resetFilters)="resetFiltros()">
-      </app-filter-sidebar>
+    <div class="search-bar-main">
+      <input
+        type="text"
+        placeholder="Ingresa el nombre de la plaga o enfermedad"
+        [(ngModel)]="searchTerm"
+        (input)="buscarEnAlmanaque()"
+      />
     </div>
 
-    <div class="results-area">
-      <h2>Enfermedades</h2>
-      <div class="cards-grid">
-        <app-almanaque-card
-          *ngFor="let enfermedad of enfermedades"
-          [id]="enfermedad.enfermedadId"
-          [subtipo] = "enfermedad.enfermedadTipo"
-          [nombre]="enfermedad.enfermedadNombre"
-          [tipo]="'enfermedad'"
-          [imagen]="enfermedad.enfermedadFoto">
-        </app-almanaque-card>
+    <div class="order-controls">
+      <span class="order-label">Ordenar por:</span>
+      <select class="order-select"
+              [(ngModel)]="ordenSeleccionada"
+              (change)="ordenarASCDESC()">
+        <option value="NOMBRE_ASC">Nombre (A-Z)</option>
+        <option value="NOMBRE_DESC">Nombre (Z-A)</option>
+      </select>
+    </div>
+  </div>
+  <div class="almanaque-container">
+
+    <div class="content-wrapper">
+      <div class="filter-sidebar">
+        <app-filter-sidebar
+          (filterChange)="aplicarFiltro($event)"
+          (resetFilters)="resetFiltros()">
+        </app-filter-sidebar>
       </div>
 
-      <h2 class="section-title">Plagas</h2>
-      <div class="cards-grid">
-        <app-almanaque-card
-          *ngFor="let plaga of plagas"
-          [id]="plaga.plagaId"
-          [subtipo] = "plaga.plagaTipo"
-          [nombre]="plaga.plagaNombre"
-          [tipo]="'plaga'"
-          [imagen]="plaga.plagaFoto">
-        </app-almanaque-card>
+      <div class="results-area">
+        <h2>Enfermedades</h2>
+        <div class="cards-grid">
+          <app-almanaque-card
+            *ngFor="let enfermedad of enfermedades"
+            [id]="enfermedad.enfermedadId"
+            [subtipo] = "enfermedad.enfermedadTipo"
+            [nombre]="enfermedad.enfermedadNombre"
+            [tipo]="'enfermedad'"
+            [imagen]="enfermedad.enfermedadFoto">
+          </app-almanaque-card>
+        </div>
+
+        <h2 class="section-title">Plagas</h2>
+        <div class="cards-grid">
+          <app-almanaque-card
+            *ngFor="let plaga of plagas"
+            [id]="plaga.plagaId"
+            [subtipo] = "plaga.plagaTipo"
+            [nombre]="plaga.plagaNombre"
+            [tipo]="'plaga'"
+            [imagen]="plaga.plagaFoto">
+          </app-almanaque-card>
+        </div>
       </div>
     </div>
   </div>
