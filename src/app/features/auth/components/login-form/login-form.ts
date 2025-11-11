@@ -12,21 +12,32 @@ import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
 export class LoginForm {
   @Output() navigateToRegister = new EventEmitter<void>();
   @Output() navigateToForgot = new EventEmitter<void>();
+  @Output() loginSuccess = new EventEmitter<void>(); // ✅ para el modal
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    email: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   loginError: string | null = null;
   isLoading = false;
-  showFieldErrors = false;
+  hidePassword = true;
 
-  get email() { return this.loginForm.get('email'); }
-  get password() { return this.loginForm.get('password'); }
+  get email(): FormControl<string> {
+    return this.loginForm.get('email') as FormControl<string>;
+  }
+
+  get password(): FormControl<string> {
+    return this.loginForm.get('password') as FormControl<string>;
+  }
 
   onLoginSubmit(): void {
-    this.showFieldErrors = true;
     this.loginError = null;
 
     if (this.loginForm.invalid) {
@@ -35,14 +46,16 @@ export class LoginForm {
     }
 
     this.isLoading = true;
-    const { email, password } = this.loginForm.value;
+    const emailValue = this.email.value;
+    const passwordValue = this.password.value;
 
     setTimeout(() => {
       this.isLoading = false;
 
-      if (email === 'diego@ecoshield.com' && password === '1234') {
+      if (emailValue === 'diego@ecoshield.com' && passwordValue === '1234') {
         this.loginError = null;
         console.log('✅ Login exitoso');
+        this.loginSuccess.emit(); // 👈 dispara el success en el modal
       } else {
         this.loginError = 'Contraseña o correo incorrectos';
         console.error('❌ Error de autenticación (simulado)');
@@ -52,10 +65,13 @@ export class LoginForm {
 
   goToRegister(event: Event): void {
     event.preventDefault();
+    event.stopPropagation();
     this.navigateToRegister.emit();
   }
 
   goToForgotPassword(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
     this.navigateToForgot.emit();
   }
 }

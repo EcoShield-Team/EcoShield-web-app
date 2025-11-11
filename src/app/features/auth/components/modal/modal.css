@@ -26,6 +26,12 @@
   justify-content: center;
 }
 
+/* 🔹 Modal más grande solo cuando currentView === 'register' */
+.modal-content.modal-large {
+  width: 700px;
+  height: 700px;
+}
+
 .modal-close {
   position: absolute;
   top: 12px;

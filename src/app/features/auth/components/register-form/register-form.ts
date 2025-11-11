@@ -13,24 +13,38 @@ import { countryList, CountryOption } from '../../../../shared/utils/country-lis
 export class RegisterForm {
 
   @Output() backToLogin = new EventEmitter<void>();
+  @Output() registerSuccess = new EventEmitter<void>(); // ✅ para el modal
 
   registerForm = new FormGroup({
-    fullName: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-    country:  new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-    email:    new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
-    password: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.minLength(6)] }),
-    confirmPassword: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    fullName: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    country: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    email: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(6)],
+    }),
+    confirmPassword: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   formError: string | null = null;
-  showFieldErrors = false;
   isLoading = false;
 
   hidePassword = true;
   hideConfirm = true;
 
   countries: CountryOption[] = countryList;
-
 
   get fullName() { return this.registerForm.get('fullName'); }
   get country()  { return this.registerForm.get('country'); }
@@ -39,22 +53,16 @@ export class RegisterForm {
   get confirmPassword() { return this.registerForm.get('confirmPassword'); }
 
   onRegisterSubmit(): void {
-    this.showFieldErrors = true;
     this.formError = null;
 
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
-
-      if (this.email?.errors?.['email']) {
-        this.formError = 'Dirección de correo inválida';
-      } else {
-        this.formError = 'Campos incompletos';
-      }
       return;
     }
 
     if (this.password?.value !== this.confirmPassword?.value) {
       this.confirmPassword?.setErrors({ mismatch: true });
+      this.confirmPassword?.markAsTouched();
       this.formError = 'Las contraseñas no coinciden';
       return;
     }
@@ -68,11 +76,13 @@ export class RegisterForm {
       this.isLoading = false;
       this.formError = null;
       console.log('✅ Registro simulado exitoso');
+      this.registerSuccess.emit(); // 👈 dispara el success en el modal
     }, 800);
   }
 
   onBackToLogin(event: Event): void {
     event.preventDefault();
+    event.stopPropagation();
     this.backToLogin.emit();
   }
 }

@@ -1,0 +1,28 @@
+<div class="success-container">
+
+  @if (subtitle) {
+    <p class="success-subtitle">{{ subtitle }}</p>
+  }
+
+  <h2 class="success-title">
+    {{ title }}
+  </h2>
+
+  <div class="success-illustration">
+    <img src="/assets/images/logo/ecoshield-icon.png" alt="EcoShield Logo" class="success-logo"/>
+    <span class="success-brand">ECOSHIELD</span>
+  </div>
+
+  @if (message) {
+    <p class="success-message">
+      {{ message }}
+    </p>
+  }
+
+  <button
+    mat-flat-button
+    class="btn btn-primary-ecoshield success-button"
+    (click)="onConfirm()">
+    {{ actionLabel }}
+  </button>
+</div>
