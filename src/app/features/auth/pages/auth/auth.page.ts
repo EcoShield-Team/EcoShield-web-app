@@ -17,19 +17,16 @@ export class AuthPage implements AfterViewInit {
   constructor(private router: Router, private route: ActivatedRoute, private el: ElementRef) { }
 
   ngAfterViewInit(): void {
-
     const nativeEl = this.el.nativeElement;
-
     const letters = nativeEl.querySelectorAll('.logo-text .letter');
 
     letters.forEach((letter: Element) => {
-
       letter.addEventListener('mouseenter', () => {
         gsap.to(letter, {
           y: -15,
           duration: 0.2,
-          ease: "power2.out",
-          overwrite: true
+          ease: 'power2.out',
+          overwrite: true,
         });
       });
 
@@ -37,24 +34,23 @@ export class AuthPage implements AfterViewInit {
         gsap.to(letter, {
           y: 0,
           duration: 0.4,
-          ease: "bounce.out",
-          overwrite: true
+          ease: 'bounce.out',
+          overwrite: true,
         });
       });
     });
 
     this.route.queryParams.subscribe(params => {
-      const view = (params['view'] as AuthView) || 'login';
+      const viewParam = params['view'] as AuthView | undefined;
 
-      setTimeout(() => {
-        if (view === 'register' || view === 'login') {
-          this.modal.open(view);
-        }
-      });
+      // ✅ Solo abrir si REALMENTE viene un view en la URL
+      if (viewParam === 'register' || viewParam === 'login') {
+        setTimeout(() => {
+          this.modal.open(viewParam);
+        });
+      }
     });
   }
-
-
 
   goToHome(): void {
     console.log('Navegando a la página de inicio...');

@@ -1,72 +1,90 @@
-<div class="form-error-slot">
-  @if (loginError) {
-    <div class="form-error">
-      {{ loginError }}
-    </div>
-  }
-</div>
+<div class="login-card">
 
-<div class="form-logo-wrapper">
-  <img src="assets/images/logo/ecoshield-icon.png" alt="EcoShield Logo" />
-  <span class="logo-text">ECOSHIELD</span>
-</div>
-
-<h3 class="form-title">Iniciar Sesión en EcoShield</h3>
-
-<form
-  [formGroup]="loginForm"
-  (ngSubmit)="onLoginSubmit()"
-  class="form-container"
-  [class.form-submitted]="showFieldErrors"
->
-  <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
-    <mat-label>Correo electrónico</mat-label>
-    <input
-      matInput
-      formControlName="email"
-      type="email"
-      autocomplete="email"
-    />
-    @if (showFieldErrors && email?.invalid) {
-      <mat-error>
-        @if (email?.errors?.['required']) {
-          El correo es requerido.
-        }
-        @if (email?.errors?.['email']) {
-          El formato del correo no es válido.
-        }
-      </mat-error>
+  <div class="form-error-slot">
+    @if (loginError) {
+      <div class="form-error">
+        {{ loginError }}
+      </div>
     }
-  </mat-form-field>
+  </div>
 
-  <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
-    <mat-label>Contraseña</mat-label>
-    <input
-      matInput
-      formControlName="password"
-      type="password"
-      autocomplete="current-password"
-    />
-    @if (showFieldErrors && password?.invalid) {
-      <mat-error>La contraseña es requerida.</mat-error>
-    }
-  </mat-form-field>
+  <div class="form-logo-wrapper">
+    <img src="/assets/images/logo/ecoshield-icon.png" alt="EcoShield Logo" />
+    <span class="logo-text">ECOSHIELD</span>
+  </div>
 
-  <button
-    type="submit"
-    class="form-submit-button"
-    [disabled]="loginForm.invalid || isLoading"
-  >
-    @if (!isLoading) {
-      Iniciar sesión
-    } @else {
-      Iniciando...
-    }
-  </button>
-</form>
+  <h3 class="form-title">Iniciar Sesión en EcoShield</h3>
 
-<div class="form-footer-links">
-  <a href="#" class="form-link" (click)="goToForgotPassword($event)">¿Olvidaste tu contraseña?</a>
-  <a href="#" class="form-link" (click)="goToRegister($event)">Regístrate</a>
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onLoginSubmit()"
+    class="form-container">
+
+    <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
+      <mat-label>Correo electrónico</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        autocomplete="email"
+        placeholder="tucorreo@ejemplo.com"
+      />
+      @if (email.invalid && (email.dirty || email.touched)) {
+        <mat-error>
+          @if (email.errors?.['required']) {
+            El correo es requerido.
+          }
+          @if (email.errors?.['email']) {
+            El formato del correo no es válido.
+          }
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
+      <mat-label>Contraseña</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        formControlName="password"
+        autocomplete="new-password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Mostrar u ocultar contraseña'">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+
+      @if (password.invalid && (password.dirty || password.touched)) {
+        <mat-error>
+          @if (password.errors?.['required']) {
+            La contraseña es requerida.
+          }
+          @if (password.errors?.['minlength']) {
+            Debe tener al menos 6 caracteres.
+          }
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <button
+      type="submit"
+      class="form-submit-button"
+      [disabled]="loginForm.invalid || isLoading">
+      @if (!isLoading) {
+        Iniciar sesión
+      } @else {
+        Iniciando...
+      }
+    </button>
+  </form>
+
+  <div class="form-footer-links">
+    <a href="#" class="form-link" (click)="goToForgotPassword($event)">¿Olvidaste tu contraseña?</a>
+    <a href="#" class="form-link" (click)="goToRegister($event)">Regístrate</a>
+  </div>
+
 </div>
-

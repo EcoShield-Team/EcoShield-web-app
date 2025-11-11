@@ -1,0 +1,140 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 380px;
+  max-width: calc(100vw - 40px);
+  padding: 26px 36px 34px; /* 🔹 más aire vertical y horizontal */
+  border-radius: 24px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+@media (max-width: 600px) {
+  :host {
+    width: 100%;
+    padding: 24px 24px 28px;
+  }
+}
+
+/* Error arriba */
+.form-error-slot {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.form-error {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background-color: #ffe5e5;
+  color: #c62828;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Logo + título */
+.form-logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px; /* 🔹 antes 12px */
+}
+
+.form-logo-wrapper img {
+  width: 50px;
+  height: 50px;
+}
+
+.logo-text {
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  font-size: 16px;
+  color: #2e7d32;
+}
+
+/* Título y subtítulo */
+.form-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+  margin: 12px 0 12px; /* 🔹 más espacio entre logo y subtítulo */
+  text-align: left;
+  width: 100%;
+}
+
+.form-subtitle {
+  font-size: 0.93rem;
+  color: #666;
+  margin: 0 0 26px; /* 🔹 antes 14px */
+  line-height: 1.55;
+  text-align: left;
+  width: 100%;
+}
+
+/* Form */
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px; /* 🔹 separa campo y botón */
+}
+
+.full-width {
+  width: 100%;
+}
+
+button.btn {
+  width: 100%;
+  margin-top: 10px; /* 🔹 más separación visual desde el input */
+}
+
+/* Footer links */
+.form-footer-links {
+  width: 100%;
+  margin-top: 26px; /* 🔹 más aire antes del footer */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 12px; /* 🔹 espaciado más natural entre textos */
+  text-align: center;
+}
+
+.form-text-small {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.form-link {
+  position: relative;
+  font-size: 0.9rem;
+  color: #2e7d32;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.form-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background-color: #1a8b3b;
+  transition: width 0.15s ease;
+}
+
+.form-link:hover {
+  color: #1a8b3b;
+}
+
+.form-link:hover::after {
+  width: 100%;
+}

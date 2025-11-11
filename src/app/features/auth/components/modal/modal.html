@@ -1,9 +1,11 @@
 @if (showModal) {
   <div class="modal-overlay" (click)="close()">
+    <div
+      class="modal-content"
+      [class.modal-large]="currentView === 'register'"
+      (click)="$event.stopPropagation()">
 
-    <div class="modal-content" (click)="$event.stopPropagation()">
-
-      <button class="modal-close" (click)="close()">
+    <button class="modal-close" (click)="close()">
         <mat-icon>close</mat-icon>
       </button>
 
@@ -12,18 +14,46 @@
         @case ('login') {
           <app-login-form
             (navigateToRegister)="onNavigate('register')"
-            (navigateToForgot)="onNavigate('forgotPassword')">
+            (navigateToForgot)="onNavigate('forgotPassword')"
+            (loginSuccess)="showSuccess('login')">
           </app-login-form>
         }
 
         @case ('register') {
           <app-register-form
-            (backToLogin)="onNavigate('login')">
+            (backToLogin)="onNavigate('login')"
+            (registerSuccess)="showSuccess('register')">
           </app-register-form>
         }
 
         @case ('forgotPassword') {
-          <p>Formulario de Olvidé Contraseña (Próximamente)</p>
+          <app-forgot-password
+            (backToLogin)="onNavigate('login')"
+            (codeSent)="onCodeSent($event)">
+          </app-forgot-password>
+        }
+
+        @case ('code') {
+          <app-code-form
+            [email]="recoveryEmail || ''"
+            (codeVerified)="onNavigate('resetPassword')">
+          </app-code-form>
+        }
+
+        @case ('resetPassword') {
+          <app-reset-password
+            (passwordChanged)="showSuccess('password')">
+          </app-reset-password>
+        }
+
+        @case ('success') {
+          <app-success-message
+            [subtitle]="successSubtitle"
+            [title]="successTitle"
+            [message]="successMessage"
+            [actionLabel]="successActionLabel"
+            (confirmed)="onSuccessConfirmed()">
+          </app-success-message>
         }
       }
     </div>

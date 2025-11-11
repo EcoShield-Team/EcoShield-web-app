@@ -1,1 +1,72 @@
-<p>code-form works!</p>
+<div class="form-error-slot">
+  @if (submitError) {
+    <div class="form-error">
+      {{ submitError }}
+    </div>
+  }
+</div>
+
+<div class="form-logo-wrapper">
+  <img src="/assets/images/logo/ecoshield-icon.png" alt="EcoShield Logo" />
+  <span class="logo-text">ECOSHIELD</span>
+</div>
+
+<h3 class="form-title">Verifica tu correo</h3>
+<p class="form-subtitle">
+  Ingresa el código de 6 dígitos que enviamos
+  @if (email) { a <strong>{{ email }}</strong> }.
+</p>
+
+<form
+  class="form"
+  [formGroup]="codeForm"
+  (ngSubmit)="onSubmit()">
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Código de verificación</mat-label>
+    <input
+      matInput
+      type="text"
+      maxlength="6"
+      formControlName="code"
+      placeholder="••••••" />
+
+    @if (code.invalid && (code.dirty || code.touched)) {
+      <mat-error>
+        @if (code.hasError('required')) {
+          El código es obligatorio.
+        } @else if (code.hasError('pattern')) {
+          El código debe tener 6 dígitos.
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    mat-flat-button
+    class="btn btn-primary-ecoshield"
+    type="submit"
+    [disabled]="codeForm.invalid || isLoading">
+
+    @if (!isLoading) {
+      Continuar
+    } @else {
+      Verificando...
+    }
+  </button>
+</form>
+
+<div class="form-footer-links">
+  <span class="form-text-small">
+    ¿No recibiste el código?
+    <a href="#" class="form-link" (click)="onResendCode($event)">
+      Reenviar código
+    </a>
+  </span>
+
+  @if (resendMessage) {
+    <span class="form-text-small resend-message">
+      {{ resendMessage }}
+    </span>
+  }
+</div>
