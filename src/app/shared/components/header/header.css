@@ -1,3 +1,4 @@
+/* General navbar layout */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -12,7 +13,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex-shrink: 0;
 }
 
 .navbar-logo {
@@ -28,41 +28,50 @@
   color: #2E2E2E;
 }
 
+/* Center navigation */
 .navbar-center {
   flex: 1;
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  padding: 0 2rem;
 }
 
+/* Links */
 .nav-link {
   font-weight: 500;
   font-size: 0.95rem;
   color: #2E2E2E;
   text-transform: none;
 }
-.nav-link.active, .nav-link:hover {
+
+.nav-link.active,
+.nav-link:hover {
   color: #0B8A3A;
   font-weight: 550;
 }
 
+/* Right section */
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 1rem;
-  flex-shrink: 0;
 }
 
-.icon-button mat-icon {
-  color: #2E2E2E;
-}
-
+/* USER CHIP REAL */
 .user-chip {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 10px;
+  gap: 0.5rem;
+  height: 40px;
+  padding: 0 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.user-chip:hover {
+  background-color: #f9fafb;
 }
 
 .user-chip-avatar {
@@ -70,20 +79,18 @@
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-.user-chip:hover {
-  background-color: #f9fafb;
+  display: block;
 }
 
 .user-name {
-  font-weight: 500;
   font-size: 0.9rem;
+  font-weight: 600;
+  color: #2E2E2E;
 }
 
+/* Mobile */
 .mobile-menu-button {
   display: none;
-  color: #2E2E2E;
 }
 
 @media (max-width: 768px) {
@@ -110,14 +117,5 @@
 
   .navbar-right {
     gap: 0.5rem;
-  }
-
-  .mat-mdc-menu-item.active-menu-item {
-    color: #0B8A3A;
-    font-weight: 550;
-  }
-
-  .mat-mdc-menu-item.active-menu-item mat-icon {
-    color: #0B8A3A;
   }
 }

@@ -7,72 +7,81 @@
     <span class="navbar-brand">ECOSHIELD</span>
   </div>
 
+  <!-- Center (Desktop only) -->
   <div class="navbar-center desktop-nav">
-    <button mat-button class="nav-link" routerLink="/home" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">Inicio</button>
+    <button mat-button class="nav-link" routerLink="/home"
+            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Inicio
+    </button>
 
-    <button mat-button class="nav-link" routerLink="/not-found" routerLinkActive="active">
+    <button mat-button class="nav-link" routerLink="/not-found"
+            routerLinkActive="active">
       Capturas
     </button>
 
-    <button mat-button class="nav-link" routerLink="/home/comunidad" routerLinkActive="active">
+    <button mat-button class="nav-link" routerLink="/home/comunidad"
+            routerLinkActive="active">
       Comunidad
     </button>
 
-    <button mat-button class="nav-link" routerLink="/about" routerLinkActive="active">
+    <button mat-button class="nav-link" routerLink="/about"
+            routerLinkActive="active">
       Nosotros
     </button>
   </div>
 
+  <!-- Right -->
   <div class="navbar-right">
+
     <button mat-icon-button class="icon-button" aria-label="Notificaciones">
       <mat-icon>notifications</mat-icon>
     </button>
 
-    <button mat-button
-            class="user-chip"
-            aria-label="Mi cuenta"
-            [matMenuTriggerFor]="accountMenu">
+    <!-- USER CHIP (YA NO USA mat-button) -->
+    <div class="user-chip"
+         aria-label="Mi cuenta"
+         [matMenuTriggerFor]="accountMenu">
 
       <img [src]="fotoPerfil"
            alt="Foto de perfil"
            class="user-chip-avatar">
 
       <span class="user-name">{{ nombreUsuario }}</span>
-    </button>
+    </div>
 
+    <!-- Menu icon (mobile) -->
     <button mat-icon-button class="mobile-menu-button"
             [matMenuTriggerFor]="mobileMenu"
             aria-label="Abrir menú">
       <mat-icon>menu</mat-icon>
     </button>
+
   </div>
 </mat-toolbar>
 
+<!-- Account Menu -->
 <mat-menu #accountMenu="matMenu" xPosition="before" yPosition="below">
   <button mat-menu-item routerLink="/perfil">
     <mat-icon>person</mat-icon>
     <span>Ver perfil</span>
   </button>
-
   <button mat-menu-item (click)="logout()">
     <mat-icon>logout</mat-icon>
     <span>Cerrar sesión</span>
   </button>
 </mat-menu>
 
+<!-- Mobile Menu -->
 <mat-menu #mobileMenu="matMenu">
   <button mat-menu-item routerLink="/home" routerLinkActive="active-menu-item"
           [routerLinkActiveOptions]="{exact: true}">
     <mat-icon>home</mat-icon>
     <span>Inicio</span>
   </button>
-
   <button mat-menu-item routerLink="/not-found" routerLinkActive="active-menu-item">
     <mat-icon>camera_alt</mat-icon>
     <span>Capturas</span>
   </button>
-
   <button mat-menu-item routerLink="/home/comunidad" routerLinkActive="active-menu-item">
     <mat-icon>group</mat-icon>
     <span>Comunidad</span>
