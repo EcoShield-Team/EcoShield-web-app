@@ -22,3 +22,33 @@ export interface UsuarioAuth {
   usuarioCorreo: string;
   usuarioRol: string;
 }
+
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ForgotPasswordResponse {
+  message: string;
+  tokenPreview?: string | null;
+  codePreview?: string | null;
+}
+
+export interface ValidateTokenResponse {
+  valid: boolean;
+  message: string;
+  token?: string | null;
+}
+
+export interface ResetPasswordRequest {
+  token: string;
+  newPassword: string;
+}
+
+export interface ResetPasswordResponse {
+  message: string;
+}
+
+export interface VerifyCodeRequest {
+  email: string;
+  code: string;
+}

@@ -38,14 +38,15 @@ export class Modal {
 
   showModal = false;
 
-  // Correo que se usó en "Olvidé mi contraseña"
   recoveryEmail: string | null = null;
 
-  // Textos dinámicos para el componente de éxito
+  recoveryToken: string | null = null;
+
   successSubtitle = '';
   successTitle = '';
   successMessage = '';
   successActionLabel = 'Continuar';
+  successShowButton = true;
 
   open(view: AuthView): void {
     console.log('🔍 open() llamado con vista:', view);
@@ -68,8 +69,11 @@ export class Modal {
     this.onNavigate('code');
   }
 
-  // 🔹 En vez de navegar a resetSuccess, usamos la vista genérica de éxito
-  // para login / registro / cambio de contraseña.
+  onCodeVerified(token: string): void {
+    this.recoveryToken = token;
+    this.onNavigate('resetPassword');
+  }
+
   showSuccess(kind: SuccessKind): void {
     switch (kind) {
       case 'login':
@@ -77,6 +81,7 @@ export class Modal {
         this.successTitle = 'Bienvenido de vuelta a EcoShield';
         this.successMessage = 'Has iniciado sesión correctamente.';
         this.successActionLabel = 'Continuar';
+        this.successShowButton = false;
         break;
 
       case 'register':
@@ -84,13 +89,15 @@ export class Modal {
         this.successTitle = 'Bienvenido a la familia de EcoShield';
         this.successMessage = 'Tu cuenta ha sido creada correctamente.';
         this.successActionLabel = 'Comenzar';
+        this.successShowButton = true;
         break;
 
       case 'password':
-        this.successSubtitle = 'Recuperar contraseña';
+        this.successSubtitle = 'Recuperación de contraseña exitoso';
         this.successTitle = 'Tu contraseña ha sido actualizada';
         this.successMessage = 'Ya puedes iniciar sesión con tu nueva contraseña.';
         this.successActionLabel = 'Ir a iniciar sesión';
+        this.successShowButton = true;
         break;
     }
 
@@ -98,7 +105,6 @@ export class Modal {
   }
 
   onSuccessConfirmed(): void {
-    // Lo usual: ir al login después de cualquier éxito
     this.currentView = 'login';
   }
 }

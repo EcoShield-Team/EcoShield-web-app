@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
 import { countryList, CountryOption } from '../../../../shared/utils/country-list';
+import { Auth } from '../../services/auth';
+import { RegisterRequest } from '../../../../core/models/auth.model';
 
 @Component({
   selector: 'app-register-form',
@@ -11,9 +14,8 @@ import { countryList, CountryOption } from '../../../../shared/utils/country-lis
   styleUrls: ['./register-form.css'],
 })
 export class RegisterForm {
-
   @Output() backToLogin = new EventEmitter<void>();
-  @Output() registerSuccess = new EventEmitter<void>(); // ✅ para el modal
+  @Output() registerSuccess = new EventEmitter<void>();
 
   registerForm = new FormGroup({
     fullName: new FormControl<string>('', {
@@ -30,7 +32,7 @@ export class RegisterForm {
     }),
     password: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(6)],
+      validators: [Validators.required, Validators.minLength(8), Validators.maxLength(64)],
     }),
     confirmPassword: new FormControl<string>('', {
       nonNullable: true,
@@ -46,11 +48,20 @@ export class RegisterForm {
 
   countries: CountryOption[] = countryList;
 
+  constructor(private authService: Auth) {}
+
   get fullName() { return this.registerForm.get('fullName'); }
   get country()  { return this.registerForm.get('country'); }
   get email()    { return this.registerForm.get('email'); }
   get password() { return this.registerForm.get('password'); }
   get confirmPassword() { return this.registerForm.get('confirmPassword'); }
+
+  onBackToLogin(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.isLoading) return;
+    this.backToLogin.emit();
+  }
 
   onRegisterSubmit(): void {
     this.formError = null;
@@ -69,20 +80,43 @@ export class RegisterForm {
 
     this.isLoading = true;
 
-    const formValue = this.registerForm.value;
-    console.log('Payload listo para backend:', formValue);
+    const payload: RegisterRequest = {
+      usuarioNombre: (this.fullName?.value ?? '').trim(),
+      usuarioCorreo: (this.email?.value ?? '').trim().toLowerCase(),
+      usuarioContrasena: this.password?.value ?? '',
+      usuarioPais: (this.country?.value ?? '').trim(),
+    };
 
-    setTimeout(() => {
-      this.isLoading = false;
-      this.formError = null;
-      console.log('✅ Registro simulado exitoso');
-      this.registerSuccess.emit(); // 👈 dispara el success en el modal
-    }, 800);
-  }
+    this.authService.register(payload).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        console.log('✅ Registro exitoso:', res);
+        // No hacemos login aquí → solo avisamos al modal
+        this.registerSuccess.emit();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isLoading = false;
 
-  onBackToLogin(event: Event): void {
-    event.preventDefault();
-    event.stopPropagation();
-    this.backToLogin.emit();
+        const backendMessage: string | null =
+          (error.error && (error.error.message || error.error.error)) || null;
+
+        if (error.status === 0) {
+          this.formError =
+            'No se pudo conectar con el servidor. Revisa tu conexión e inténtalo nuevamente.';
+        } else if (error.status === 400) {
+          this.formError =
+            backendMessage ??
+            'Hay datos inválidos en el formulario. Revisa los campos e inténtalo de nuevo.';
+        } else if (error.status >= 500) {
+          this.formError =
+            'Ocurrió un error en el servidor. Inténtalo de nuevo más tarde.';
+        } else {
+          this.formError =
+            backendMessage ?? 'No se pudo completar el registro. Inténtalo de nuevo.';
+        }
+
+        console.error('Error en registro:', error);
+      },
+    });
   }
 }

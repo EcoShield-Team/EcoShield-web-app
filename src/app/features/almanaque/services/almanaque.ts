@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {EnfermedadDetail, EnfermedadList} from '../../../core/models/enfermedad.model';
 import {PlagaDetail, PlagaList} from '../../../core/models/plaga.model';
-import {observableToBeFn} from 'rxjs/internal/testing/TestScheduler';
 import {environment} from '../../../../environments/environment';
 
 @Injectable({

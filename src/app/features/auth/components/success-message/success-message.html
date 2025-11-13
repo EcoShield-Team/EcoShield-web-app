@@ -19,10 +19,12 @@
     </p>
   }
 
-  <button
-    mat-flat-button
-    class="btn btn-primary-ecoshield success-button"
-    (click)="onConfirm()">
-    {{ actionLabel }}
-  </button>
+  @if (showButton) {
+    <button
+      mat-flat-button
+      class="btn btn-primary-ecoshield success-button"
+      (click)="onConfirm()">
+      {{ actionLabel }}
+    </button>
+  }
 </div>

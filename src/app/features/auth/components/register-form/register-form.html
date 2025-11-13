@@ -20,7 +20,6 @@
     (ngSubmit)="onRegisterSubmit()"
     class="form-container">
 
-    <!-- NOMBRE + PAÍS (misma línea) -->
     <div class="form-row">
       <mat-form-field appearance="outline" class="form-input-field half" floatLabel="auto">
         <mat-label>Nombre completo</mat-label>
@@ -47,7 +46,6 @@
       </mat-form-field>
     </div>
 
-    <!-- CORREO -->
     <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
       <mat-label>Correo electrónico</mat-label>
       <input
@@ -68,7 +66,6 @@
       }
     </mat-form-field>
 
-    <!-- CONTRASEÑA -->
     <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
       <mat-label>Contraseña</mat-label>
       <input
@@ -92,13 +89,12 @@
             La contraseña es requerida.
           }
           @if (password?.errors?.['minlength']) {
-            Debe tener al menos 6 caracteres.
+            Debe tener al menos 8 caracteres.
           }
         </mat-error>
       }
     </mat-form-field>
 
-    <!-- CONFIRMAR CONTRASEÑA -->
     <mat-form-field appearance="outline" class="form-input-field" floatLabel="auto">
       <mat-label>Confirmar contraseña</mat-label>
       <input
@@ -127,7 +123,6 @@
       }
     </mat-form-field>
 
-    <!-- BOTÓN -->
     <button
       type="submit"
       class="form-submit-button"
@@ -140,7 +135,6 @@
     </button>
   </form>
 
-  <!-- FOOTER -->
   <div class="form-footer-links">
     <span class="form-text-small">
       Al registrarte, aceptas nuestros

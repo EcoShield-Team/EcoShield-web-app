@@ -36,15 +36,17 @@
         @case ('code') {
           <app-code-form
             [email]="recoveryEmail || ''"
-            (codeVerified)="onNavigate('resetPassword')">
+            (codeVerified)="onCodeVerified($event)">
           </app-code-form>
         }
 
         @case ('resetPassword') {
           <app-reset-password
+            [token]="recoveryToken || ''"
             (passwordChanged)="showSuccess('password')">
           </app-reset-password>
         }
+
 
         @case ('success') {
           <app-success-message
@@ -52,6 +54,7 @@
             [title]="successTitle"
             [message]="successMessage"
             [actionLabel]="successActionLabel"
+            [showButton]="successShowButton"
             (confirmed)="onSuccessConfirmed()">
           </app-success-message>
         }

@@ -1,6 +1,16 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+  Validators
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
+import { Auth } from '../../services/auth';
+import { LoginRequest } from '../../../../core/models/auth.model';
 
 @Component({
   selector: 'app-login-form',
@@ -12,7 +22,7 @@ import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
 export class LoginForm {
   @Output() navigateToRegister = new EventEmitter<void>();
   @Output() navigateToForgot = new EventEmitter<void>();
-  @Output() loginSuccess = new EventEmitter<void>(); // ✅ para el modal
+  @Output() loginSuccess = new EventEmitter<void>(); // para el modal / auth page
 
   loginForm = new FormGroup({
     email: new FormControl<string>('', {
@@ -21,13 +31,18 @@ export class LoginForm {
     }),
     password: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required],
+      validators: [Validators.required, Validators.minLength(8)],
     }),
   });
 
   loginError: string | null = null;
   isLoading = false;
   hidePassword = true;
+
+  constructor(
+    private authService: Auth,
+    private router: Router
+  ) {}
 
   get email(): FormControl<string> {
     return this.loginForm.get('email') as FormControl<string>;
@@ -46,21 +61,42 @@ export class LoginForm {
     }
 
     this.isLoading = true;
-    const emailValue = this.email.value;
+
+    const emailValue = this.email.value.trim();
     const passwordValue = this.password.value;
 
-    setTimeout(() => {
-      this.isLoading = false;
+    const payload: LoginRequest = {
+      usuarioCorreo: emailValue,
+      usuarioContrasena: passwordValue,
+    };
 
-      if (emailValue === 'diego@ecoshield.com' && passwordValue === '1234') {
+    this.authService.login(payload).subscribe({
+      next: () => {
+        this.isLoading = false;
         this.loginError = null;
-        console.log('✅ Login exitoso');
-        this.loginSuccess.emit(); // 👈 dispara el success en el modal
-      } else {
-        this.loginError = 'Contraseña o correo incorrectos';
-        console.error('❌ Error de autenticación (simulado)');
-      }
-    }, 800);
+
+        this.loginSuccess.emit();
+
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1000);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isLoading = false;
+
+        if (error.status === 0) {
+          this.loginError = 'No se pudo conectar con el servidor. Revisa tu conexión e inténtalo nuevamente.';
+        } else if (error.status === 401 || error.status === 400) {
+          this.loginError = 'Correo o contraseña incorrectos.';
+        } else if (error.status >= 500) {
+          this.loginError = 'Ocurrió un error en el servidor. Inténtalo de nuevo más tarde.';
+        } else {
+          this.loginError = 'No se pudo iniciar sesión. Inténtalo de nuevo.';
+        }
+
+        console.error('Error en login:', error);
+      },
+    });
   }
 
   goToRegister(event: Event): void {
