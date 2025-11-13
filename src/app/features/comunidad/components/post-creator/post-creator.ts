@@ -1,8 +1,13 @@
+// src/app/features/comunidad/components/post-creator/post-creator.ts
 import { Component, EventEmitter, Output, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
 import { Comunidad } from '../../services/comunidad';
 import { PostRequest, PostResponse } from '../../../../core/models/post.model';
+import { Auth } from '../../../auth/services/auth';
+import { UsuarioAuth } from '../../../../core/models/auth.model';
+import { UsuarioService } from '../../../../core/services/usuario';
+import { UsuarioResponse } from '../../../../core/models/usuario.model';
 
 @Component({
   selector: 'app-post-creator',
@@ -20,12 +25,40 @@ export class PostCreator implements OnInit {
   previewUrl = signal<string | null>(null);
   cargando = signal(false);
 
-  usuarioActual: any = null;
+  // Usuario ligth (del AuthResponse)
+  usuarioActual: UsuarioAuth | null = null;
 
-  constructor(private comunidadService: Comunidad) {}
+  // Perfil extendido (foto, país, etc.)
+  usuarioPerfil: UsuarioResponse | null = null;
+  cargandoPerfil = true;
+
+  constructor(
+    private comunidadService: Comunidad,
+    private auth: Auth,
+    private usuarioService: UsuarioService,
+  ) {}
 
   ngOnInit(): void {
-    this.usuarioActual = this.comunidadService.getUsuarioFromToken();
+    this.usuarioActual = this.auth.getCurrentUser();
+
+    if (!this.usuarioActual) {
+      console.warn('PostCreator: no hay usuario logueado. Deberías proteger esta ruta con AuthGuard.');
+      this.cargandoPerfil = false;
+      return;
+    }
+
+    const userId = this.usuarioActual.usuarioId;
+
+    this.usuarioService.getById(userId).subscribe({
+      next: (perfil) => {
+        this.usuarioPerfil = perfil;
+        this.cargandoPerfil = false;
+      },
+      error: (err) => {
+        console.error('Error cargando perfil de usuario:', err);
+        this.cargandoPerfil = false;
+      },
+    });
   }
 
   onFileSelected(event: Event): void {
@@ -41,10 +74,17 @@ export class PostCreator implements OnInit {
   publicar(): void {
     if (!this.titulo.trim() || !this.descripcion.trim()) return;
 
+    if (!this.usuarioActual) {
+      console.error('No hay usuario autenticado. No se puede crear post.');
+      return;
+    }
+
     this.cargando.set(true);
+
     const request: PostRequest = {
       postTitulo: this.titulo.trim(),
       postDescripcion: this.descripcion.trim(),
+      // El backend usa el usuario del JWT. No hace falta enviar más aquí.
     };
 
     this.comunidadService.createPost(request, this.imagen || undefined).subscribe({

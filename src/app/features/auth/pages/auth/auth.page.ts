@@ -41,9 +41,20 @@ export class AuthPage implements AfterViewInit {
     });
 
     this.route.queryParams.subscribe(params => {
+      const token = params['token'] as string | undefined;
       const viewParam = params['view'] as AuthView | undefined;
 
-      // ✅ Solo abrir si REALMENTE viene un view en la URL
+      if (token) {
+        console.log('🔐 Token de reset recibido por URL:', token);
+
+        setTimeout(() => {
+          this.modal.recoveryToken = token;
+          this.modal.open('resetPassword');
+        });
+
+        return;
+      }
+
       if (viewParam === 'register' || viewParam === 'login') {
         setTimeout(() => {
           this.modal.open(viewParam);

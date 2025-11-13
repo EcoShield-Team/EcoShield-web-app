@@ -1,7 +1,7 @@
 <div class="creator-card">
   <div class="creator-header">
     <img
-      src="/assets/images/user-placeholder.jpg"
+      [src]="usuarioPerfil?.usuarioFotoPerfil || '/assets/images/usuario/user_placeholder.jpg'"
       alt="Tu perfil"
       class="creator-avatar"
     />
@@ -16,7 +16,7 @@
 
   <textarea
     [(ngModel)]="descripcion"
-    placeholder="Escribe una descripción detallada..."
+    placeholder="¿Qué quieres compartir hoy, {{ usuarioPerfil?.usuarioNombre || 'ecoshielder' }}?"
     class="creator-textarea"
     rows="3"
   ></textarea>

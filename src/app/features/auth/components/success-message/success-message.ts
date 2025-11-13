@@ -9,17 +9,15 @@ import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
   styleUrl: './success-message.css',
 })
 export class SuccessMessage {
-  /** Texto pequeño de contexto, ej: "Recuperar contraseña" */
   @Input() subtitle = '';
 
-  /** Mensaje principal grande, ej: "Bienvenido a la familia de EcoShield" */
   @Input() title = 'Operación exitosa';
 
-  /** Texto opcional debajo del logo */
   @Input() message = '';
 
-  /** Texto del botón */
   @Input() actionLabel = 'Continuar';
+
+  @Input() showButton = true;
 
   @Output() confirmed = new EventEmitter<void>();
 

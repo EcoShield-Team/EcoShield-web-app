@@ -61,14 +61,17 @@
 .user-chip {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  border: 1px solid #e5e7eb;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  color: #2E2E2E;
-  transition: 0.2s;
-  cursor: pointer;
+  gap: 8px;
+  padding: 4px 10px;
 }
+
+.user-chip-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .user-chip:hover {
   background-color: #f9fafb;
 }
