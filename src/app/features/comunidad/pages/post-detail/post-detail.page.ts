@@ -74,5 +74,4 @@ export class PostDetailPage implements OnInit {
       this.post.commentCount++;
     }
   }
-
 }

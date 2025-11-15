@@ -1,5 +1,3 @@
-// src/app/core/services/auth.ts (ajusta la ruta si es distinta)
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
@@ -39,10 +37,7 @@ export class Auth {
   }
 
   private handleAuthSuccess(response: AuthResponse): void {
-    if (!response || !response.token) {
-      console.warn('AuthResponse sin token. Revisa el backend o el mapeo.');
-      return;
-    }
+    if (!response?.token) return;
     localStorage.setItem(this.TOKEN_KEY, response.token);
     if (response.expiresAt) {
       localStorage.setItem(this.EXPIRES_AT_KEY, response.expiresAt);
@@ -50,14 +45,10 @@ export class Auth {
     if (response.usuario) {
       localStorage.setItem(this.USER_KEY, JSON.stringify(response.usuario));
     }
-    localStorage.removeItem('token');
   }
 
   getToken(): string | null {
-    return (
-      localStorage.getItem(this.TOKEN_KEY) ??
-      localStorage.getItem('token')
-    );
+    return localStorage.getItem(this.TOKEN_KEY); // solo ecoshield_token
   }
 
   getCurrentUser(): UsuarioAuth | null {
