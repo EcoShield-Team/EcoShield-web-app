@@ -69,7 +69,7 @@ export class PostDetailPage implements OnInit {
   }
 
   onComentarioCreado(nuevoComentario: any) {
-    this.comentarios.push(nuevoComentario);
+    this.comentarios.unshift(nuevoComentario);
     if (this.post) {
       this.post.commentCount++;
     }
