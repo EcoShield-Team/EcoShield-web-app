@@ -74,8 +74,9 @@ export class Comunidad {
   }
 
   toggleComentarioLike(postId: number, comentarioId: number) {
-    return this.http.post<boolean>(`${environment.apiURl}/posts/${postId}/comentarios/${comentarioId}/like`, {});
+    return this.http.post<boolean>(`${this.API_BASE_URL}/${postId}/comentarios/${comentarioId}/like`, {});
   }
+
 
   getComentarioLikes(comentarioId: number): Observable<number> {
     return this.http.get<number>(`${environment.apiURl}/comentarios/${comentarioId}/likes`);

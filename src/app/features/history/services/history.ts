@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { DeteccionResponse } from '../../../core/models/deteccion.model';
 import { environment } from '../../../../environments/environment';
 
@@ -8,24 +9,16 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class History {
+  private readonly http = inject(HttpClient);
   private readonly apiUrl = `${environment.apiURl}/deteccion`;
-  private http = inject(HttpClient);
 
-  private getHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      Authorization: `Bearer ${environment.token}`
-    });
-  }
+  constructor() {}
 
   getHistorial(): Observable<DeteccionResponse[]> {
-    return this.http.get<DeteccionResponse[]>(`${this.apiUrl}/historial`, {
-      headers: this.getHeaders()
-    });
+    return this.http.get<DeteccionResponse[]>(`${this.apiUrl}/historial`);
   }
 
   getById(id: number): Observable<DeteccionResponse> {
-    return this.http.get<DeteccionResponse>(`${this.apiUrl}/${id}`, {
-      headers: this.getHeaders()
-    });
+    return this.http.get<DeteccionResponse>(`${this.apiUrl}/${id}`);
   }
 }

@@ -44,7 +44,6 @@ export class PerfilPage {
 
   ngOnInit() {
 
-    // Cargar el perfil del usuario autenticado (para pasar al modal)
     if (this.usuarioAuth) {
       this.usuarioService.getById(this.usuarioAuth.usuarioId).subscribe({
         next: perfil => this.usuarioPerfil = perfil,

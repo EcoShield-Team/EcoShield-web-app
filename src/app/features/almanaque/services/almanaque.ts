@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {EnfermedadDetail, EnfermedadList} from '../../../core/models/enfermedad.model';
@@ -10,10 +10,10 @@ import {environment} from '../../../../environments/environment';
 })
 export class AlmanaqueService {
   private readonly apiUrl = `${environment.apiURl}/almanaque`;
+  private readonly http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  //ENFERMEDADES
 
   getEnfermedades(): Observable<EnfermedadList[]> {
     return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades`);
@@ -57,7 +57,6 @@ export class AlmanaqueService {
     return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades/ordenadas/nombre-desc`);
   }
 
-  //PLAGAS
 
   getPlagas(): Observable<PlagaList[]> {
     return this.http.get<PlagaList[]>(`${this.apiUrl}/plagas`);
