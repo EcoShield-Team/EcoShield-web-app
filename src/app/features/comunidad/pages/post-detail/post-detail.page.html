@@ -1,1 +1,57 @@
-<p>post-detail works!</p>
+<app-header></app-header>
+
+<section class="comunidad-container">
+  <div class="comunidad-wrapper">
+    <app-breadcrumb></app-breadcrumb>
+
+    <h2 class="page-title">
+      Post de
+      @if (post) {
+        <a [routerLink]="['/home/comunidad/perfil', post.usuario.usuarioId]" class="author-link">
+          {{ post.usuario.usuarioNombre }}
+        </a>
+      }
+    </h2>
+
+    <div class="content-layout">
+      <app-sidebar-left></app-sidebar-left>
+
+      <div class="post-detail-column">
+
+        @if (post) {
+          <app-post-card [post]="post" [clickable]="false"></app-post-card>
+        }
+
+        <div class="comments-container">
+
+          @if (post) {
+            <app-comment-input
+              [usuario]="usuarioPerfil"
+              [postId]="post.postId"
+              (commentCreated)="onComentarioCreado($event)"
+            ></app-comment-input>
+          }
+
+          @if (cargando) {
+            <p>Cargando comentarios...</p>
+          } @else {
+            @if (comentarios.length === 0) {
+              <p class="no-comments">Sé el primero en comentar</p>
+            }
+
+            @for (c of comentarios; track c.comentarioId) {
+              <app-comment-card [comment]="c" [postId]="post!.postId"></app-comment-card>
+            }
+          }
+        </div>
+      </div>
+
+
+      <div class="sidebar-right-column">
+        <app-sidebar-search></app-sidebar-search>
+        <app-sidebar-recomendaciones></app-sidebar-recomendaciones>
+        <app-sidebar-tendencias></app-sidebar-tendencias>
+      </div>
+    </div>
+  </div>
+</section>

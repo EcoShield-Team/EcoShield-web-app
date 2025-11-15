@@ -1,4 +1,3 @@
-// src/app/features/comunidad/services/comunidad.ts
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -26,24 +25,15 @@ export class Comunidad {
     return this.http.post<PostResponse>(this.API_BASE_URL, formData);
   }
 
-  // ============================
-  // ✏️ Actualizar post
-  // ============================
   updatePost(postId: number, request: PostRequest, file?: File): Observable<PostResponse> {
     const formData = this.buildFormData(request, file);
     return this.http.put<PostResponse>(`${this.API_BASE_URL}/${postId}`, formData);
   }
 
-  // ============================
-  // 🗑 Eliminar post
-  // ============================
   deletePost(postId: number): Observable<void> {
     return this.http.delete<void>(`${this.API_BASE_URL}/${postId}`);
   }
 
-  // ============================
-  // 📃 Listar todos los posts (GET /posts — público en tu back)
-  // ============================
   getAll(titulo?: string): Observable<PostResponse[]> {
     let params = new HttpParams();
     if (titulo?.trim()) {
@@ -53,31 +43,19 @@ export class Comunidad {
     return this.http.get<PostResponse[]>(this.API_BASE_URL, { params });
   }
 
-  // ============================
-  // 🔎 Obtener un post por ID
-  // ============================
   getById(postId: number): Observable<PostResponse> {
     return this.http.get<PostResponse>(`${this.API_BASE_URL}/${postId}`);
   }
 
-  // ============================
-  // 👤 Mis posts (GET /posts/mis-posts — usa el token)
-  // ============================
   getMyPosts(): Observable<PostResponse[]> {
     return this.http.get<PostResponse[]>(`${this.API_BASE_URL}/mis-posts`);
   }
 
-  // ============================
-  // 👤 Posts por usuario (GET /usuarios/{id}/posts)
-  // ============================
   getByUsuarioId(usuarioId: number): Observable<PostResponse[]> {
     const url = `${environment.apiURl}/usuarios/${usuarioId}/posts`;
     return this.http.get<PostResponse[]>(url);
   }
 
-  // ============================
-  // Helper para multipart/form-data
-  // ============================
   private buildFormData(request: PostRequest, file?: File): FormData {
     const formData = new FormData();
     formData.append('data', new Blob([JSON.stringify(request)], { type: 'application/json' }));
@@ -85,5 +63,29 @@ export class Comunidad {
       formData.append('imagen', file);
     }
     return formData;
+  }
+
+  togglePostLike(postId: number): Observable<boolean> {
+    return this.http.post<boolean>(`${this.API_BASE_URL}/${postId}/like`, {});
+  }
+
+  getPostLikes(postId: number): Observable<number> {
+    return this.http.get<number>(`${this.API_BASE_URL}/${postId}/likes`);
+  }
+
+  toggleComentarioLike(postId: number, comentarioId: number) {
+    return this.http.post<boolean>(`${environment.apiURl}/posts/${postId}/comentarios/${comentarioId}/like`, {});
+  }
+
+  getComentarioLikes(comentarioId: number): Observable<number> {
+    return this.http.get<number>(`${environment.apiURl}/comentarios/${comentarioId}/likes`);
+  }
+
+  getComentariosByPost(postId: number) {
+    return this.http.get<any[]>(`${this.API_BASE_URL}/${postId}/comentarios`);
+  }
+
+  crearComentario(postId: number, dto: { comentarioTexto: string }) {
+    return this.http.post<any>(`${this.API_BASE_URL}/${postId}/comentarios`, dto);
   }
 }

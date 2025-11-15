@@ -1,0 +1,174 @@
+.comunidad-container {
+  background:
+    radial-gradient(circle at 10px 10px, rgba(145, 190, 120, 0.15) 2px, transparent 0),
+    radial-gradient(circle at 30px 30px, rgba(100, 160, 100, 0.1) 2px, transparent 0),
+    #FFFDF2;
+  background-size: 40px 40px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.comunidad-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  padding-left: calc(240px + 2rem);
+  box-sizing: border-box;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 310px;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+app-sidebar-left {
+  position: sticky;
+  top: 1.5rem;
+}
+
+.sidebar-right-column {
+  position: sticky;
+  top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.perfil-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.perfil-card {
+  background-color: #fefcf9;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.perfil-banner {
+  width: 100%;
+  height: 160px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #a7d99b, #f9fdf6);
+  margin-bottom: -80px;
+}
+
+.perfil-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 4.5rem;
+  align-items: flex-start;
+}
+
+.perfil-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.perfil-info {
+  flex: 1;
+}
+
+.perfil-info h3 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.username {
+  color: #6b7280;
+}
+
+.perfil-tags {
+  display: flex;
+  gap: .5rem;
+  margin-top: .4rem;
+}
+
+.rol-tag {
+  background: #E6F4EA;
+  color: #0A7A36;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: .75rem;
+}
+
+.estado-tag {
+  background: #DCFCE7;
+  color: #15803D;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: .75rem;
+}
+
+.estado-tag.inactivo {
+  background: #FEE2E2;
+  color: #B91C1C;
+}
+
+.country {
+  font-size: .9rem;
+  color: #374151;
+}
+
+.fecha-registro {
+  font-size: .9rem;
+  color: #6b7280;
+}
+
+.editar-btn {
+  padding: .4rem 1rem;
+  background: #0B8A3A;
+  color: white;
+  border-radius: 8px;
+  font-size: .9rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.tabs button {
+  background: transparent;
+  border: none;
+  font-weight: 500;
+  color: #6b7280;
+  font-size: 1rem;
+  padding-bottom: .5rem;
+}
+
+.tabs .active {
+  color: #111827;
+  border-bottom: 2px solid #0B8A3A;
+}
+
+.info-box {
+  padding: 1rem;
+  border-radius: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.placeholder {
+  color: #6b7280;
+  font-size: .9rem;
+}

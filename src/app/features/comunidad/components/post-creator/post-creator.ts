@@ -1,4 +1,3 @@
-// src/app/features/comunidad/components/post-creator/post-creator.ts
 import { Component, EventEmitter, Output, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
@@ -6,7 +5,7 @@ import { Comunidad } from '../../services/comunidad';
 import { PostRequest, PostResponse } from '../../../../core/models/post.model';
 import { Auth } from '../../../auth/services/auth';
 import { UsuarioAuth } from '../../../../core/models/auth.model';
-import { UsuarioService } from '../../../../core/services/usuario';
+import { UsuarioService } from '../../../../core/services/usuario.service';
 import { UsuarioResponse } from '../../../../core/models/usuario.model';
 
 @Component({
@@ -25,10 +24,7 @@ export class PostCreator implements OnInit {
   previewUrl = signal<string | null>(null);
   cargando = signal(false);
 
-  // Usuario ligth (del AuthResponse)
   usuarioActual: UsuarioAuth | null = null;
-
-  // Perfil extendido (foto, país, etc.)
   usuarioPerfil: UsuarioResponse | null = null;
   cargandoPerfil = true;
 
@@ -84,7 +80,6 @@ export class PostCreator implements OnInit {
     const request: PostRequest = {
       postTitulo: this.titulo.trim(),
       postDescripcion: this.descripcion.trim(),
-      // El backend usa el usuario del JWT. No hace falta enviar más aquí.
     };
 
     this.comunidadService.createPost(request, this.imagen || undefined).subscribe({

@@ -1,10 +1,35 @@
 <div class="comment-card">
-  <div class="header">
-    <img [src]="comment.usuario.usuarioFotoPerfil" alt="perfil" />
-    <div>
-      <h4>{{ comment.usuario.usuarioNombre }}</h4>
-      <span>{{ comment.fecha | date: 'short' }}</span>
+  <div class="comment-header">
+
+    <a [routerLink]="['/home/comunidad/perfil', comment.usuario.usuarioId]" (click)="$event.stopPropagation()">
+      <img [src]="comment.usuario.usuarioFotoPerfil" alt="perfil" />
+    </a>
+
+    <div class="comment-meta">
+      <a
+        [routerLink]="['/home/comunidad/perfil', comment.usuario.usuarioId]"
+        (click)="$event.stopPropagation()" class="comment-author"
+      >
+        {{ comment.usuario.usuarioNombre }}
+      </a>
+      <span class="comment-date">{{ comment.comentarioFecha | date:'short' }}</span>
     </div>
   </div>
-  <p>{{ comment.texto }}</p>
+
+  <p class="comment-text">
+    {{ comment.comentarioTexto }}
+  </p>
+
+  <div class="comment-footer">
+    <button
+      mat-button
+      class="like-button"
+      (click)="toggleLike($event)"
+    >
+      <mat-icon [ngClass]="{ liked: comment.userLiked }">
+        {{ comment.userLiked ? 'thumb_up' : 'thumb_up_off_alt' }}
+      </mat-icon>
+      <span>{{ comment.likeCount}}</span>
+    </button>
+  </div>
 </div>

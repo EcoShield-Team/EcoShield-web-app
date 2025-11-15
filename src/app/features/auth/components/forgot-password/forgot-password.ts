@@ -15,7 +15,7 @@ import { ForgotPasswordRequest } from '../../../../core/models/auth.model';
 })
 export class ForgotPassword {
   @Output() backToLogin = new EventEmitter<void>();
-  @Output() codeSent = new EventEmitter<string>(); // emitimos el email cuando todo sale bien
+  @Output() codeSent = new EventEmitter<string>();
 
   isLoading = false;
   submitError: string | null = null;

@@ -1,10 +1,13 @@
-<div class="post-card" (click)="verDetalle()">
+<div class="post-card" (click)="!showImageModal && clickable && verDetalle()">
   <div class="post-header">
-    <img [src]="post.usuario.usuarioFotoPerfil" alt="avatar" class="avatar" />
+    <img [src]="post.usuario.usuarioFotoPerfil" alt="avatar" class="avatar" (click)="goToProfile($event)"/>
     <div class="user-info">
       <h3>
-        {{ post.usuario.usuarioNombre }}
-        <span class="subtitle">· {{ post.usuario.usuarioPais || 'Filadelfia' }}</span>
+        <span class="author-link" (click)="goToProfile($event)">
+          {{ post.usuario.usuarioNombre }}
+        </span>
+
+        <span class="subtitle">· {{ post.usuario.usuarioPais}}</span>
       </h3>
       <p class="fecha">{{ post.postFecha | date: 'short' }}</p>
     </div>
@@ -18,17 +21,29 @@
   <a href="#" class="translate-link">Traducir al inglés</a>
 
   @if (post.postFoto) {
-    <img [src]="post.postFoto" alt="foto del post" class="imagen" />
+    <img [src]="post.postFoto" alt="foto del post" class="imagen" (click)="openImage($event)"/>
+  }
+
+  @if (showImageModal) {
+    <div class="image-modal" (click)="closeImage(); $event.stopPropagation()">
+      <img [src]="post.postFoto" class="modal-img" (click)="$event.stopPropagation()"  alt="modal de la foto"/>
+    </div>
   }
 
   <div class="post-footer">
-    <button mat-button class="footer-btn">
-      <mat-icon>thumb_up_off_alt</mat-icon> <span>12</span>
+
+    <button mat-button class="footer-btn" (click)="toggleLike($event)">
+      <mat-icon [ngClass]="{ liked: post.userLiked }">
+        {{ post.userLiked ? 'thumb_up' : 'thumb_up_off_alt' }}
+      </mat-icon>
+      <span>{{ post.likeCount }}</span>
     </button>
-    <button mat-button class="footer-btn">
+
+    <button mat-button class="footer-btn" (click)="abrirModalComentarios($event)">
       <mat-icon>chat_bubble_outline</mat-icon>
-      <span>3</span>
+      <span>{{ post.commentCount }}</span>
     </button>
+
     <button mat-button class="footer-btn">
       <mat-icon>share</mat-icon>
       <span>Compartir</span>

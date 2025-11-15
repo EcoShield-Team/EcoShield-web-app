@@ -1,0 +1,97 @@
+<app-header></app-header>
+
+<section class="comunidad-container">
+  <div class="comunidad-wrapper">
+    <app-breadcrumb></app-breadcrumb>
+
+    <h2 class="page-title">Perfil</h2>
+
+    <div class="content-layout">
+      <app-sidebar-left></app-sidebar-left>
+
+      <div class="perfil-column">
+
+        <div class="perfil-banner" [style.background]="bannerColor()"></div>
+        <div class="perfil-card">
+          <div class="perfil-header">
+            <img [src]="usuario()?.usuarioFotoPerfil" alt="avatar" class="perfil-avatar">
+
+            <div class="perfil-info">
+              <h3>{{ usuario()?.usuarioNombre }}</h3>
+              <p class="username">{{ '@' + (usuario()?.usuarioNombre | lowercase) }}</p>
+
+              <div class="perfil-tags">
+                <span class="rol-tag">{{ usuario()?.rolNombre }}</span>
+
+                <span class="estado-tag"
+                      [class.inactivo]="usuario()?.usuarioEstado !== 'ACTIVO'">
+                      {{ usuario()?.usuarioEstado }}
+                </span>
+              </div>
+
+              <p class="country">🌍 {{ usuario()?.usuarioPais }}</p>
+
+              <p class="fecha-registro">
+                Miembro desde {{ usuario()?.usuarioFechaRegistro | date:'MMMM y' }}
+              </p>
+            </div>
+
+            @if (esMiPerfil()) {
+              <button class="editar-btn" routerLink="/home/comunidad/editar-perfil">
+                Editar perfil
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button [class.active]="tab() === 'posts'" (click)="tab.set('posts')">Publicaciones ({{ posts().length }})</button>
+          <button [class.active]="tab() === 'actividad'" (click)="tab.set('actividad')">Actividad</button>
+          <button [class.active]="tab() === 'info'" (click)="tab.set('info')">Información</button>
+        </div>
+
+        @if (tab() === 'posts') {
+
+          @for (post of posts(); track post.postId) {
+            <app-post-card
+              [post]="post"
+              (openCommentModal)="abrirModal($event)"
+            ></app-post-card>
+          }
+
+          @if (showCommentModal() && selectedPost() !== null) {
+            <app-comment-modal
+              [post]="selectedPost()!"
+              [usuario]="usuarioPerfil"
+              (closed)="cerrarModal()"
+              (commentCreated)="onComentarioPerfil(selectedPost()!, $event)"
+              ></app-comment-modal>
+          }
+        }
+
+
+        @if (tab() === 'actividad') {
+          <p class="placeholder">No hay actividad registrada aún.</p>
+        }
+
+        @if (tab() === 'info') {
+          <div class="info-box">
+            <p><strong>Nombre:</strong> {{ usuario()?.usuarioNombre }}</p>
+            <p><strong>Correo:</strong> {{ usuario()?.usuarioCorreo }}</p>
+            <p><strong>País:</strong> {{ usuario()?.usuarioPais }}</p>
+            <p><strong>Rol:</strong> {{ usuario()?.rolNombre }}</p>
+            <p><strong>Estado:</strong> {{ usuario()?.usuarioEstado }}</p>
+            <p><strong>Miembro desde:</strong> {{ usuario()?.usuarioFechaRegistro | date:'mediumDate' }}</p>
+          </div>
+        }
+      </div>
+
+
+      <div class="sidebar-right-column">
+        <app-sidebar-search></app-sidebar-search>
+        <app-sidebar-recomendaciones></app-sidebar-recomendaciones>
+        <app-sidebar-tendencias></app-sidebar-tendencias>
+      </div>
+    </div>
+  </div>
+</section>

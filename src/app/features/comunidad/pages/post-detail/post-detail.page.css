@@ -1,0 +1,79 @@
+.comunidad-container {
+  background:
+    radial-gradient(circle at 10px 10px, rgba(145, 190, 120, 0.15) 2px, transparent 0),
+    radial-gradient(circle at 30px 30px, rgba(100, 160, 100, 0.1) 2px, transparent 0),
+    #FFFDF2;
+  background-size: 40px 40px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.comunidad-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  padding-left: calc(240px + 2rem);
+  box-sizing: border-box;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 310px;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+app-sidebar-left {
+  position: sticky;
+  top: 1.5rem;
+}
+
+.sidebar-right-column {
+  position: sticky;
+  top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post-detail-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.comments-container {
+  background: white;
+  padding: 1.3rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.no-comments {
+  color: #6b7280;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.author-link {
+  color: #000000;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.author-link:hover {
+  text-decoration: none;
+}

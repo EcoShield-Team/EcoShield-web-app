@@ -7,7 +7,11 @@ export interface PostResponse {
   postDescripcion: string;
   postFoto: string;
   postFecha: string;
+  likeCount: number;
+  userLiked: boolean;
+  commentCount: number;
 }
+
 
 export interface PostRequest {
   postTitulo: string;

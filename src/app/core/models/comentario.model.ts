@@ -5,6 +5,8 @@ export interface ComentarioResponse {
   usuario: UsuarioResponseForo;
   comentarioTexto: string;
   comentarioFecha: string;
+  likeCount: number;
+  userLiked: boolean;
 }
 
 export interface ComentarioRequest {

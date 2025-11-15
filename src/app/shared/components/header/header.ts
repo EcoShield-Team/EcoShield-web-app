@@ -1,15 +1,11 @@
-// src/app/shared/components/header/header.ts
-
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import { Router } from '@angular/router';
 import { MATERIAL_IMPORTS } from '../../material/material.imports';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
 import { Auth } from '../../../features/auth/services/auth';
 import { UsuarioAuth } from '../../../core/models/auth.model';
-import { UsuarioService } from '../../../core/services/usuario';
-import { UsuarioResponse } from '../../../core/models/usuario.model';
+import { UsuarioService } from '../../../core/services/usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -20,11 +16,9 @@ import { UsuarioResponse } from '../../../core/models/usuario.model';
 })
 export class Header implements OnInit {
 
-  usuarioAuth: UsuarioAuth | null = null;
-  usuarioCompleto: UsuarioResponse | null = null;
-
-  fotoPerfil: string = '/assets/images/usuario/user_placeholder.jpg';
-  nombreUsuario: string = 'Mi cuenta';
+  usuarioAuth = signal<UsuarioAuth | null>(null);
+  fotoPerfil = signal<string>('/assets/images/usuario/user_placeholder.jpg');
+  nombreUsuario = signal<string>('Mi cuenta');
 
   constructor(
     private auth: Auth,
@@ -33,34 +27,25 @@ export class Header implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.usuarioAuth = this.auth.getCurrentUser();
+    const authUser = this.auth.getCurrentUser();
+    this.usuarioAuth.set(authUser);
 
-    if (!this.usuarioAuth) {
-      console.warn('Header: no hay usuario autenticado.');
-      return;
-    }
+    if (!authUser) return;
 
-    this.nombreUsuario = this.usuarioAuth.usuarioNombre || 'Mi cuenta';
+    this.nombreUsuario.set(authUser.usuarioNombre ?? 'Mi cuenta');
 
-    const id = this.usuarioAuth.usuarioId;
-
-    this.usuarioService.getById(id).subscribe({
+    this.usuarioService.getById(authUser.usuarioId).subscribe({
       next: (user) => {
-        this.usuarioCompleto = user;
-        this.nombreUsuario = user.usuarioNombre || this.nombreUsuario;
-
+        this.nombreUsuario.set(user.usuarioNombre);
         if (user.usuarioFotoPerfil?.trim()) {
-          this.fotoPerfil = user.usuarioFotoPerfil;
+          this.fotoPerfil.set(user.usuarioFotoPerfil);
         }
-      },
-      error: (err) => {
-        console.warn('No se pudo obtener el perfil del usuario.', err);
-      },
+      }
     });
   }
 
   logout(): void {
     this.auth.logout();
-    void this.router.navigate(['/auth']);
+    this.router.navigate(['/auth']);
   }
 }

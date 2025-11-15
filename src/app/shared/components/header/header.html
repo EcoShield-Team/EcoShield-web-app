@@ -7,7 +7,6 @@
     <span class="navbar-brand">ECOSHIELD</span>
   </div>
 
-  <!-- Center (Desktop only) -->
   <div class="navbar-center desktop-nav">
     <button mat-button class="nav-link" routerLink="/home"
             routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -30,38 +29,28 @@
     </button>
   </div>
 
-  <!-- Right -->
   <div class="navbar-right">
 
     <button mat-icon-button class="icon-button" aria-label="Notificaciones">
       <mat-icon>notifications</mat-icon>
     </button>
 
-    <!-- USER CHIP (YA NO USA mat-button) -->
-    <div class="user-chip"
-         aria-label="Mi cuenta"
-         [matMenuTriggerFor]="accountMenu">
+    <div class="user-chip" aria-label="Mi cuenta" [matMenuTriggerFor]="accountMenu">
 
-      <img [src]="fotoPerfil"
-           alt="Foto de perfil"
-           class="user-chip-avatar">
+      <img [src]="fotoPerfil()" alt="Foto de perfil" class="user-chip-avatar">
 
-      <span class="user-name">{{ nombreUsuario }}</span>
+      <span class="user-name">{{ nombreUsuario() }}</span>
     </div>
 
-    <!-- Menu icon (mobile) -->
-    <button mat-icon-button class="mobile-menu-button"
-            [matMenuTriggerFor]="mobileMenu"
-            aria-label="Abrir menú">
+    <button mat-icon-button class="mobile-menu-button" [matMenuTriggerFor]="mobileMenu" aria-label="Abrir menú">
       <mat-icon>menu</mat-icon>
     </button>
 
   </div>
 </mat-toolbar>
 
-<!-- Account Menu -->
 <mat-menu #accountMenu="matMenu" xPosition="before" yPosition="below">
-  <button mat-menu-item routerLink="/perfil">
+  <button mat-menu-item [routerLink]="['/home/comunidad/perfil/mis-posts']">
     <mat-icon>person</mat-icon>
     <span>Ver perfil</span>
   </button>
@@ -71,7 +60,6 @@
   </button>
 </mat-menu>
 
-<!-- Mobile Menu -->
 <mat-menu #mobileMenu="matMenu">
   <button mat-menu-item routerLink="/home" routerLinkActive="active-menu-item"
           [routerLinkActiveOptions]="{exact: true}">

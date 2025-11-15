@@ -1,0 +1,32 @@
+<div class="comment-input-box">
+  <img
+    [src]="usuario?.usuarioFotoPerfil || '/assets/images/usuario/user_placeholder.jpg'"
+    alt="tu foto"
+    class="comment-avatar"
+  />
+
+
+  <div class="comment-input-area" (click)="expandir = true">
+
+    @if (!expandir) {
+      <div class="fake-input">
+        Postea tu respuesta
+      </div>
+    }
+
+    @if (expandir) {
+      <textarea [(ngModel)]="nuevoComentario" rows="3" autofocus></textarea>
+    }
+
+  </div>
+</div>
+
+@if (expandir) {
+  <div class="comment-btn-row">
+    <button class="comment-btn"
+            (click)="enviarComentario()"
+            [disabled]="!nuevoComentario.trim()">
+      Responder
+    </button>
+  </div>
+}

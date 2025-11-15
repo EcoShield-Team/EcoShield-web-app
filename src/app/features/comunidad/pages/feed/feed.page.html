@@ -13,8 +13,21 @@
         <app-post-creator (postCreated)="agregarPost($event)"></app-post-creator>
 
         @for (post of posts(); track post.postId) {
-          <app-post-card [post]="post"></app-post-card>
+          <app-post-card
+            [post]="post"
+            (openCommentModal)="abrirModal($event)"
+          ></app-post-card>
         }
+
+        @if (showCommentModal && selectedPost) {
+          <app-comment-modal
+            [post]="selectedPost"
+            [usuario]="usuarioPerfil"
+            (closed)="cerrarModal()"
+            (commentCreated)="onComentarioFeed(selectedPost!, $event)"
+          ></app-comment-modal>
+        }
+
       </div>
 
       <div class="sidebar-right-column">
