@@ -1,0 +1,30 @@
+<mat-card class="list-blog-card">
+
+  <div class="card-content-flex">
+
+    <div class="image-wrapper">
+      <img [src]="blogData.blogImagen" [alt]="blogData.blogTitulo" class="blog-image-thumb">
+    </div>
+
+    <div class="blog-details">
+
+      <p class="blog-type-tag">{{ blogData.blogTipo }}</p>
+
+      <h4 class="blog-title">{{ blogData.blogTitulo }}</h4>
+
+      <p class="blog-description-snippet">
+        {{ blogData.blogDescripcion | slice:0:120 }}...
+      </p>
+
+      <div class="card-footer">
+                <span class="blog-date">
+                    Publicado: {{ blogData.blogFechaPublicacion | date:'mediumDate' }}
+                </span>
+
+        <button mat-button color="primary" class="leer-mas-btn">
+          Leer más <mat-icon style="font-size: 16px;">arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>

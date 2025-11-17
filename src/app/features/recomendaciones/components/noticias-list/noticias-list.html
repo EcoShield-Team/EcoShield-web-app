@@ -1,27 +1,26 @@
-<div class="news-grid">
+<div class="noticias-container">
 
-  <mat-card class="news-card">
-    <img mat-card-image src="/assets/images/recomendaciones/noticia-1.jpg" alt="Rotación de cultivos">
-    <mat-card-content class="news-card__content">
-      <span class="news-card__type">Artículo 1</span>
-      <h5 class="news-card__title">2 razones para implementar la rotación de cultivos</h5>
-    </mat-card-content>
-  </mat-card>
+  <div *ngIf="isLoading" class="spinner-container">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
 
-  <mat-card class="news-card">
-    <img mat-card-image src="/assets/images/recomendaciones/noticia-1.jpg" alt="Pronóstico de tiempo">
-    <mat-card-content class="news-card__content">
-      <span class="news-card__type">Artículo 2</span>
-      <h5 class="news-card__title">Próximamente, pronóstico de tiempo para mejorar la agricultura</h5>
-    </mat-card-content>
-  </mat-card>
+  <div class="noticias-grid" *ngIf="!isLoading && !hasError">
 
-  <mat-card class="news-card">
-    <img mat-card-image src="/assets/images/recomendaciones/noticia-1.jpg" alt="Revista ecológica">
-    <mat-card-content class="news-card__content">
-      <span class="news-card__type">Artículo 3</span>
-      <h5 class="news-card__title">Revista ecológica de la primera quincena de Septiembre</h5>
-    </mat-card-content>
-  </mat-card>
+    <mat-card class="noticia-card" *ngFor="let noticia of noticiasPrincipales">
+
+      <img mat-card-image [src]="noticia.blogImagen" [alt]="noticia.blogTitulo" class="noticia-image">
+
+      <mat-card-content class="noticia-content">
+        <p class="articulo-id">ARTÍCULO {{ noticia.blogId }}</p>
+
+        <h4 class="noticia-titulo">{{ noticia.blogTitulo }}</h4>
+
+        <button mat-flat-button color="primary" class="leer-mas-btn">
+          Leer
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
 
 </div>

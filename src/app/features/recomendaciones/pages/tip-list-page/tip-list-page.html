@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<div class="page-container">
+
+  <app-breadcrumb class="breadcrumb-alignment"></app-breadcrumb>
+
+  <div class="content-wrapper">
+
+    <h2 class="main-header">Todos los Tips y Recomendaciones</h2>
+
+    <div *ngIf="isLoading" class="spinner-container">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+
+    <div class="blog-list-grid" *ngIf="!isLoading && !hasError">
+
+      <app-blog-list-card
+        *ngFor="let tip of listaTips"
+        [blogData]="tip">
+      </app-blog-list-card>
+
+      <div *ngIf="listaTips.length === 0 && !isLoading" class="no-results-container">
+        <p>No hay tips activos disponibles en este momento.</p>
+        <a [routerLink]="['/home/recomendaciones']" mat-button color="primary">Volver a Recomendaciones</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,33 +1,41 @@
-<section class="reco-card">
+<div class="tip-card-container">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
-  <img src="/assets/images/recomendaciones/noticia-1.jpg" alt="Suelo infértil" class="reco-card__image">
+  <div *ngIf="tipDelDia as tip" class="tip-del-dia-box">
 
-  <div class="reco-card__content">
+    <div class="tip-content-flex">
 
-    <h3 class="reco-card__title">¡Suelo Infértil Detectado!</h3>
-    <p class="reco-card__description">
-      A las fresas le gusta el suelo con buen drenaje y sobre todo materia orgánica en abundante. Se detectó baja densidad de nutrientes en tu cama de cultivo.
-    </p>
-
-    <h4 class="reco-card__subtitle">Recomendaciones</h4>
-    <ul class="reco-card__list">
-      <li>Incorporar materia orgánica (compost) y enmiendas ricas en fósforo y potasio.</li>
-      <li>Realizar análisis de suelo periódico y registrar los resultados.</li>
-      <li>Cambiar el riego del cultivo o la ubicación en áreas con mejor retención.</li>
-    </ul>
-
-    <footer class="reco-card__footer">
-      <div class="reco-card__actions">
-        <button mat-stroked-button class="reco-action-btn">
-          <mat-icon>share</mat-icon>
-          <span>Compartir</span>
-        </button>
-        <button mat-stroked-button class="reco-action-btn">
-          <mat-icon>bookmark_border</mat-icon>
-          <span>Guardar</span>
-        </button>
+      <div class="tip-image-wrapper">
+        <img [src]="tip.blogImagen" [alt]="tip.blogTitulo" class="tip-image">
       </div>
-      <a href="" class="reco-card__see-more">Ver más...</a>
-    </footer>
+
+      <div class="tip-details">
+        <h3 class="tip-titulo-alerta">
+          <mat-icon color="warn">warning</mat-icon>
+          ¡{{ tip.blogTitulo }}!
+        </h3>
+
+        <div class="recomendaciones-content">
+          <p class="tip-descripcion-full">
+            {{ tip.blogDescripcion }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-actions-footer">
+      <button mat-button class="action-btn" (click)="compartir()">
+        <mat-icon>share</mat-icon> Compartir
+      </button>
+      <button mat-button class="action-btn" (click)="guardar()">
+        <mat-icon>bookmark_border</mat-icon> Guardar
+      </button>
+
+      <a mat-button [routerLink]="['/home/recomendaciones/tips']" class="ver-mas-link">
+        Ver más...
+      </a>
+    </div>
   </div>
-</section>
+
+  <app-error-view *ngIf="hasError" message="No se pudo cargar la Recomendación del Día."></app-error-view>
+</div>

@@ -1,63 +1,81 @@
 :host {
+  --color-primary: #2e7d32;
   --color-text-primary: #333;
   --color-text-secondary: #666;
   --color-border: #e0e0e0;
 }
 
-.news-grid {
+.noticias-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.spinner-container {
+  padding: 30px;
+}
+
+.noticias-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.news-card {
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.news-card:hover {
-  transform: translateY(-4px);
-}
-
-img[mat-card-image] {
+  gap: 20px;
   width: 100%;
-  height: 160px;
+}
+
+.noticia-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: 8px !important;
+}
+
+.noticia-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.noticia-image {
+  height: 140px;
   object-fit: cover;
-  display: block;
 }
 
-
-.news-card__content {
-  padding: 8px 16px 16px 16px;
+.noticia-content {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.news-card__type {
-  font-size: 0.75rem;
-  font-weight: 500;
+.articulo-id {
+  font-size: 0.8em;
   color: var(--color-text-secondary);
-  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
-.news-card__title {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.4;
-  margin: 4px 0 0 0;
+.noticia-titulo {
+  font-size: 1em;
+  font-weight: 500;
+  margin-bottom: 12px;
   color: var(--color-text-primary);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-height: calc(1rem * 1.4 * 2);
+  flex-grow: 1;
+  line-height: 1.3;
 }
 
-@media (max-width: 900px) {
-  .news-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.leer-mas-btn {
+  margin-top: auto;
+  align-self: flex-start;
+  text-transform: none;
+  background-color: var(--color-primary) !important;
+  color: white !important;
+  padding: 4px 12px !important;
+  font-size: 0.85em;
 }
-@media (max-width: 600px) {
-  .news-grid {
+
+@media (max-width: 768px) {
+  .noticias-grid {
     grid-template-columns: 1fr;
   }
 }

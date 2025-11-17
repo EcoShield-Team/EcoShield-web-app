@@ -1,41 +1,67 @@
 <app-header></app-header>
 
-<section class="recommendations-container">
-  <div class="recommendations-wrapper">
+<div class="page-container">
+  <app-breadcrumb></app-breadcrumb>
 
-    <app-breadcrumb></app-breadcrumb>
+  <div class="content-wrapper">
 
-    <header class="reco-header">
-      <h2 class="reco-header__title">Recomendaciones de hoy</h2>
-    </header>
+    <div class="main-header-container">
+      <h2 class="main-header">Recomendaciones de hoy</h2>
 
-    <main>
-      <app-tip-del-dia></app-tip-del-dia>
+      <button
+              *ngIf="esAdministrador()"
+              class="admin-settings-btn"
+              (click)="goToAdminList()"
+              title="Gestionar Blogs"
+              aria-label="Gestionar Blogs"
+      >
+        <mat-icon>settings</mat-icon>
+      </button>
+    </div>
 
-      <section class="news-section">
-        <h2 class="news-section__title">Noticias que te pueden ayudar</h2>
-        <app-noticias-list></app-noticias-list>
-      </section>
+    <mat-divider style="margin-bottom: 25px;"></mat-divider>
 
-      <section class="feedback-section">
-        <h2 class="feedback-section__title">¿Qué tan útil le pareció esta información?</h2>
+    <app-tip-del-dia></app-tip-del-dia>
 
-        <div class="feedback-buttons">
-          <button mat-stroked-button class="feedback-btn">
-            <mat-icon>sentiment_very_dissatisfied</mat-icon>
-            Poco
-          </button>
-          <button mat-stroked-button class="feedback-btn">
-            <mat-icon>sentiment_neutral</mat-icon>
-            Regular
-          </button>
-          <button mat-stroked-button color="primary" class="feedback-btn feedback-btn--selected">
-            <mat-icon>sentiment_very_satisfied</mat-icon>
-            Mucho
-          </button>
-        </div>
-      </section>
-    </main>
+    <mat-divider class="section-divider"></mat-divider>
 
+    <h2 class="section-title">Noticias que te pueden ayudar</h2>
+    <app-noticias-list></app-noticias-list>
+
+    <div class="ver-mas-news-container">
+      <a mat-button [routerLink]="['/home/recomendaciones/noticias']">
+        Ver más noticias <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+
+    <div class="feedback-section">
+      <h3 class="satisfaccion-title">¿Qué tan útil le pareció esta información?</h3>
+      <div class="feedback-options">
+
+        <button mat-button
+                class="feedback-btn"
+                [class.feedback-btn--unselected]="satisfaccion !== 'Poco'"
+                [class.feedback-btn--selected]="satisfaccion === 'Poco'"
+                (click)="seleccionarSatisfaccion('Poco')">
+          <mat-icon class="feedback-icon">sentiment_very_dissatisfied</mat-icon> Poco
+        </button>
+
+        <button mat-button
+                class="feedback-btn"
+                [class.feedback-btn--unselected]="satisfaccion !== 'Regular'"
+                [class.feedback-btn--selected]="satisfaccion === 'Regular'"
+                (click)="seleccionarSatisfaccion('Regular')">
+          <mat-icon class="feedback-icon">sentiment_neutral</mat-icon> Regular
+        </button>
+
+        <button mat-button
+                class="feedback-btn"
+                [class.feedback-btn--unselected]="satisfaccion !== 'Mucho'"
+                [class.feedback-btn--selected]="satisfaccion === 'Mucho'"
+                (click)="seleccionarSatisfaccion('Mucho')">
+          <mat-icon class="feedback-icon">sentiment_very_satisfied</mat-icon> Mucho
+        </button>
+      </div>
+    </div>
   </div>
-</section>
+</div>

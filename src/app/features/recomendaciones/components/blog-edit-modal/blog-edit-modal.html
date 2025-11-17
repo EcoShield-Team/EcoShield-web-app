@@ -1,0 +1,72 @@
+<h2 mat-dialog-title class="modal-title">Editar Blog #{{ data.id }}</h2>
+
+<mat-spinner *ngIf="isLoading" [diameter]="40" class="spinner-center"></mat-spinner>
+
+<div mat-dialog-content class="modal-content" *ngIf="!isLoading">
+  <form [formGroup]="blogForm" (ngSubmit)="onSubmit()" class="blog-form">
+
+    <div class="input-group">
+      <mat-form-field appearance="outline" class="form-field-half">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="blogTipo">
+          <mat-option *ngFor="let tipo of blogTipos" [value]="tipo">{{ tipo }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="blogForm.get('blogTipo')?.invalid && blogForm.get('blogTipo')?.touched">Obligatorio.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field-half">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="blogEstado">
+          <mat-option *ngFor="let estado of blogEstados" [value]="estado">{{ estado }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="blogForm.get('blogEstado')?.invalid && blogForm.get('blogEstado')?.touched">Obligatorio.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="blogTitulo" maxlength="200">
+      <mat-hint align="end">{{ blogForm.get('blogTitulo')?.value?.length || 0 }}/200</mat-hint>
+      <mat-error *ngIf="blogForm.get('blogTitulo')?.hasError('required') && blogForm.get('blogTitulo')?.touched">El título es obligatorio.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="blogDescripcion" rows="6" maxlength="4000"></textarea>
+      <mat-hint align="end">{{ blogForm.get('blogDescripcion')?.value?.length || 0 }}/4000</mat-hint>
+      <mat-error *ngIf="blogForm.get('blogDescripcion')?.hasError('required') && blogForm.get('blogDescripcion')?.touched">La descripción es obligatoria.</mat-error>
+    </mat-form-field>
+
+    <div class="image-upload-area">
+      <div class="image-preview-wrapper" *ngIf="imagenPreviewUrl">
+        <img [src]="imagenPreviewUrl" alt="Previsualización" class="image-preview">
+        <button mat-icon-button color="warn" class="clear-image-btn" (click)="limpiarImagen()" type="button" title="Limpiar Imagen">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div class="image-upload-controls">
+        <input type="file" id="file-upload-edit" (change)="onFileSelected($event)" accept="image/*" class="file-input" [disabled]="isSaving">
+
+        <label for="file-upload-edit" mat-flat-button color="accent" [class.disabled-look]="isSaving">
+          <mat-icon>cloud_upload</mat-icon>
+          {{ imagenPreviewUrl ? 'Cambiar Imagen' : 'Subir Imagen (Opcional)' }}
+        </label>
+
+        <span class="file-name-hint">
+                    {{ imagenArchivo?.name || (imagenPreviewUrl ? 'Imagen actual' : 'Seleccionar archivo (Max 5MB)') }}
+                </span>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" [disabled]="isSaving">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="isSaving || blogForm.invalid">
+    <mat-icon *ngIf="!isSaving">save</mat-icon>
+    <mat-spinner *ngIf="isSaving" diameter="20" color="primary"></mat-spinner>
+    {{ isSaving ? 'Guardando...' : 'Guardar Cambios' }}
+  </button>
+</div>
