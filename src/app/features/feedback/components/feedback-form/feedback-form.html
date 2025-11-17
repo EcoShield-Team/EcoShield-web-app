@@ -3,6 +3,7 @@
     <h2>Feedback</h2>
 
     <button
+      *ngIf="esAdministrador()"
       class="admin-settings-btn"
       (click)="goToAdminList()"
       title="Gestionar Feedbacks"

@@ -52,6 +52,21 @@ export class FeedbackForm {
   goToAdminList(): void {
     this.router.navigate(['/home/feedback/admin-list']);
   }
+
+  esAdministrador(): boolean {
+    const rawUser = localStorage.getItem('ecoshield_user');
+    if (!rawUser) return false;
+
+    try {
+      const user = JSON.parse(rawUser);
+
+      return user?.usuarioRol === 'ROLE_ADMIN';
+
+    } catch (e) {
+      console.error('Error al leer el rol del administrador:', e);
+      return false;
+    }
+  }
 }
 
 
