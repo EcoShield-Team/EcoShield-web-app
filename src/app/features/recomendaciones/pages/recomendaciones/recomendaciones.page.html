@@ -9,12 +9,8 @@
       <h2 class="main-header">Recomendaciones de hoy</h2>
 
       <button
-              *ngIf="esAdministrador()"
-              class="admin-settings-btn"
-              (click)="goToAdminList()"
-              title="Gestionar Blogs"
-              aria-label="Gestionar Blogs"
-      >
+              *ngIf="esAdministrador()" class="admin-settings-btn"
+              (click)="goToAdminList()" title="Gestionar Blogs" aria-label="Gestionar Blogs">
         <mat-icon>settings</mat-icon>
       </button>
     </div>
@@ -29,7 +25,7 @@
     <app-noticias-list></app-noticias-list>
 
     <div class="ver-mas-news-container">
-      <a mat-button [routerLink]="['/home/recomendaciones/noticias']">
+      <a mat-button [routerLink]="['noticias']">
         Ver más noticias <mat-icon>arrow_forward</mat-icon>
       </a>
     </div>

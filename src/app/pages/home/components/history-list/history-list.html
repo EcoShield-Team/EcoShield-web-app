@@ -2,13 +2,24 @@
   <h2 class="section-title">Historial reciente</h2>
 
   <div class="history-list">
-    @for (item of historyItems(); track item.title) {
-      <app-history-item [item]="item"></app-history-item>
+    @for (det of detecciones(); track det.deteccionId) {
+      <app-history-item
+        [item]="{
+          title: det.nombreDetectado,
+          subtitle: 'Detectado el ' + (det.fecha | date:'mediumDate'),
+          status: det.tipoFicha === 'PLAGA' ? 'Plaga detectada' :
+                  det.tipoFicha === 'ENFERMEDAD' ? 'Enfermedad detectada' : 'Detección IA',
+          statusClass: det.tipoFicha === 'PLAGA' ? 'status-warning' :
+                       det.tipoFicha === 'ENFERMEDAD' ? 'status-danger' : 'status-info'
+        }"
+      ></app-history-item>
+    } @empty {
+      <p class="no-history">No hay detecciones recientes.</p>
     }
   </div>
 
   <div class="history-footer">
-    <button mat-button class="history-view-all-button" routerLink="/home/history">
+    <button mat-button class="history-view-all-button" routerLink="/historial">
       Ver todo el historial <mat-icon>arrow_forward</mat-icon>
     </button>
   </div>

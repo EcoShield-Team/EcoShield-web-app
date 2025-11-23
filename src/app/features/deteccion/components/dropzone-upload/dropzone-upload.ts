@@ -43,7 +43,7 @@ export class DropzoneUpload {
       next: (response: DeteccionResponse) => {
         this.cargando = false;
         sessionStorage.setItem('ultimaDeteccion', JSON.stringify(response));
-        this.router.navigate(['/home/deteccion/resultado']);
+        this.router.navigate(['/deteccion/resultado']);
       },
       error: (err) => {
         this.cargando = false;

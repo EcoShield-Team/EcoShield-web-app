@@ -26,7 +26,7 @@ export class RecomendacionesPage {
   }
 
   goToAdminList(): void {
-    this.router.navigate(['/home/recomendaciones/blog-admin-list']);
+    this.router.navigate(['recomendaciones/blog-admin-list']);
   }
 
   esAdministrador(): boolean {

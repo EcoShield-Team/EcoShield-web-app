@@ -15,12 +15,12 @@ export class SidebarLeft {
   goHome() {
     const currentUrl = this.router.url;
 
-    if (currentUrl.startsWith('/home')) {
+    if (currentUrl.startsWith('/comunidad')) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       window.dispatchEvent(new CustomEvent('refresh-home-feed'));
       return;
     }
-
     this.router.navigate(['/home']);
   }
+
 }

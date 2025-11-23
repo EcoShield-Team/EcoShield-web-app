@@ -7,7 +7,7 @@
     <h2 class="page-title">
       Post de
       @if (post) {
-        <a [routerLink]="['/home/comunidad/perfil', post.usuario.usuarioId]" class="author-link">
+        <a [routerLink]="['/comunidad/perfil', post.usuario.usuarioId]" class="author-link">
           {{ post.usuario.usuarioNombre }}
         </a>
       }

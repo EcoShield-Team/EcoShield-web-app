@@ -18,7 +18,7 @@
       Capturas
     </button>
 
-    <button mat-button class="nav-link" routerLink="/home/comunidad"
+    <button mat-button class="nav-link" routerLink="/comunidad"
             routerLinkActive="active">
       Comunidad
     </button>
@@ -50,7 +50,7 @@
 </mat-toolbar>
 
 <mat-menu #accountMenu="matMenu" xPosition="before" yPosition="below">
-  <button mat-menu-item [routerLink]="['/home/comunidad/perfil/mis-posts']">
+  <button mat-menu-item [routerLink]="['/comunidad/perfil/mis-posts']">
     <mat-icon>person</mat-icon>
     <span>Ver perfil</span>
   </button>
@@ -70,7 +70,7 @@
     <mat-icon>camera_alt</mat-icon>
     <span>Capturas</span>
   </button>
-  <button mat-menu-item routerLink="/home/comunidad" routerLinkActive="active-menu-item">
+  <button mat-menu-item routerLink="/comunidad" routerLinkActive="active-menu-item">
     <mat-icon>group</mat-icon>
     <span>Comunidad</span>
   </button>

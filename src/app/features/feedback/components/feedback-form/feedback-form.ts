@@ -50,7 +50,7 @@ export class FeedbackForm {
   }
 
   goToAdminList(): void {
-    this.router.navigate(['/home/feedback/admin-list']);
+    this.router.navigate(['feedback/admin-list']);
   }
 
   esAdministrador(): boolean {

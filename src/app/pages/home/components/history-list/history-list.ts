@@ -1,18 +1,29 @@
-import {Component, signal} from '@angular/core';
+import {Component, effect, inject, signal} from '@angular/core';
 import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 import {RouterLink} from '@angular/router';
+import {History} from '../../../../features/history/services/history';
 import {HistoryItem} from '../../../../features/history/components/history-item/history-item';
+import {DeteccionResponse} from '../../../../core/models/deteccion.model';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-history-list',
-  imports: [MATERIAL_IMPORTS, RouterLink, HistoryItem],
+  imports: [MATERIAL_IMPORTS, RouterLink, HistoryItem, DatePipe],
   templateUrl: './history-list.html',
   styleUrl: './history-list.css',
 })
 export class HistoryList {
-  historyItems = signal([
-    { title: 'Parcela Lote A - hoja manchada', subtitle: 'Foto - 2024-08-20', status: 'Posible roya', statusClass: 'status-warning' },
-    { title: 'Mildiu confirmado en Tomate', subtitle: 'Diagnóstico - 2024-08-18', status: 'Tratado', statusClass: 'status-success' },
-    { title: 'Sensor NDVI - estrés hídrico leve', subtitle: 'Foto - 2024-08-16', status: 'Revisar riego', statusClass: 'status-info' },
-  ]);
+  private historyService = inject(History);
+
+  detecciones = signal<DeteccionResponse[]>([]);
+
+  constructor() {
+    effect(() => {
+      this.historyService.getHistorial().subscribe({
+        next: (data) => this.detecciones.set(data),
+        error: (err) => console.error('Error al cargar historial', err),
+      });
+    });
+  }
+
 }

@@ -30,11 +30,11 @@ export class PostCard {
 
   goToProfile(event: Event) {
     event.stopPropagation();
-    this.router.navigate(['/home/comunidad/perfil', this.post.usuario.usuarioId]);
+    this.router.navigate(['comunidad/perfil', this.post.usuario.usuarioId]);
   }
 
   verDetalle() {
-    this.router.navigate(['/home/comunidad/post', this.post.postId]);
+    this.router.navigate(['comunidad/post', this.post.postId]);
   }
 
   abrirModalComentarios(event: Event) {
