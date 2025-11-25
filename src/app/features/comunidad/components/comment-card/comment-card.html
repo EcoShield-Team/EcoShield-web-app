@@ -1,19 +1,51 @@
 <div class="comment-card">
-  <div class="comment-header">
 
-    <a [routerLink]="['/comunidad/perfil', comment.usuario.usuarioId]" (click)="$event.stopPropagation()">
+  <div class="comment-header">
+    <a [routerLink]="['/perfil', comment.usuario.usuarioId]"
+       (click)="$event.stopPropagation()">
       <img [src]="comment.usuario.usuarioFotoPerfil" alt="perfil" />
     </a>
 
     <div class="comment-meta">
-      <a
-        [routerLink]="['/comunidad/perfil', comment.usuario.usuarioId]"
-        (click)="$event.stopPropagation()" class="comment-author"
-      >
+      <a [routerLink]="['/perfil', comment.usuario.usuarioId]"
+         (click)="$event.stopPropagation()"
+         class="comment-author">
         {{ comment.usuario.usuarioNombre }}
       </a>
-      <span class="comment-date">{{ comment.comentarioFecha | date:'short' }}</span>
+
+      <span class="comment-date">
+        @if (comment.editado && comment.comentarioFechaModificacion) {
+          {{ comment.comentarioFechaModificacion | date:'short' }}
+        } @else {{{ comment.comentarioFecha | date:'short' }}}
+      </span>
+
+      @if (comment.editado) {<span class="edited-label">(editado)</span>}
     </div>
+
+    @if (canManage()) {
+      <button mat-icon-button
+              class="comment-more-btn"
+              [matMenuTriggerFor]="menu"
+              #menuTrigger="matMenuTrigger"
+              (click)="$event.stopPropagation()">
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+
+        @if (allowEdit && isOwnerComment()) {
+          <button mat-menu-item (click)="editarComentario($event, menuTrigger)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+        }
+
+        <button mat-menu-item (click)="eliminarComentario($event, menuTrigger)">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>
+    }
   </div>
 
   <p class="comment-text">
@@ -21,15 +53,11 @@
   </p>
 
   <div class="comment-footer">
-    <button
-      mat-button
-      class="like-button"
-      (click)="toggleLike($event)"
-    >
+    <button mat-button class="like-button" (click)="toggleLike($event)">
       <mat-icon [ngClass]="{ liked: comment.userLiked }">
         {{ comment.userLiked ? 'thumb_up' : 'thumb_up_off_alt' }}
       </mat-icon>
-      <span>{{ comment.likeCount}}</span>
+      <span>{{ comment.likeCount }}</span>
     </button>
   </div>
 </div>

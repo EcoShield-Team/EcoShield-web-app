@@ -1,4 +1,9 @@
 <div class="sidebar-search">
   <mat-icon>search</mat-icon>
-  <input type="text" placeholder="Buscar" />
+  <input
+    type="text"
+    placeholder="Buscar"
+    [(ngModel)]="query"
+    (keyup.enter)="buscar()"
+  />
 </div>

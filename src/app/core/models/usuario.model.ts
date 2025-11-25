@@ -9,6 +9,7 @@ export interface UsuarioResponse {
   usuarioEstado: UsuarioEstado;
   rolNombre: RolNombre;
   usuarioFechaRegistro: string;
+  online: boolean;
 }
 
 export interface UsuarioProfile {

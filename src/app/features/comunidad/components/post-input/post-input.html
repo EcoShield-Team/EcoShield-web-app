@@ -18,8 +18,12 @@
     [(ngModel)]="descripcion"
     placeholder="¿Qué quieres compartir hoy, {{ usuarioPerfil?.usuarioNombre || 'ecoshielder' }}?"
     class="creator-textarea"
-    rows="3"
-  ></textarea>
+    rows="3">
+  </textarea>
+
+  @if (descripcionInvalida && descripcion.trim().length > 0) {
+    <p class="error-msg">La descripción debe tener al menos {{ minDescripcion }} caracteres</p>
+  }
 
   @if (previewUrl()) {
     <div class="preview-wrapper">
@@ -42,18 +46,10 @@
       />
     </div>
 
-    <button
-      mat-flat-button
-      color="primary"
-      class="post-btn"
-      [disabled]="!titulo || !descripcion || cargando()"
-      (click)="publicar()"
-    >
-      @if (cargando()) {
-        <mat-spinner diameter="20"></mat-spinner>
-      } @else {
-        Publicar
-      }
+    <button mat-flat-button color="primary" class="post-btn" [disabled]="formularioInvalido"
+            (click)="publicar()">
+      @if (cargando()) {<mat-spinner diameter="20"></mat-spinner>} @else {Publicar}
     </button>
+
   </div>
 </div>

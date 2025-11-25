@@ -1,11 +1,17 @@
 <div class="overlay" (click)="cerrar()"></div>
 
 <div class="modal">
-  <h3>Responder a {{ post.usuario.usuarioNombre }}</h3>
+  <h3>
+    {{ editMode ? 'Editar comentario' : 'Responder a ' + post.usuario.usuarioNombre }}
+  </h3>
 
   <app-comment-input
     [usuario]="usuario"
     [postId]="post.postId"
+    [editMode]="editMode"
+    [comentarioId]="comentario?.comentarioId"
+    [textoInicial]="comentario?.comentarioTexto"
     (commentCreated)="onComentarioCreado($event)"
+    (commentEdited)="onComentarioEditado($event)"
   ></app-comment-input>
 </div>

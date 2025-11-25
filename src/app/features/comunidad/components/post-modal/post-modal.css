@@ -1,0 +1,49 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(3px);
+  z-index: 2000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 95%;
+  max-width: 520px;
+  padding: 1.5rem;
+  border-radius: 20px;
+  z-index: 2001;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-title,
+.input-desc {
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 1rem 0 1rem 0.2rem;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+}
+
+.preview-section {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.preview-img {
+  max-width: 100%;
+  border-radius: 15px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}

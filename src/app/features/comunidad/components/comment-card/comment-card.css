@@ -7,6 +7,20 @@
   display: flex;
   align-items: center;
   gap: .75rem;
+  position: relative;
+}
+
+.comment-more-btn {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  color: #6b7280;
+  width: 40px;
+  height: 35px;
+}
+
+.comment-more-btn:hover {
+  background-color: #f3f4f6;
 }
 
 .comment-header img {
@@ -26,6 +40,12 @@
 .comment-date {
   font-size: .8rem;
   color: #6b7280;
+}
+
+.edited-label {
+  font-size: .75rem;
+  color: #6b7280;
+  margin-left: 4px;
 }
 
 .comment-text {

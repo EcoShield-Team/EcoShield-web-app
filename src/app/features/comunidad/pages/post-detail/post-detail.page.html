@@ -2,7 +2,6 @@
 
 <section class="comunidad-container">
   <div class="comunidad-wrapper">
-    <app-breadcrumb></app-breadcrumb>
 
     <h2 class="page-title">
       Post de
@@ -19,7 +18,11 @@
       <div class="post-detail-column">
 
         @if (post) {
-          <app-post-card [post]="post" [clickable]="false"></app-post-card>
+          <app-post-card
+            [post]="post"
+            (deleted)="onPostDeleted()"
+            (editRequested)="openEditPost($event)">
+          </app-post-card>
         }
 
         <div class="comments-container">
@@ -40,18 +43,45 @@
             }
 
             @for (c of comentarios; track c.comentarioId) {
-              <app-comment-card [comment]="c" [postId]="post!.postId"></app-comment-card>
+              <app-comment-card
+                [comment]="c"
+                [postId]="post!.postId"
+                [postAuthorId]="post!.usuario.usuarioId"
+                (deleted)="onCommentDeleted($event)"
+                (editRequested)="onEditRequested($event)"
+              ></app-comment-card>
             }
           }
         </div>
       </div>
-
 
       <div class="sidebar-right-column">
         <app-sidebar-search></app-sidebar-search>
         <app-sidebar-recomendaciones></app-sidebar-recomendaciones>
         <app-sidebar-tendencias></app-sidebar-tendencias>
       </div>
+
     </div>
   </div>
+
 </section>
+
+@if (mostrarModal) {
+  <app-comment-modal
+    [post]="post!"
+    [usuario]="usuarioPerfil"
+    [editMode]="editMode"
+    [comentario]="comentarioAEditar"
+    (closed)="cerrarModal()"
+    (commentCreated)="onComentarioCreado($event)"
+    (commentEdited)="onComentarioEditado($event)"
+  ></app-comment-modal>
+}
+
+@if (showEditPost && postToEdit) {
+  <app-post-modal
+    [post]="postToEdit"
+    (closed)="closeEditPost()"
+    (postEdited)="onPostEdited($event)">
+  </app-post-modal>
+}

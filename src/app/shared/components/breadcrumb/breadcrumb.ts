@@ -15,11 +15,7 @@ export class Breadcrumb {
   breadcrumbs: { label: string; url: string }[] = [];
   isLoggedIn = false;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private auth: Auth
-  ) {
+  constructor(private router: Router, private route: ActivatedRoute, private auth: Auth) {
     this.isLoggedIn = this.auth.isLoggedIn();
 
     this.router.events
@@ -31,11 +27,21 @@ export class Breadcrumb {
 
   buildBreadcrumb() {
     const segments = this.router.url.split('/').filter(Boolean);
-    this.breadcrumbs = segments.map((seg, i) => ({
+
+    const filtered: string[] = [];
+    for (let i = 0; i < segments.length; i++) {
+      filtered.push(segments[i]);
+      if (segments[i] === 'enfermedad') break;
+      if (segments[i] === 'plaga') break;
+    }
+
+    this.breadcrumbs = filtered.map((seg, i) => ({
       label: this.formatLabel(seg),
-      url: '/' + segments.slice(0, i + 1).join('/'),
+      url: '/' + filtered.slice(0, i + 1).join('/'),
     }));
   }
+
+
 
   private formatLabel(segment: string): string {
     return segment

@@ -43,9 +43,14 @@
 }
 
 .fecha {
-  color: #9ca3af;
-  font-size: 0.85rem;
-  margin-top: 2px;
+  font-size: .8rem;
+  color: #6b7280;
+}
+
+.edited-label {
+  font-size: .75rem;
+  color: #6b7280;
+  margin-left: 4px;
 }
 
 .more-btn {

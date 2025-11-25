@@ -22,7 +22,6 @@ export class Auth {
 
   constructor(private http: HttpClient) {}
 
-
   login(payload: LoginRequest): Observable<AuthResponse> {
     return this.http
       .post<AuthResponse>(`${this.baseUrl}/auth/login`, payload)
@@ -30,7 +29,6 @@ export class Auth {
         tap((response) => this.handleAuthSuccess(response))
       );
   }
-
 
   register(payload: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/auth/register`, payload);
@@ -67,34 +65,34 @@ export class Auth {
     return localStorage.getItem(this.EXPIRES_AT_KEY);
   }
 
+  getUserId(): number | null {
+    const user = this.getCurrentUser();
+    return user ? user.usuarioId : null;
+  }
+
+  getRoles(): string[] {
+    const user = this.getCurrentUser();
+    if (!user) return [];
+
+    return Array.isArray(user.usuarioRol)
+      ? user.usuarioRol : user.usuarioRol
+        ? [user.usuarioRol] : [];
+  }
+
   isLoggedIn(): boolean {
     const token = this.getToken();
     const expiresAt = this.getExpiresAt();
 
-    if (!token || !expiresAt) {
-      return false;
-    }
+    if (!token || !expiresAt) return false;
 
-    try {
-      const now = new Date();
-      const exp = new Date(expiresAt);
+    const exp = new Date(expiresAt);
+    if (isNaN(exp.getTime())) return false;
 
-      if (isNaN(exp.getTime())) {
-        console.warn('expiresAt inválido en localStorage:', expiresAt);
-        return false;
-      }
+    const alive = exp.getTime() > Date.now();
 
-      const stillValid = exp.getTime() > now.getTime();
+    if (!alive) this.logout();
 
-      if (!stillValid) {
-        this.logout();
-      }
-
-      return stillValid;
-    } catch (e) {
-      console.error('Error evaluando expiresAt:', e);
-      return false;
-    }
+    return alive;
   }
 
   logout(): void {
@@ -102,4 +100,5 @@ export class Auth {
     localStorage.removeItem(this.USER_KEY);
     localStorage.removeItem(this.EXPIRES_AT_KEY);
   }
+
 }

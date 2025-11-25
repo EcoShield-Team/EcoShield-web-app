@@ -2,7 +2,6 @@
 
 <section class="comunidad-container">
   <div class="comunidad-wrapper">
-    <app-breadcrumb></app-breadcrumb>
 
     <h2 class="page-title">Foro de la comunidad</h2>
 
@@ -10,13 +9,15 @@
       <app-sidebar-left></app-sidebar-left>
 
       <div class="feed-column">
-        <app-post-creator (postCreated)="agregarPost($event)"></app-post-creator>
+        <app-post-input (postCreated)="agregarPost($event)"></app-post-input>
 
         @for (post of posts(); track post.postId) {
           <app-post-card
             [post]="post"
             (openCommentModal)="abrirModal($event)"
-          ></app-post-card>
+            (deleted)="onPostDeleted(post.postId)"
+            (editRequested)="openEditPost($event)">
+          </app-post-card>
         }
 
         @if (showCommentModal && selectedPost) {
@@ -38,3 +39,11 @@
     </div>
   </div>
 </section>
+
+@if (showEditPost && postToEdit) {
+  <app-post-modal
+    [post]="postToEdit"
+    (closed)="closeEditPost()"
+    (postEdited)="onPostEdited($event)">
+  </app-post-modal>
+}

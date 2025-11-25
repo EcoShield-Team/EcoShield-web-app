@@ -32,10 +32,9 @@
 
 .sidebar-left li:hover {
   color: #15803d;
-  background-color: #f0f5f0;
 }
 
-.sidebar-left li.active {
+.active {
   color: #16a34a;
   font-weight: 600;
   background-color: #eef5e3;

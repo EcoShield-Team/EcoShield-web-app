@@ -5,7 +5,6 @@ import { Comunidad } from '../../services/comunidad';
 import { UsuarioService } from '../../../../core/services/usuario.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Header } from '../../../../shared/components/header/header';
-import { Breadcrumb } from '../../../../shared/components/breadcrumb/breadcrumb';
 import { SidebarLeft } from '../../components/sidebar-left/sidebar-left';
 import { PostCard } from '../../components/post-card/post-card';
 import { SidebarSearch } from '../../components/sidebar-search/sidebar-search';
@@ -15,10 +14,13 @@ import { DatePipe, LowerCasePipe } from '@angular/common';
 import { Auth } from '../../../auth/services/auth';
 import { UsuarioAuth } from '../../../../core/models/auth.model';
 import { CommentModal } from '../../components/comment-modal/comment-modal';
+import {CommentCard} from '../../components/comment-card/comment-card';
+import {PostModal} from '../../components/post-modal/post-modal';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-perfil',
-  imports: [Header, Breadcrumb, SidebarLeft, PostCard, SidebarSearch, SidebarRecomendaciones, SidebarTendencias, LowerCasePipe, DatePipe, RouterLink, CommentModal],
+  imports: [Header, SidebarLeft, PostCard, SidebarSearch, SidebarRecomendaciones, SidebarTendencias, LowerCasePipe, DatePipe, RouterLink, CommentModal, CommentCard, PostModal],
   templateUrl: './perfil.page.html',
   styleUrl: './perfil.page.css',
 })
@@ -28,16 +30,20 @@ export class PerfilPage {
   private usuarioService = inject(UsuarioService);
   private comunidadService = inject(Comunidad);
   private auth = inject(Auth);
+  private snack = inject(MatSnackBar);
 
   usuario = signal<UsuarioResponse | null>(null);
   posts = signal<PostResponse[]>([]);
   tab = signal<'posts' | 'actividad' | 'info'>('posts');
+  comentarios = signal<any[]>([]);
 
   usuarioAuth: UsuarioAuth | null = this.auth.getCurrentUser();
   usuarioPerfil: UsuarioResponse | null = null;
 
   selectedPost = signal<PostResponse | null>(null);
   showCommentModal = signal(false);
+  postToEdit: PostResponse | null = null;
+  showEditPost = false;
 
   esMiPerfil = () =>
     this.usuarioAuth?.usuarioId === this.usuario()?.usuarioId;
@@ -46,8 +52,10 @@ export class PerfilPage {
 
     if (this.usuarioAuth) {
       this.usuarioService.getById(this.usuarioAuth.usuarioId).subscribe({
-        next: perfil => this.usuarioPerfil = perfil,
-        error: () => console.warn('No se pudo cargar perfil auth para modal')
+        next: perfil => (this.usuarioPerfil = perfil),
+        error: () => {this.snack.open(
+          'No se pudo cargar tu perfil para el modal', 'Cerrar', { duration: 3000 });
+        },
       });
     }
 
@@ -65,6 +73,13 @@ export class PerfilPage {
       const id = Number(idParam);
       if (!isNaN(id)) this.cargarPerfil(id, false);
     });
+
+    window.addEventListener('refresh-profile', () => {
+      const user = this.usuario();
+      if (user) {
+        this.cargarPerfil(user.usuarioId, this.esMiPerfil());
+      }
+    });
   }
 
   cargarPerfil(id: number, propio: boolean) {
@@ -73,13 +88,21 @@ export class PerfilPage {
       next: u => this.usuario.set(u),
     });
 
-    const source = propio
+    const postSource = propio
       ? this.comunidadService.getMyPosts()
       : this.comunidadService.getByUsuarioId(id);
 
-    source.subscribe({
+    postSource.subscribe({
       next: posts => this.posts.set(posts),
     });
+
+    this.comunidadService.getComentariosByUsuario(id).subscribe({
+      next: comentarios => this.comentarios.set(comentarios),
+    });
+  }
+
+  onComentarioEliminadoActividad(id: number) {
+    this.comentarios.update(prev => prev.filter(c => c.comentarioId !== id));
   }
 
   abrirModal(post: PostResponse) {
@@ -124,5 +147,31 @@ export class PerfilPage {
 
     return `linear-gradient(135deg, ${c1}, ${c2})`;
   });
+
+  openEditPost(post: PostResponse) {
+    this.postToEdit = post;
+    this.showEditPost = true;
+  }
+
+  closeEditPost() {
+    this.showEditPost = false;
+    this.postToEdit = null;
+  }
+
+  onPostEdited(event: any) {
+    this.comunidadService.updatePost(this.postToEdit!.postId, event.dto, event.imagen
+    ).subscribe({
+      next: (updated) => {
+        this.posts.update(prev =>
+          prev.map(p => p.postId === updated.postId ? updated : p)
+        );
+        this.closeEditPost();
+
+        this.snack.open('Publicación actualizada', 'Cerrar', {
+          duration: 2500
+        });
+      }
+    });
+  }
 
 }
