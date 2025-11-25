@@ -1,0 +1,103 @@
+<app-header></app-header>
+
+<section class="search-container">
+  <div class="search-wrapper">
+
+    <h2 class="page-title">
+      Busqueda avanzada
+    </h2>
+
+    <div class="content-layout">
+      <app-sidebar-left></app-sidebar-left>
+
+      <div class="main-column">
+
+        <app-sidebar-search></app-sidebar-search>
+
+        @if (query.trim().length === 0) {
+
+          <div class="empty-search">
+            <h3>Empieza a explorar</h3>
+            <p>Realiza tu primera búsqueda o descubre nuevas tendencias.</p>
+            <img ngSrc="/assets/images/landing/recursos/7.svg" alt="maceta" height="180" width="180">
+          </div>
+
+        } @else {
+          <div class="tabs-column">
+            <button
+              [class.active]="tab === 'destacado'"
+              (click)="cambiarTab('destacado')">
+              Destacado
+            </button>
+
+            <button
+              [class.active]="tab === 'recientes'"
+              (click)="cambiarTab('recientes')">
+              Más reciente
+            </button>
+
+            <button
+              [class.active]="tab === 'personas'"
+              (click)="cambiarTab('personas')">
+              Personas
+            </button>
+          </div>
+
+          @if (loading) {
+            <p class="loading">Buscando...</p>
+          }
+
+          @if (!loading && tab === 'personas') {
+            @if (usuarios.length === 0){
+              <p class="no-results">No hay personas para "{{ query }}"</p>
+            } @else {
+              @for (u of usuarios; track u.usuarioId) {
+                <div class="usuario-card">
+                  <img
+                    [src]="u.usuarioFotoPerfil"
+                    class="avatar"
+                    alt="foto_perfil"
+                  />
+                  <div class="user-info">
+                    <h4>{{ u.usuarioNombre }}</h4>
+                    <p>{{ '@' + u.usuarioNombre.toLowerCase().replace(' ', '') }}</p>
+                  </div>
+                  <button class="btn-follow" (click)="irAlPerfil(u.usuarioId)">Ir a perfil</button>
+                </div>
+              }
+            }
+          }
+
+          @if (!loading && (tab === 'destacado' || tab === 'recientes')) {
+            @if (posts.length === 0) {
+              <p class="no-results">No hay publicaciones para “{{ query }}”</p>
+            } @else {
+              @for (p of posts; track p.postId) {
+                <app-post-card
+                  [post]="p"
+                  (editRequested)="openEditPost($event)">
+                </app-post-card>
+              }
+            }
+          }
+
+        }
+
+      </div>
+
+      <div class="sidebar-right-column">
+        <app-sidebar-recomendaciones></app-sidebar-recomendaciones>
+        <app-sidebar-tendencias></app-sidebar-tendencias>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+@if (showEditPost && postToEdit) {
+  <app-post-modal
+    [post]="postToEdit"
+    (closed)="closeEditPost()"
+    (postEdited)="onPostEdited($event)">
+  </app-post-modal>
+}

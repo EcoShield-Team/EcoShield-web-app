@@ -50,6 +50,5 @@ export enum Temporada {
 
 export enum UsuarioEstado {
   ACTIVO = 'ACTIVO',
-  INACTIVO = 'INACTIVO',
   BLOQUEADO = 'BLOQUEADO'
 }

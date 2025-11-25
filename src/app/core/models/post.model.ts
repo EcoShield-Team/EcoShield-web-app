@@ -7,9 +7,11 @@ export interface PostResponse {
   postDescripcion: string;
   postFoto: string;
   postFecha: string;
+  postFechaModificacion?: string | null;
   likeCount: number;
   userLiked: boolean;
   commentCount: number;
+  editado: boolean;
 }
 
 

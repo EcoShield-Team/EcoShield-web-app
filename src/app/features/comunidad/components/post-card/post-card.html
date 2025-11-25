@@ -1,19 +1,50 @@
 <div class="post-card" (click)="!showImageModal && clickable && verDetalle()">
+
   <div class="post-header">
     <img [src]="post.usuario.usuarioFotoPerfil" alt="avatar" class="avatar" (click)="goToProfile($event)"/>
+
     <div class="user-info">
       <h3>
         <span class="author-link" (click)="goToProfile($event)">
           {{ post.usuario.usuarioNombre }}
         </span>
-
-        <span class="subtitle">· {{ post.usuario.usuarioPais}}</span>
+        <span class="subtitle">· {{ post.usuario.usuarioPais }}</span>
       </h3>
-      <p class="fecha">{{ post.postFecha | date: 'short' }}</p>
+
+      <span class="fecha">
+        @if (post.editado && post.postFechaModificacion) {
+          {{ post.postFechaModificacion | date:'short' }}
+        } @else {{{ post.postFecha | date:'short' }}}
+      </span>
+
+      @if (post.editado) {<span class="edited-label">(editado)</span>}
     </div>
-    <button mat-icon-button class="more-btn">
-      <mat-icon>more_horiz</mat-icon>
-    </button>
+
+    @if (canManage()) {
+      <button mat-icon-button class="more-btn" [matMenuTriggerFor]="menu"
+              #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()">
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+
+        @if (isOwnerPost()) {
+          <button mat-menu-item (click)="editarPost($event, menuTrigger)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+        }
+
+        @if (isOwnerPost() || isAdmin()) {
+          <button mat-menu-item (click)="eliminarPost($event, menuTrigger)">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+          </button>
+        }
+
+      </mat-menu>
+    }
+
   </div>
 
   <h4 class="titulo">{{ post.postTitulo }}</h4>
@@ -21,12 +52,19 @@
   <a href="#" class="translate-link">Traducir al inglés</a>
 
   @if (post.postFoto) {
-    <img [src]="post.postFoto" alt="foto del post" class="imagen" (click)="openImage($event)"/>
+    <img [src]="post.postFoto"
+         alt="foto del post"
+         class="imagen"
+         (click)="openImage($event)"/>
   }
 
   @if (showImageModal) {
-    <div class="image-modal" (click)="closeImage(); $event.stopPropagation()">
-      <img [src]="post.postFoto" class="modal-img" (click)="$event.stopPropagation()"  alt="modal de la foto"/>
+    <div class="image-modal"
+         (click)="closeImage(); $event.stopPropagation()">
+      <img [src]="post.postFoto"
+           class="modal-img"
+           (click)="$event.stopPropagation()"
+           alt="modal de la foto"/>
     </div>
   }
 
@@ -48,5 +86,6 @@
       <mat-icon>share</mat-icon>
       <span>Compartir</span>
     </button>
+
   </div>
 </div>

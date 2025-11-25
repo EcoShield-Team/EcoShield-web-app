@@ -23,7 +23,7 @@
   font-size: 1.75rem;
   font-weight: 600;
   color: #111827;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
   padding-left: calc(240px + 2rem);
   box-sizing: border-box;
@@ -168,7 +168,45 @@ app-sidebar-left {
   border: 1px solid #e5e7eb;
 }
 
+.online { color: #0f9d58; font-weight: 600; }
+.offline { color: #999;font-weight: 600;  }
+
 .placeholder {
   color: #6b7280;
   font-size: .9rem;
+}
+
+.actividad-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.actividad-item {
+  padding: 0 15px 0 15px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.actividad-item:last-child {
+  border-bottom: none;
+}
+
+.actividad-fecha {
+  color: #6b7280;
+  font-size: .85rem;
+  margin: 0 0 .3rem 0;
+}
+
+.actividad-texto {
+  font-size: .95rem;
+  margin-bottom: .5rem;
+  color: #374151;
+}
+
+.actividad-texto a {
+  color: #006a35;
+  font-weight: 600;
+  text-decoration: none;
 }

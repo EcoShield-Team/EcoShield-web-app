@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal, OnInit } from '@angular/core';
+import {Component, EventEmitter, Output, signal, OnInit, inject} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
 import { Comunidad } from '../../services/comunidad';
@@ -7,26 +7,32 @@ import { Auth } from '../../../auth/services/auth';
 import { UsuarioAuth } from '../../../../core/models/auth.model';
 import { UsuarioService } from '../../../../core/services/usuario.service';
 import { UsuarioResponse } from '../../../../core/models/usuario.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-post-creator',
+  selector: 'app-post-input',
   standalone: true,
   imports: [MATERIAL_IMPORTS, FormsModule],
-  templateUrl: './post-creator.html',
-  styleUrl: './post-creator.css',
+  templateUrl: './post-input.html',
+  styleUrl: './post-input.css',
 })
-export class PostCreator implements OnInit {
+export class PostInput implements OnInit {
   @Output() postCreated = new EventEmitter<PostResponse>();
 
   titulo = '';
   descripcion = '';
   imagen: File | null = null;
+  minTitulo = 3;
+  minDescripcion = 5;
+
   previewUrl = signal<string | null>(null);
   cargando = signal(false);
 
   usuarioActual: UsuarioAuth | null = null;
   usuarioPerfil: UsuarioResponse | null = null;
   cargandoPerfil = true;
+
+  private snack = inject(MatSnackBar);
 
   constructor(
     private comunidadService: Comunidad,
@@ -38,7 +44,7 @@ export class PostCreator implements OnInit {
     this.usuarioActual = this.auth.getCurrentUser();
 
     if (!this.usuarioActual) {
-      console.warn('PostCreator: no hay usuario logueado. Deberías proteger esta ruta con AuthGuard.');
+      console.warn('PostInput: no hay usuario logueado. Deberías proteger esta ruta con AuthGuard.');
       this.cargandoPerfil = false;
       return;
     }
@@ -68,12 +74,7 @@ export class PostCreator implements OnInit {
   }
 
   publicar(): void {
-    if (!this.titulo.trim() || !this.descripcion.trim()) return;
-
-    if (!this.usuarioActual) {
-      console.error('No hay usuario autenticado. No se puede crear post.');
-      return;
-    }
+    if (this.formularioInvalido) return;
 
     this.cargando.set(true);
 
@@ -86,12 +87,26 @@ export class PostCreator implements OnInit {
       next: (response) => {
         this.postCreated.emit(response);
         this.resetForm();
+        this.snack.open('¡Publicación creada con éxito!', 'Cerrar', { duration: 2500 });
       },
       error: (err) => {
-        console.error('Error al publicar:', err);
+        const msg = err?.error?.message || 'Error inesperado';
+        this.snack.open(msg, 'Cerrar', { duration: 3500 });
         this.cargando.set(false);
-      },
+      }
     });
+  }
+
+  get tituloInvalido(): boolean {
+    return this.titulo.trim().length < this.minTitulo;
+  }
+
+  get descripcionInvalida(): boolean {
+    return this.descripcion.trim().length < this.minDescripcion;
+  }
+
+  get formularioInvalido(): boolean {
+    return this.tituloInvalido || this.descripcionInvalida || this.cargando();
   }
 
   private resetForm(): void {

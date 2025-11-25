@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { PostRequest, PostResponse } from '../../../core/models/post.model';
+import {SearchResponse} from '../../../core/models/search.model';
+import {ComentarioRequest} from '../../../core/models/comentario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,6 @@ export class Comunidad {
     if (imagen) {
       formData.append('imagen', imagen);
     }
-
     return this.http.post<PostResponse>(this.API_BASE_URL, formData);
   }
 
@@ -34,13 +35,8 @@ export class Comunidad {
     return this.http.delete<void>(`${this.API_BASE_URL}/${postId}`);
   }
 
-  getAll(titulo?: string): Observable<PostResponse[]> {
-    let params = new HttpParams();
-    if (titulo?.trim()) {
-      params = params.set('titulo', titulo);
-    }
-
-    return this.http.get<PostResponse[]>(this.API_BASE_URL, { params });
+  getAll(): Observable<PostResponse[]> {
+    return this.http.get<PostResponse[]>(this.API_BASE_URL);
   }
 
   getById(postId: number): Observable<PostResponse> {
@@ -56,13 +52,9 @@ export class Comunidad {
     return this.http.get<PostResponse[]>(url);
   }
 
-  private buildFormData(request: PostRequest, file?: File): FormData {
-    const formData = new FormData();
-    formData.append('data', new Blob([JSON.stringify(request)], { type: 'application/json' }));
-    if (file) {
-      formData.append('imagen', file);
-    }
-    return formData;
+  buscar(query: string, tipo: string): Observable<SearchResponse> {
+    const params = new HttpParams().set("query", query).set("tipo", tipo);
+    return this.http.get<SearchResponse>(`${this.API_BASE_URL}/search`, { params });
   }
 
   togglePostLike(postId: number): Observable<boolean> {
@@ -77,16 +69,35 @@ export class Comunidad {
     return this.http.post<boolean>(`${this.API_BASE_URL}/${postId}/comentarios/${comentarioId}/like`, {});
   }
 
-
   getComentarioLikes(comentarioId: number): Observable<number> {
     return this.http.get<number>(`${environment.apiURl}/comentarios/${comentarioId}/likes`);
+  }
+
+  getComentariosByUsuario(usuarioId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiURl}/usuarios/${usuarioId}/comentarios`);
   }
 
   getComentariosByPost(postId: number) {
     return this.http.get<any[]>(`${this.API_BASE_URL}/${postId}/comentarios`);
   }
 
+  deleteComentario(postId: number, comentarioId: number) {
+    return this.http.delete<void>(`${this.API_BASE_URL}/${postId}/comentarios/${comentarioId}`);
+  }
+
   crearComentario(postId: number, dto: { comentarioTexto: string }) {
     return this.http.post<any>(`${this.API_BASE_URL}/${postId}/comentarios`, dto);
   }
+
+  actualizarComentario(postId: number, comentarioId: number, dto: ComentarioRequest) {
+    return this.http.put<any>(`${this.API_BASE_URL}/${postId}/comentarios/${comentarioId}`, dto);
+  }
+
+  private buildFormData(request: PostRequest, file?: File): FormData {
+    const formData = new FormData();
+    formData.append('data', new Blob([JSON.stringify(request)], { type: 'application/json' }));
+    if (file) formData.append('imagen', file);
+    return formData;
+  }
+
 }
