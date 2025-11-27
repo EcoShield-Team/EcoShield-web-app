@@ -17,8 +17,9 @@
           {{ tipo === 'plaga' ? 'Plagas relacionadas' : 'Enfermedades relacionadas' }}
         </h3>
         <div class="related-cards-grid">
-          <div *ngFor="let r of relacionadas" class="related-card">
+          <div *ngFor="let r of relacionadas" class="related-card cursor-pointer" (click)="verDetalle(tipo, tipo === 'plaga'? r.plagaId : r.enfermedadId)">
             <img [src]="getFotoRelacionado(r)" [alt]="getNombreRelacionado(r)">
+            <p class="related-name">{{ getNombreRelacionado(r) }}</p>
           </div>
         </div>
       </div>
@@ -45,20 +46,17 @@
       <div class="action-footer">
         <button class="favorite-button">Guardar en favoritos</button>
         <div class="social-share">
-          <a href="#" class="social-icon facebook" (click)="$event.preventDefault()">
+          <a class="social-icon facebook" (click)="share('facebook')">
             <i class="fab fa-facebook-f"></i>
           </a>
-          <a href="#" class="social-icon twitter" (click)="$event.preventDefault()">
+          <a class="social-icon twitter" (click)="share('twitter')">
             <i class="fab fa-x-twitter"></i>
           </a>
-          <a href="#" class="social-icon linkedin" (click)="$event.preventDefault()">
+          <a class="social-icon linkedin" (click)="share('linkedin')">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          <a href="#" class="social-icon pinterest" (click)="$event.preventDefault()">
+          <a class="social-icon pinterest" (click)="share('pinterest')">
             <i class="fab fa-pinterest-p"></i>
-          </a>
-          <a href="#" class="social-icon dots" (click)="$event.preventDefault()">
-            <i class="fas fa-ellipsis-h"></i>
           </a>
         </div>
       </div>
