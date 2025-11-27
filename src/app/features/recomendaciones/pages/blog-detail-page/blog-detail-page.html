@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+<div class="detail-page-container">
+
+  <app-breadcrumb class="breadcrumb-alignment"></app-breadcrumb>
+
+  <div class="detail-content-wrapper">
+
+    <mat-progress-spinner *ngIf="isLoading" [diameter]="50" class="spinner-center"></mat-progress-spinner>
+
+    <div *ngIf="blog && !isLoading" class="blog-article">
+
+      <h1 class="article-title">{{ blog.blogTitulo }}</h1>
+
+      <div class="metadata-bar">
+        <span class="meta-item"><mat-icon>calendar_today</mat-icon> {{ blog.blogFechaPublicacion | date:'longDate' }}</span>
+        <span class="meta-item blog-type-{{ blog.blogTipo }}">{{ blog.blogTipo }}</span>
+        <span class="meta-item"><mat-icon>person</mat-icon> Ecoshield Team</span>
+      </div>
+
+      <div class="main-image-container">
+        <img [src]="blog.blogImagen" [alt]="blog.blogTitulo" class="main-image">
+      </div>
+
+      <div class="article-body">
+        <p class="article-description-text" [innerHTML]="blog.blogDescripcion"></p>
+      </div>
+
+      <div class="back-button-container">
+        <a [routerLink]="['/recomendaciones']" mat-flat-button color="primary">
+          <mat-icon>arrow_back</mat-icon> Volver a Recomendaciones
+        </a>
+      </div>
+    </div>
+
+    <div *ngIf="!blog && !isLoading" class="not-found-message">
+      <p>El artículo con ID {{ blogId }} no fue encontrado o hubo un error al cargarlo.</p>
+      <a [routerLink]="['/recomendaciones']" mat-button color="accent">Volver a la lista</a>
+    </div>
+  </div>
+</div>

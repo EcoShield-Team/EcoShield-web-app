@@ -11,13 +11,16 @@
       <img mat-card-image [src]="noticia.blogImagen" [alt]="noticia.blogTitulo" class="noticia-image">
 
       <mat-card-content class="noticia-content">
-        <p class="articulo-id">ARTÍCULO {{ noticia.blogId }}</p>
-
         <h4 class="noticia-titulo">{{ noticia.blogTitulo }}</h4>
 
-        <button mat-flat-button color="primary" class="leer-mas-btn">
+        <a
+          mat-flat-button
+          color="primary"
+          class="leer-mas-btn"
+          [routerLink]="['/recomendaciones/detalle', noticia.blogId]"
+        >
           Leer
-        </button>
+        </a>
       </mat-card-content>
     </mat-card>
 

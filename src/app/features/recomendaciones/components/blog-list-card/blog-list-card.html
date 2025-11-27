@@ -17,13 +17,18 @@
       </p>
 
       <div class="card-footer">
-                <span class="blog-date">
-                    Publicado: {{ blogData.blogFechaPublicacion | date:'mediumDate' }}
-                </span>
+    <span class="blog-date">
+      Publicado: {{ blogData.blogFechaPublicacion | date:'mediumDate' }}
+    </span>
 
-        <button mat-button color="primary" class="leer-mas-btn">
+        <a
+          mat-button
+          color="primary"
+          class="leer-mas-btn"
+          [routerLink]="['/recomendaciones/detalle', blogData.blogId]"
+        >
           Leer más <mat-icon style="font-size: 16px;">arrow_forward</mat-icon>
-        </button>
+        </a>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 import {Recomendaciones} from '../../services/recomendaciones';
 import {BlogResponse} from '../../../../core/models/blog.model';
 import {NgForOf, NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-noticias-list',
@@ -10,7 +11,8 @@ import {NgForOf, NgIf} from '@angular/common';
   imports: [
     MATERIAL_IMPORTS,
     NgIf,
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './noticias-list.html',
   styleUrl: './noticias-list.css',
