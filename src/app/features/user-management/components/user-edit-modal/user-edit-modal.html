@@ -1,0 +1,68 @@
+<h2 mat-dialog-title class="modal-title">Editar Perfil de Usuario</h2>
+
+<div *ngIf="isLoading" class="spinner-center-modal">
+  <mat-progress-spinner [diameter]="40"></mat-progress-spinner>
+</div>
+
+<div mat-dialog-content class="modal-content" *ngIf="!isLoading">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+
+    <p class="user-id-info">Editando: {{ usuarioActual.usuarioNombre }} (ID: {{ data.usuarioId }})</p>
+
+    <mat-card class="profile-photo-card" appearance="outlined">
+      <div class="photo-controls-flex">
+
+        <div class="photo-preview-wrapper">
+          <img [src]="imagenPreviewUrl || 'assets/images/usuario/user_placeholder.jpg'"
+               alt="Foto de Perfil"
+               class="profile-photo">
+        </div>
+
+        <div class="upload-area">
+          <p class="photo-status">
+            {{ imagenArchivo ? 'Archivo seleccionado' : 'Foto actual' }}
+          </p>
+
+          <input type="file" id="file-upload-user-edit" (change)="onFileSelected($event)" accept="image/*" class="file-input" [disabled]="isSaving">
+
+          <div class="action-buttons">
+            <label for="file-upload-user-edit" mat-flat-button color="primary" [class.disabled-look]="isSaving">
+              <mat-icon>cloud_upload</mat-icon> Cambiar Foto
+            </label>
+
+            <button mat-button color="warn" type="button" (click)="limpiarImagen()" *ngIf="imagenPreviewUrl" [disabled]="isSaving">
+              Eliminar Foto
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Correo Electrónico (No Editable)</mat-label>
+      <input matInput [value]="usuarioActual.usuarioCorreo" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="usuarioNombre">
+      <mat-error *ngIf="userForm.get('usuarioNombre')?.invalid">El nombre es obligatorio.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>País</mat-label>
+      <input matInput formControlName="usuarioPais">
+      <mat-error *ngIf="userForm.get('usuarioPais')?.invalid">El país es obligatorio.</mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" [disabled]="isSaving">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="isSaving || userForm.invalid">
+    <mat-icon *ngIf="!isSaving">save</mat-icon>
+    <mat-spinner *ngIf="isSaving" diameter="20" color="primary"></mat-spinner>
+    {{ isSaving ? 'Guardando...' : 'Guardar Cambios' }}
+  </button>
+</div>

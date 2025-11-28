@@ -1,0 +1,57 @@
+/* features/user-management/components/delete-confirm-modal/delete-confirm-modal.css */
+
+:host {
+  --color-warn: #d32f2f;
+  --color-text-primary: #333;
+  --color-text-secondary: #666;
+  --color-border: #f0f0f0;
+}
+
+.dialog-title-warn {
+  color: var(--color-warn);
+  display: flex;
+  align-items: center;
+  font-size: 1.35rem;
+  font-weight: 600;
+  padding: 18px 24px 12px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dialog-title-warn mat-icon {
+  margin-right: 10px;
+  font-size: 26px;
+}
+
+.dialog-content {
+  padding: 20px 24px 25px 24px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+.user-name-highlight {
+  font-weight: 700;
+  font-style: italic;
+  color: var(--color-text-primary);
+  margin-top: 5px;
+}
+
+.warning-text {
+  font-weight: 500;
+  color: var(--color-warn);
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+.dialog-actions {
+  padding: 12px 24px 18px 24px;
+  border-top: 1px solid var(--color-border);
+  gap: 12px;
+}
+
+.dialog-actions button {
+  text-transform: none;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 25px;
+}

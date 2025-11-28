@@ -38,6 +38,12 @@ export const routes: Routes = [
   { path: 'feedback', canActivate: [authGuard], loadChildren: () =>
       import('./features/feedback/feedback.routes').then(m => m.FEEDBACK_ROUTES)},
 
+  {
+    path: 'admin/users',
+    canActivate: [authGuard], loadChildren: () =>
+      import('./features/user-management/user-management.routes').then(m => m.USER_MANAGEMENT_ROUTES)
+  },
+
   { path: 'auth', canActivate: [authRedirectGuard], loadChildren: () =>
       import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
   },
