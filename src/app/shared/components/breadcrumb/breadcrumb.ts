@@ -33,6 +33,7 @@ export class Breadcrumb {
       filtered.push(segments[i]);
       if (segments[i] === 'enfermedad') break;
       if (segments[i] === 'plaga') break;
+      if (segments[i] === 'detalle') break;
     }
 
     this.breadcrumbs = filtered.map((seg, i) => ({
