@@ -54,6 +54,12 @@
     <mat-icon>person</mat-icon>
     <span>Ver perfil</span>
   </button>
+
+  <button mat-menu-item *ngIf="esAdministrador()" (click)="goToAdminList()">
+    <mat-icon>supervisor_account</mat-icon>
+    <span>Gestión de Usuarios</span>
+  </button>
+
   <button mat-menu-item (click)="logout()">
     <mat-icon>logout</mat-icon>
     <span>Cerrar sesión</span>
