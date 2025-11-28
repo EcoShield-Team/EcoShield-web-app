@@ -1,0 +1,107 @@
+:host {
+  --color-primary: #387c44;
+  --color-text-primary: #333;
+  --color-warn: #d32f2f;
+}
+
+.spinner-center-modal {
+  margin: 20px auto;
+  display: block;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  padding: 24px 24px 15px 24px;
+  border-bottom: 1px solid var(--color-border, #e0e0e0);
+}
+
+.modal-content {
+  padding: 30px 24px 24px 24px;
+}
+
+.user-id-info {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.profile-photo-card {
+  margin-bottom: 25px;
+  padding: 15px;
+}
+
+.photo-controls-flex {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.photo-preview-wrapper {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.photo-status {
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  margin: 0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.file-input {
+  display: none;
+}
+
+.action-buttons label {
+  cursor: pointer;
+  text-transform: none;
+  font-size: 0.85rem;
+  padding: 6px 12px !important;
+  border-radius: 20px;
+}
+
+.mat-dialog-actions {
+  padding: 8px 24px 16px 24px;
+  border-top: 1px solid var(--color-border);
+  gap: 10px;
+}
+
+.mat-dialog-actions button {
+  text-transform: none;
+  font-weight: 500;
+  border-radius: 20px;
+}
