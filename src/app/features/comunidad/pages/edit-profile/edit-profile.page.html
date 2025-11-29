@@ -1,0 +1,173 @@
+<app-header></app-header>
+
+<div class="edit-profile-container">
+  <header class="page-header">
+    <h2>Configuración de Cuenta</h2>
+    <p>Gestiona tu información personal y seguridad.</p>
+  </header>
+
+  <div class="layout-grid">
+
+    <aside class="sidebar-menu">
+      <button type="button" class="menu-item" [class.active]="activeTab === 'profile'" (click)="switchTab('profile')">
+        <mat-icon>person</mat-icon> <span>Editar Perfil</span>
+      </button>
+
+      <button type="button" class="menu-item" [class.active]="activeTab === 'security'" (click)="switchTab('security')">
+        <mat-icon>lock</mat-icon> <span>Seguridad</span>
+      </button>
+
+      <div class="separator"></div>
+
+      <button type="button" class="menu-item back-btn" routerLink="/comunidad/perfil">
+        <mat-icon>arrow_back</mat-icon> <span>Volver al Perfil</span>
+      </button>
+    </aside>
+
+    <main class="content-area">
+
+      @if (isLoading) {
+        <div class="spinner-center">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      } @else {
+
+        @if (activeTab === 'profile') {
+          <section class="tab-content fade-in">
+            <h3>Información Pública</h3>
+
+            <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()">
+
+              <mat-card class="profile-photo-card" appearance="outlined">
+                <div class="photo-controls-flex">
+                  <div class="photo-preview-wrapper">
+                    <img [src]="imagenPreviewUrl || '/assets/images/usuario/user_placeholder.jpg'"
+                         alt="Foto de Perfil" class="profile-photo">
+                  </div>
+                  <div class="upload-area">
+                    <p class="photo-status">
+                      {{ imagenArchivo ? 'Archivo seleccionado' : 'Foto actual' }}
+                    </p>
+                    <input type="file" #fileInput (change)="onFileSelected($event)"
+                           accept="image/*" style="display: none;">
+                    <div class="action-buttons-row">
+                      <button type="button" mat-flat-button color="primary" (click)="fileInput.click()" [disabled]="isSaving">
+                        <mat-icon>cloud_upload</mat-icon> Cambiar Foto
+                      </button>
+                      @if (imagenPreviewUrl) {
+                        <button type="button" mat-button color="warn" (click)="limpiarImagen()" [disabled]="isSaving">
+                          Eliminar Foto
+                        </button>
+                      }
+                    </div>
+                    <span class="helper-text">JPG o PNG, máx 2MB</span>
+                  </div>
+                </div>
+              </mat-card>
+
+              <br>
+
+              <div class="form-fields">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Correo (No editable)</mat-label>
+                  <input matInput formControlName="usuarioCorreo">
+                  <mat-icon matSuffix>lock</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput formControlName="usuarioNombre">
+                  <mat-error>
+                    @if (profileForm.get('usuarioNombre')?.invalid) {
+                      El nombre es requerido
+                    }
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>País</mat-label>
+                  <mat-select formControlName="usuarioPais">
+                    @for (c of countries; track c.code) {
+                      <mat-option [value]="c.code">{{ c.name }}</mat-option>
+                    }
+                  </mat-select>
+                  <mat-error>Requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="actions">
+                <button mat-flat-button color="primary" type="submit" [disabled]="profileForm.invalid || isSaving">
+                  @if (isSaving) { <mat-spinner diameter="20" color="accent"></mat-spinner> }
+                  @else { Guardar Cambios }
+                </button>
+              </div>
+            </form>
+          </section>
+        }
+
+        @if (activeTab === 'security') {
+          <section class="tab-content fade-in">
+            <h3>Cambiar Contraseña</h3>
+            <p class="info-text">Asegura tu cuenta con una contraseña fuerte.</p>
+
+            @if (securityStatus) {
+              <div class="status-alert"
+                   [class.alert-success]="securityStatus === 'success'"
+                   [class.alert-error]="securityStatus === 'error'">
+                <mat-icon>{{ securityStatus === 'success' ? 'check_circle' : 'error' }}</mat-icon>
+                <span>{{ securityMessage }}</span>
+              </div>
+            }
+
+            <form [formGroup]="securityForm" (ngSubmit)="onChangePassword()" class="security-fields">
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Contraseña Actual</mat-label>
+                <input matInput [type]="hideCurrent ? 'password' : 'text'" formControlName="currentPassword">
+                <button mat-icon-button matSuffix type="button" (click)="hideCurrent = !hideCurrent">
+                  <mat-icon>{{ hideCurrent ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error>Requerido</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Nueva Contraseña</mat-label>
+                <input matInput [type]="hideNew ? 'password' : 'text'" formControlName="newPassword">
+                <button mat-icon-button matSuffix type="button" (click)="hideNew = !hideNew">
+                  <mat-icon>{{ hideNew ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error>
+                  @if (securityForm.get('newPassword')?.hasError('minlength')) {
+                    Mínimo 8 caracteres
+                  } @else if (securityForm.get('newPassword')?.hasError('sameAsCurrent')) {
+                    La nueva contraseña no puede ser igual a la actual
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Confirmar Nueva Contraseña</mat-label>
+                <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmNewPassword">
+                <button mat-icon-button matSuffix type="button" (click)="hideConfirm = !hideConfirm">
+                  <mat-icon>{{ hideConfirm ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error>
+                  @if (securityForm.get('confirmNewPassword')?.hasError('mismatch')) {
+                    Las contraseñas no coinciden
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <div class="actions">
+                <button mat-flat-button color="warn" type="submit" [disabled]="securityForm.invalid || isSaving">
+                  @if (isSaving) { <mat-spinner diameter="20"></mat-spinner> }
+                  @else { Actualizar Contraseña }
+                </button>
+              </div>
+            </form>
+          </section>
+        }
+      }
+    </main>
+  </div>
+</div>

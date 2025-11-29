@@ -12,9 +12,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 export const MATERIAL_IMPORTS = [
   MatButtonModule,
+  MatButtonToggleModule,
   MatIconModule,
   MatToolbarModule,
   MatCardModule,
@@ -28,5 +30,6 @@ export const MATERIAL_IMPORTS = [
   MatExpansionModule,
   MatFormFieldModule,
   MatSelectModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSnackBarModule
 ];

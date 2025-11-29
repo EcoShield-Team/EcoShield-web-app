@@ -1,29 +1,28 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {UserManagement} from '../../services/user-management';
-import {MatDialog} from '@angular/material/dialog';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {UsuarioResponse} from '../../../../core/models/usuario.model';
-import {RolNombre} from '../../../../core/models/enums.model';
-import {finalize} from 'rxjs';
-import {EChartsOption} from 'echarts';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatSelectModule} from '@angular/material/select';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {NgxEchartsModule} from 'ngx-echarts';
-import {Router} from '@angular/router';
-import {Header} from '../../../../shared/components/header/header';
-import {DeleteConfirmModal} from '../../components/delete-confirm-modal/delete-confirm-modal';
-import {UserEditModal} from '../../components/user-edit-modal/user-edit-modal';
+import { Component, inject, OnInit } from '@angular/core';
+import { UserManagement } from '../../services/user-management';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { UsuarioResponse } from '../../../../core/models/usuario.model';
+import { RolNombre } from '../../../../core/models/enums.model';
+import { finalize } from 'rxjs';
+import { EChartsOption } from 'echarts';
+import { FormsModule } from '@angular/forms';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { Router } from '@angular/router';
+import { Header } from '../../../../shared/components/header/header';
+import { DeleteConfirmModal } from '../../components/delete-confirm-modal/delete-confirm-modal';
+import { UserEditModal } from '../../components/user-edit-modal/user-edit-modal';
+import { DatePipe } from '@angular/common';
+import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 
 @Component({
   selector: 'app-user-list',
   imports: [
-    CommonModule, FormsModule, MatTableModule, MatButtonModule, MatIconModule, MatMenuModule,
-    MatSelectModule, MatProgressSpinnerModule, NgxEchartsModule, Header
+    FormsModule,
+    MATERIAL_IMPORTS,
+    NgxEchartsModule,
+    Header,
+    DatePipe
   ],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
@@ -42,7 +41,10 @@ export class UserList implements OnInit {
   ];
   isLoading = false;
 
-  selectedUserId: number | null = null;
+
+  searchTerm: string = '';
+  filterStatus: string = 'TODOS';
+
   allUsersCache: UsuarioResponse[] = [];
 
   adminCount = 0;
@@ -53,10 +55,6 @@ export class UserList implements OnInit {
     this.loadUsers();
   }
 
-  get userIds(): number[] {
-    return this.allUsersCache.map(u => u.usuarioId);
-  }
-
   loadUsers(): void {
     this.isLoading = true;
     this.userManegement.findAll()
@@ -65,10 +63,10 @@ export class UserList implements OnInit {
       )
       .subscribe({
         next: (users) => {
-          this.dataSource.data = users;
-          this.allUsersCache = users;
-
+          const sortedUsers = users.sort((a, b) => a.usuarioId - b.usuarioId);
+          this.allUsersCache = sortedUsers;
           this.adminCount = users.filter(u => u.rolNombre === RolNombre.ADMIN).length;
+          this.applyFilters();
           this.prepareChartData(users);
         },
         error: (err) => {
@@ -77,14 +75,31 @@ export class UserList implements OnInit {
       });
   }
 
-  onIdSelectChange(id: number | null): void {
-    if (id) {
-      const filteredUsers = this.allUsersCache.filter(u => u.usuarioId === id);
-      this.dataSource.data = filteredUsers;
-    } else {
-      this.dataSource.data = this.allUsersCache;
+  applyFilters(): void {
+    let filtered = [...this.allUsersCache];
+
+    if (this.searchTerm && this.searchTerm.trim() !== '') {
+      const term = this.searchTerm.toLowerCase().trim();
+      filtered = filtered.filter(u =>
+        u.usuarioId.toString().includes(term) ||
+        u.usuarioNombre.toLowerCase().includes(term) ||
+        u.usuarioCorreo.toLowerCase().includes(term)
+      );
     }
-    this.dataSource._updateChangeSubscription();
+
+    if (this.filterStatus !== 'TODOS') {
+      filtered = filtered.filter(u => u.usuarioEstado === this.filterStatus);
+    }
+
+    this.dataSource.data = filtered;
+  }
+
+  onSearchChange(): void {
+    this.applyFilters();
+  }
+
+  onStatusChange(): void {
+    this.applyFilters();
   }
 
   prepareChartData(users: UsuarioResponse[]): void {
@@ -131,7 +146,7 @@ export class UserList implements OnInit {
               shadowColor: 'rgba(0, 0, 0, 0.5)'
             }
           },
-          color: ['#387c44', '#6aaa74', '#93c47d', '#b6d7a8']
+          color: ['#2c6536', '#81d18d', '#93c47d', '#b6d7a8']
         }
       ]
     };
@@ -139,14 +154,13 @@ export class UserList implements OnInit {
 
   onDeleteUser(user: UsuarioResponse): void {
     const dialogRef = this.dialog.open(DeleteConfirmModal, {
-      width: '400px', // Tamaño fijo para el modal
+      width: '500px',
       data: {
         usuarioId: user.usuarioId,
         usuarioNombre: user.usuarioNombre
       },
     });
 
-    // Suscribirse al cierre: si devuelve 'true', recargar la lista
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this.loadUsers();
@@ -161,15 +175,18 @@ export class UserList implements OnInit {
       .subscribe({
         next: (updatedUser) => {
           const index = this.dataSource.data.findIndex(u => u.usuarioId === updatedUser.usuarioId);
+
           if (index !== -1) {
             this.dataSource.data[index] = updatedUser;
+
             const cacheIndex = this.allUsersCache.findIndex(u => u.usuarioId === updatedUser.usuarioId);
             if (cacheIndex !== -1) {
               this.allUsersCache[cacheIndex] = updatedUser;
             }
+
             delete user.newRolNombre;
             this.dataSource._updateChangeSubscription();
-            this.prepareChartData(this.dataSource.data);
+            this.prepareChartData(this.allUsersCache);
           }
         },
         error: (err) => {

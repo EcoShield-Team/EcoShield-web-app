@@ -55,10 +55,17 @@
     <span>Ver perfil</span>
   </button>
 
-  <button mat-menu-item *ngIf="esAdministrador()" (click)="goToAdminList()">
-    <mat-icon>supervisor_account</mat-icon>
-    <span>Gestión de Usuarios</span>
+  <button mat-menu-item [routerLink]="['/comunidad/editar-perfil']">
+    <mat-icon>manage_accounts</mat-icon>
+    <span>Editar perfil</span>
   </button>
+
+  @if (esAdministrador()) {
+    <button mat-menu-item (click)="goToAdminList()">
+      <mat-icon>supervisor_account</mat-icon>
+      <span>Gestión de Usuarios</span>
+    </button>
+  }
 
   <button mat-menu-item (click)="logout()">
     <mat-icon>logout</mat-icon>

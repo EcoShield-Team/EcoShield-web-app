@@ -79,19 +79,21 @@ export class RegisterForm {
     }
 
     this.isLoading = true;
+    const selectedCode = this.country?.value;
+    const foundCountry = this.countries.find(c => c.code === selectedCode);
+    const paisParaGuardar = foundCountry ? foundCountry.name : selectedCode;
 
     const payload: RegisterRequest = {
       usuarioNombre: (this.fullName?.value ?? '').trim(),
       usuarioCorreo: (this.email?.value ?? '').trim().toLowerCase(),
       usuarioContrasena: this.password?.value ?? '',
-      usuarioPais: (this.country?.value ?? '').trim(),
+      usuarioPais: (paisParaGuardar ?? '').trim(),
     };
 
     this.authService.register(payload).subscribe({
       next: (res) => {
         this.isLoading = false;
         console.log('✅ Registro exitoso:', res);
-        // No hacemos login aquí → solo avisamos al modal
         this.registerSuccess.emit();
       },
       error: (error: HttpErrorResponse) => {
