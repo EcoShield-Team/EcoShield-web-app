@@ -4,10 +4,22 @@
     <h3>Qué está pasando</h3>
   </div>
   <ul>
-    <li><mat-icon>bug_report</mat-icon> Roya</li>
-    <li><mat-icon>eco</mat-icon> Mildiu</li>
-    <li><mat-icon>pets</mat-icon> Mosca blanca</li>
-    <li><mat-icon>spa</mat-icon> Antracnosis</li>
+    <li (click)="buscar('Roya')">
+      <mat-icon>bug_report</mat-icon> Roya
+    </li>
+
+    <li (click)="buscar('Mildiu')">
+      <mat-icon>eco</mat-icon> Mildiu
+    </li>
+
+    <li (click)="buscar('Mosca blanca')">
+      <mat-icon>pets</mat-icon> Mosca blanca
+    </li>
+
+    <li (click)="buscar('Antracnosis')">
+      <mat-icon>spa</mat-icon> Antracnosis
+    </li>
+
     <li class="mostrar">
       <mat-icon>expand_more</mat-icon> Mostrar más...
     </li>

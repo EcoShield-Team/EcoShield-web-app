@@ -3,16 +3,20 @@
     <mat-icon color="primary">lightbulb</mat-icon>
     <h3>Recomendaciones de hoy</h3>
   </div>
-
   <ul>
-    <li>
-      <mat-icon>eco</mat-icon> Acciones sugeridas según clima y cultivo
+    <li (click)="verDetalle(2)">
+      <mat-icon>eco</mat-icon>
+      Prácticas sostenibles para proteger cultivos
     </li>
-    <li>
-      <mat-icon>water_drop</mat-icon> Monitorear roya en zonas húmedas
+
+    <li (click)="verDetalle(4)">
+      <mat-icon>water_drop</mat-icon>
+      Como identificar señales tempranas de enfermedades
     </li>
-    <li>
-      <mat-icon>local_florist</mat-icon> Revisar hojas inferiores en tomates
+
+    <li (click)="verDetalle(5)">
+      <mat-icon>local_florist</mat-icon>
+      Ahorra agua sin afectar la salud de los cultivos
     </li>
   </ul>
 </div>
