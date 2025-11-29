@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<section class="capturas-bg-container">
+  <div class="capturas-wrapper">
+
+    <h1 class="page-title">Mis capturas</h1>
+
+    @if (loading) {
+      <div class="loading">
+        <mat-icon>hourglass_top</mat-icon>
+        Cargando historial...
+      </div>
+    } @else if (historial.length === 0) {
+      <p class="empty">Aún no tienes capturas registradas.</p>
+    } @else {
+      <div class="grid">
+        @for (item of historial; track item.deteccionId) {
+          <div class="card">
+
+            <img [src]="item.fotoUrl"
+                 alt="Foto detectada"
+                 class="foto"
+                 (click)="openImage(item.fotoUrl, $event)" />
+
+            <div class="content">
+              <h3>{{ item.nombreDetectado }}</h3>
+              <p class="fecha">{{ item.fecha | date:'medium' }}</p>
+
+              <button mat-stroked-button color="primary"
+                      [routerLink]="['/deteccion', item.deteccionId]">
+                Ver detalle
+              </button>
+            </div>
+
+          </div>
+        }
+      </div>
+    }
+
+    @if (showImageModal) {
+      <div class="image-modal" (click)="closeImage()">
+        <img [src]="selectedImage"
+             class="modal-img"
+             (click)="$event.stopPropagation()"  alt="captura de la deteccion"/>
+      </div>
+    }
+
+  </div>
+</section>

@@ -20,7 +20,6 @@ export class Header implements OnInit {
   fotoPerfil = signal<string>('/assets/images/usuario/user_placeholder.jpg');
   nombreUsuario = signal<string>('Mi cuenta');
 
-  // 💡 NUEVA PROPIEDAD: Controla la visibilidad del menú de administración
   esAdmin = signal(false);
 
   constructor(

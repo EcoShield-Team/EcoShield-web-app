@@ -1,0 +1,16 @@
+<app-header></app-header>
+
+<section class="detalle-container">
+  <div class="detalle-wrapper">
+
+    <app-breadcrumb></app-breadcrumb>
+    <h1 class="page-title">Detalle de detección</h1>
+
+    @if (loading) {
+      <p class="loading">Cargando datos...</p>
+    } @else if (resultado) {
+      <app-resultado-card [data]="resultado"></app-resultado-card>
+    }
+
+  </div>
+</section>
