@@ -5,6 +5,7 @@
     @for (det of detecciones(); track det.deteccionId) {
       <app-history-item
         [item]="{
+          id: det.deteccionId,
           title: det.nombreDetectado,
           subtitle: 'Detectado el ' + (det.fecha | date:'mediumDate'),
           status: det.tipoFicha === 'PLAGA' ? 'Plaga detectada' :

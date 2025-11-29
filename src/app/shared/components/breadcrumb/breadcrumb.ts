@@ -34,6 +34,7 @@ export class Breadcrumb {
       if (segments[i] === 'enfermedad') break;
       if (segments[i] === 'plaga') break;
       if (segments[i] === 'detalle') break;
+      if (segments[i] === 'deteccion') break;
     }
 
     this.breadcrumbs = filtered.map((seg, i) => ({

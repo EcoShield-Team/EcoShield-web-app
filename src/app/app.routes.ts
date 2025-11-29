@@ -15,6 +15,11 @@ export const routes: Routes = [
       import('./pages/about/about.routes').then(m => m.ABOUT_ROUTES)
   },
 
+  {
+    path: 'capturas', loadComponent: () =>
+      import('./features/deteccion/pages/capturas/capturas.page').then(m => m.CapturasPage)
+  },
+
   { path: 'comunidad', canActivate: [authGuard], loadChildren: () =>
       import('./features/comunidad/comunidad.routes').then(m => m.COMUNIDAD_ROUTES)
   },
