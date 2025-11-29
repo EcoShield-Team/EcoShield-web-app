@@ -10,7 +10,7 @@ import { UsuarioService } from '../../../core/services/usuario.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MATERIAL_IMPORTS, NgOptimizedImage, RouterLink, RouterLinkActive, NgIf],
+  imports: [MATERIAL_IMPORTS, NgOptimizedImage, RouterLink, RouterLinkActive],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })

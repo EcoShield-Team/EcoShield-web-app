@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import {
   AuthResponse,
+  ChangePasswordRequest,
   LoginRequest,
   RegisterRequest,
   UsuarioAuth
@@ -32,6 +33,14 @@ export class Auth {
 
   register(payload: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/auth/register`, payload);
+  }
+
+  changePassword(payload: ChangePasswordRequest): Observable<AuthResponse> {
+    return this.http
+      .put<AuthResponse>(`${this.baseUrl}/auth/password/change`, payload)
+      .pipe(
+        tap((response) => this.handleAuthSuccess(response))
+      );
   }
 
   private handleAuthSuccess(response: AuthResponse): void {

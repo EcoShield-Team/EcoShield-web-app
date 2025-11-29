@@ -52,3 +52,9 @@ export interface VerifyCodeRequest {
   email: string;
   code: string;
 }
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}

@@ -4,23 +4,39 @@ import { PostResponse } from '../../../../core/models/post.model';
 import { Comunidad } from '../../services/comunidad';
 import { UsuarioService } from '../../../../core/services/usuario.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { DatePipe, LowerCasePipe } from '@angular/common';
+import { Auth } from '../../../auth/services/auth';
+import { UsuarioAuth } from '../../../../core/models/auth.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Header } from '../../../../shared/components/header/header';
 import { SidebarLeft } from '../../components/sidebar-left/sidebar-left';
 import { PostCard } from '../../components/post-card/post-card';
 import { SidebarSearch } from '../../components/sidebar-search/sidebar-search';
 import { SidebarRecomendaciones } from '../../components/sidebar-recomendaciones/sidebar-recomendaciones';
 import { SidebarTendencias } from '../../components/sidebar-tendencias/sidebar-tendencias';
-import { DatePipe, LowerCasePipe } from '@angular/common';
-import { Auth } from '../../../auth/services/auth';
-import { UsuarioAuth } from '../../../../core/models/auth.model';
 import { CommentModal } from '../../components/comment-modal/comment-modal';
-import {CommentCard} from '../../components/comment-card/comment-card';
-import {PostModal} from '../../components/post-modal/post-modal';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { CommentCard } from '../../components/comment-card/comment-card';
+import { PostModal } from '../../components/post-modal/post-modal';
+import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 
 @Component({
   selector: 'app-perfil',
-  imports: [Header, SidebarLeft, PostCard, SidebarSearch, SidebarRecomendaciones, SidebarTendencias, LowerCasePipe, DatePipe, RouterLink, CommentModal, CommentCard, PostModal],
+  standalone: true,
+  imports: [
+    Header,
+    SidebarLeft,
+    PostCard,
+    SidebarSearch,
+    SidebarRecomendaciones,
+    SidebarTendencias,
+    LowerCasePipe,
+    DatePipe,
+    RouterLink,
+    CommentModal,
+    CommentCard,
+    PostModal,
+    MATERIAL_IMPORTS
+  ],
   templateUrl: './perfil.page.html',
   styleUrl: './perfil.page.css',
 })
@@ -49,12 +65,11 @@ export class PerfilPage {
     this.usuarioAuth?.usuarioId === this.usuario()?.usuarioId;
 
   ngOnInit() {
-
     if (this.usuarioAuth) {
       this.usuarioService.getById(this.usuarioAuth.usuarioId).subscribe({
         next: perfil => (this.usuarioPerfil = perfil),
-        error: () => {this.snack.open(
-          'No se pudo cargar tu perfil para el modal', 'Cerrar', { duration: 3000 });
+        error: () => {
+          this.snack.open('No se pudo cargar tu perfil para el modal', 'Cerrar', { duration: 3000 });
         },
       });
     }
@@ -65,7 +80,6 @@ export class PerfilPage {
       if (!idParam || idParam === 'mis-posts') {
         const myId = this.usuarioAuth?.usuarioId;
         if (!myId) return;
-
         this.cargarPerfil(myId, true);
         return;
       }
@@ -83,7 +97,6 @@ export class PerfilPage {
   }
 
   cargarPerfil(id: number, propio: boolean) {
-
     this.usuarioService.getById(id).subscribe({
       next: u => this.usuario.set(u),
     });
@@ -129,22 +142,18 @@ export class PerfilPage {
     for (let i = 0; i < str.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
-
     const color = '#' +
       ((hash >> 24) & 0xFF).toString(16).padStart(2, '0') +
       ((hash >> 16) & 0xFF).toString(16).padStart(2, '0') +
       ((hash >> 8) & 0xFF).toString(16).padStart(2, '0');
-
     return color;
   }
 
   bannerColor = computed(() => {
     const user = this.usuario();
     if (!user) return 'linear-gradient(135deg, #d7e8d1, #f1f9f3)';
-
     const c1 = this.getColorFromString(user.usuarioNombre + 'a');
     const c2 = this.getColorFromString(user.usuarioNombre + 'b');
-
     return `linear-gradient(135deg, ${c1}, ${c2})`;
   });
 
@@ -159,19 +168,15 @@ export class PerfilPage {
   }
 
   onPostEdited(event: any) {
-    this.comunidadService.updatePost(this.postToEdit!.postId, event.dto, event.imagen
-    ).subscribe({
-      next: (updated) => {
-        this.posts.update(prev =>
-          prev.map(p => p.postId === updated.postId ? updated : p)
-        );
-        this.closeEditPost();
-
-        this.snack.open('Publicación actualizada', 'Cerrar', {
-          duration: 2500
-        });
-      }
-    });
+    this.comunidadService.updatePost(this.postToEdit!.postId, event.dto, event.imagen)
+      .subscribe({
+        next: (updated) => {
+          this.posts.update(prev =>
+            prev.map(p => p.postId === updated.postId ? updated : p)
+          );
+          this.closeEditPost();
+          this.snack.open('Publicación actualizada', 'Cerrar', { duration: 2500 });
+        }
+      });
   }
-
 }

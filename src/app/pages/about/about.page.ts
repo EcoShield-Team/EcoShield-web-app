@@ -49,14 +49,14 @@ export class AboutPage {
     },
     {
       name: 'Camilo Parraga',
-      role: 'Ingeniero de IA y Backend',
+      role: 'Especialista de IA y Backend',
       bio: 'Desarrollo de los modelos de detección de enfermedades y optimización del procesamiento de datos.',
       imageUrl: '/assets/images/about/camilo.png',
       emailUrl: 'u202323939@upc.edu.pe',
     },
     {
       name: 'Diego Ricra',
-      role: 'Experta en Clima y Datos',
+      role: 'Experto en Clima y Datos',
       bio: 'Responsable de integrar datos meteorológicos en las recomendaciones de riego y tratamiento.',
       imageUrl: '/assets/images/about/diego.png',
       emailUrl: 'u202310729@upc.edu.pe',

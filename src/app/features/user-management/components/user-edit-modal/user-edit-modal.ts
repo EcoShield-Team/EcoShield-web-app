@@ -1,16 +1,11 @@
-import {Component, Inject, inject, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {UserManagement} from '../../services/user-management';
-import {UsuarioResponse} from '../../../../core/models/usuario.model';
-import {MatCard} from '@angular/material/card';
+import { Component, Inject, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserManagement } from '../../services/user-management';
+import { UsuarioResponse } from '../../../../core/models/usuario.model';
+import { countryList, CountryOption } from '../../../../shared/utils/country-list';
+import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 
 interface UsuarioUpdateData {
   usuarioNombre: string;
@@ -21,21 +16,20 @@ interface UsuarioUpdateData {
   selector: 'app-user-edit-modal',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule, MatDialogModule, MatButtonModule, MatIconModule,
-    MatInputModule, MatSelectModule, MatSnackBarModule, MatProgressSpinnerModule, MatCard,
+    ReactiveFormsModule,
+    MATERIAL_IMPORTS,
   ],
   templateUrl: './user-edit-modal.html',
   styleUrl: './user-edit-modal.css',
 })
-
 export class UserEditModal implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly userManagement = inject(UserManagement);
   private readonly snackBar = inject(MatSnackBar);
 
   userForm!: FormGroup;
-
   usuarioActual!: UsuarioResponse;
+  countries: CountryOption[] = countryList;
 
   imagenPreviewUrl: string | null = null;
   imagenArchivo: File | null = null;
@@ -50,8 +44,9 @@ export class UserEditModal implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
+      usuarioCorreo: [{ value: '', disabled: true }],
       usuarioNombre: ['', [Validators.required, Validators.maxLength(100)]],
-      usuarioPais: ['', [Validators.required, Validators.maxLength(100)]],
+      usuarioPais: ['', [Validators.required]],
     });
 
     this.cargarDatosUsuario(this.data.usuarioId);
@@ -62,10 +57,23 @@ export class UserEditModal implements OnInit {
     this.userManagement.findById(id).subscribe({
       next: (user: UsuarioResponse) => {
         this.usuarioActual = user;
+
+        let codigoPais = '';
+        const paisEncontrado = this.countries.find(c => c.name === user.usuarioPais);
+
+        if (paisEncontrado) {
+          codigoPais = paisEncontrado.code;
+        } else {
+          const esCodigo = this.countries.find(c => c.code === user.usuarioPais);
+          codigoPais = esCodigo ? esCodigo.code : '';
+        }
+
         this.userForm.patchValue({
+          usuarioCorreo: user.usuarioCorreo,
           usuarioNombre: user.usuarioNombre,
-          usuarioPais: user.usuarioPais,
+          usuarioPais: codigoPais,
         });
+
         this.imagenPreviewUrl = user.usuarioFotoPerfil || null;
         this.isLoading = false;
       },
@@ -91,8 +99,6 @@ export class UserEditModal implements OnInit {
   limpiarImagen(): void {
     this.imagenArchivo = null;
     this.imagenPreviewUrl = null;
-    const fileInput = document.getElementById('file-upload-user-edit') as HTMLInputElement;
-    if (fileInput) fileInput.value = '';
   }
 
   onSubmit(): void {
@@ -104,7 +110,15 @@ export class UserEditModal implements OnInit {
 
     this.isSaving = true;
     const formData = new FormData();
-    const dtoData: UsuarioUpdateData = this.userForm.value as UsuarioUpdateData;
+    const formVal = this.userForm.getRawValue();
+
+    const selectedCountry = this.countries.find(c => c.code === formVal.usuarioPais);
+    const paisToSend = selectedCountry ? selectedCountry.name : formVal.usuarioPais;
+
+    const dtoData: UsuarioUpdateData = {
+      usuarioNombre: formVal.usuarioNombre,
+      usuarioPais: paisToSend
+    };
 
     formData.append('data', new Blob([JSON.stringify(dtoData)], { type: 'application/json' }));
 
@@ -118,7 +132,7 @@ export class UserEditModal implements OnInit {
         this.dialogRef.close(true);
       },
       error: (err) => {
-        this.snackBar.open('Error al actualizar. Verifique la imagen y el tamaño.', 'Cerrar', { duration: 4000 });
+        this.snackBar.open('Error al actualizar. Verifique la imagen.', 'Cerrar', { duration: 4000 });
         this.isSaving = false;
         console.error('Error de API:', err);
       },

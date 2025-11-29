@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<section class="comunidad-container">
+<div class="comunidad-container">
   <div class="comunidad-wrapper">
 
     <h2 class="page-title">Perfil</h2>
@@ -11,13 +11,27 @@
       <div class="perfil-column">
 
         <div class="perfil-banner" [style.background]="bannerColor()"></div>
+
         <div class="perfil-card">
           <div class="perfil-header">
-            <img [src]="usuario()?.usuarioFotoPerfil" alt="avatar" class="perfil-avatar">
+
+            <img [src]="usuario()?.usuarioFotoPerfil || '/assets/images/usuario/user_placeholder.jpg'"
+                 alt="avatar" class="perfil-avatar">
 
             <div class="perfil-info">
-              <h3>{{ usuario()?.usuarioNombre }}</h3>
-              <p class="username">{{ '@' + (usuario()?.usuarioNombre | lowercase) }}</p>
+
+              <div class="info-top" style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <h3>{{ usuario()?.usuarioNombre }}</h3>
+                  <p class="username">{{ '@' + (usuario()?.usuarioNombre | lowercase) }}</p>
+                </div>
+
+                @if (esMiPerfil()) {
+                  <button mat-flat-button class="editar-btn" routerLink="/comunidad/editar-perfil">
+                    Editar perfil
+                  </button>
+                }
+              </div>
 
               <div class="perfil-tags">
                 <span class="rol-tag">{{ usuario()?.rolNombre }}</span>
@@ -31,15 +45,10 @@
               <p class="country">🌍 {{ usuario()?.usuarioPais }}</p>
 
               <p class="fecha-registro">
-                Miembro desde {{ usuario()?.usuarioFechaRegistro | date:'MMMM y' }}
+                📅 Miembro desde {{ usuario()?.usuarioFechaRegistro | date:'MMMM y' }}
               </p>
             </div>
 
-            @if (esMiPerfil()) {
-              <button class="editar-btn" routerLink="/comunidad/editar-perfil">
-                Editar perfil
-              </button>
-            }
           </div>
         </div>
 
@@ -50,9 +59,10 @@
         </div>
 
         @if (tab() === 'posts') {
-
           @if (posts().length === 0) {
-            <p class="placeholder">Aún no se ha publicado nada.</p>
+            <div class="empty-state">
+              <p class="placeholder">Aún no has publicado nada.</p>
+            </div>
           }
 
           @for (post of posts(); track post.postId) {
@@ -69,23 +79,23 @@
               [usuario]="usuarioPerfil"
               (closed)="cerrarModal()"
               (commentCreated)="onComentarioPerfil(selectedPost()!, $event)"
-              ></app-comment-modal>
+            ></app-comment-modal>
           }
         }
 
         @if (tab() === 'actividad') {
-
           <div class="actividad-container">
-
             @if (comentarios().length === 0) {
-              <p class="placeholder">Aún no se ha comentado nada.</p>
+              <div class="empty-state">
+                <p class="placeholder">No hay actividad reciente.</p>
+              </div>
             }
 
             @for (c of comentarios(); track c.comentarioId) {
-
               <div class="actividad-item">
+                <p class="actividad-fecha" style="margin-top: 10px;">{{ c.fecha | date:'mediumDate' }}</p>
                 <p class="actividad-texto">
-                  Se comentó en <a [routerLink]="['/comunidad/post', c.postId]">este post</a>
+                  Comentaste en <a [routerLink]="['/comunidad/post', c.postId]">esta publicación</a>:
                 </p>
                 <app-comment-card
                   [comment]="c"
@@ -94,7 +104,6 @@
                   [allowEdit]="false"
                   (deleted)="onComentarioEliminadoActividad(c.comentarioId)">
                 </app-comment-card>
-
               </div>
             }
           </div>
@@ -102,20 +111,19 @@
 
         @if (tab() === 'info') {
           <div class="info-box">
-            <p><strong>Nombre:</strong> {{ usuario()?.usuarioNombre }}</p>
-            <p><strong>Correo:</strong> {{ usuario()?.usuarioCorreo }}</p>
-            <p><strong>País:</strong> {{ usuario()?.usuarioPais }}</p>
-            <p><strong>Rol:</strong> {{ usuario()?.rolNombre }}</p>
-            <p class="estado"> Estado:
-              <span [class.online]="usuario()?.online" [class.offline]="!usuario()?.online">
+            <p><strong>Nombre completo:</strong> {{ usuario()?.usuarioNombre }}</p>
+            <p><strong>Correo electrónico:</strong> {{ usuario()?.usuarioCorreo }}</p>
+            <p><strong>País de origen:</strong> {{ usuario()?.usuarioPais }}</p>
+            <p><strong>Rol en la comunidad:</strong> {{ usuario()?.rolNombre }}</p>
+            <p>
+              <strong>Estado actual:</strong>
+              <span class="status-badge" [class.online]="usuario()?.online" [class.offline]="!usuario()?.online">
                 {{ usuario()?.online ? '🟢 En línea' : '🔴 Desconectado' }}
               </span>
             </p>
-            <p><strong>Miembro desde:</strong> {{ usuario()?.usuarioFechaRegistro | date:'mediumDate' }}</p>
           </div>
         }
       </div>
-
 
       <div class="sidebar-right-column">
         <app-sidebar-search></app-sidebar-search>
@@ -124,7 +132,7 @@
       </div>
     </div>
   </div>
-</section>
+</div>
 
 @if (showEditPost && postToEdit) {
   <app-post-modal
