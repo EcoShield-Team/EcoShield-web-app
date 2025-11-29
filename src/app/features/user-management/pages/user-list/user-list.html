@@ -160,10 +160,12 @@
               <mat-icon>edit</mat-icon>
               <span>Editar</span>
             </button>
-            <button mat-menu-item (click)="onDeleteUser(user)">
-              <mat-icon color="warn">delete</mat-icon>
-              <span>Eliminar</span>
-            </button>
+            @if (user.usuarioId !== currentUserId) {
+              <button mat-menu-item (click)="onDeleteUser(user)">
+                <mat-icon color="warn">delete</mat-icon>
+                <span>Eliminar</span>
+              </button>
+            }
           </mat-menu>
         </td>
       </ng-container>

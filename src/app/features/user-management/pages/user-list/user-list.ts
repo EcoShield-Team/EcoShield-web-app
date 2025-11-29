@@ -14,6 +14,7 @@ import { DeleteConfirmModal } from '../../components/delete-confirm-modal/delete
 import { UserEditModal } from '../../components/user-edit-modal/user-edit-modal';
 import { DatePipe } from '@angular/common';
 import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
+import {Auth} from '../../../auth/services/auth';
 
 @Component({
   selector: 'app-user-list',
@@ -31,6 +32,7 @@ import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 export class UserList implements OnInit {
 
   private readonly userManegement = inject(UserManagement);
+  private readonly authService = inject(Auth);
   private readonly router = inject(Router);
   private readonly dialog = inject(MatDialog);
 
@@ -50,8 +52,10 @@ export class UserList implements OnInit {
   adminCount = 0;
   roles = Object.values(RolNombre);
   chartOptions: EChartsOption = {};
+  currentUserId: number | null = null;
 
   ngOnInit(): void {
+    this.currentUserId = this.authService.getUserId();
     this.loadUsers();
   }
 
@@ -153,6 +157,10 @@ export class UserList implements OnInit {
   }
 
   onDeleteUser(user: UsuarioResponse): void {
+    if (user.usuarioId === this.currentUserId) {
+      alert("No puedes eliminar tu propia cuenta.");
+      return;
+    }
     const dialogRef = this.dialog.open(DeleteConfirmModal, {
       width: '500px',
       data: {
@@ -169,6 +177,12 @@ export class UserList implements OnInit {
   }
 
   onChangeRole(user: UsuarioResponse & { newRolNombre?: RolNombre }, newRole: RolNombre): void {
+    if (user.usuarioId === this.currentUserId && user.rolNombre === RolNombre.ADMIN && newRole !== RolNombre.ADMIN) {
+      if(!confirm("Estás a punto de quitarte tus propios permisos de Administrador. ¿Estás seguro?")) {
+        this.loadUsers();
+        return;
+      }
+    }
     if (user.rolNombre === newRole) return;
 
     this.userManegement.asignarRol(user.usuarioId, newRole)
@@ -187,10 +201,15 @@ export class UserList implements OnInit {
             delete user.newRolNombre;
             this.dataSource._updateChangeSubscription();
             this.prepareChartData(this.allUsersCache);
+            if (updatedUser.usuarioId === this.currentUserId && updatedUser.rolNombre !== RolNombre.ADMIN) {
+              alert("Has cambiado tu rol correctamente. Como ya no eres Administrador, serás redirigido al inicio.");
+              this.router.navigate(['/comunidad']);
+            }
           }
         },
         error: (err) => {
           console.error('Error al cambiar rol:', err);
+          this.loadUsers();
         }
       });
   }
