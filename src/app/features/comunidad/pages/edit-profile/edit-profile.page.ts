@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
+import {Component, inject, OnInit, ViewChild} from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, FormGroup, FormGroupDirective } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {Auth} from '../../../auth/services/auth';
 import {UserManagement} from '../../../user-management/services/user-management';
@@ -20,6 +20,7 @@ export class EditProfilePage implements OnInit {
   private fb = inject(FormBuilder);
   private authService = inject(Auth);
   private userManagement = inject(UserManagement);
+  @ViewChild('securityFormDir') securityFormDir!: FormGroupDirective;
 
   activeTab: 'profile' | 'security' = 'profile';
   isLoading = true;
@@ -156,7 +157,11 @@ export class EditProfilePage implements OnInit {
     this.authService.changePassword(payload).subscribe({
       next: () => {
         this.isSaving = false;
-        this.securityForm.reset();
+        if (this.securityFormDir) {
+          this.securityFormDir.resetForm();
+        } else {
+          this.securityForm.reset();
+        }
 
         this.securityStatus = 'success';
         this.securityMessage = '¡Contraseña actualizada con éxito! Deberás iniciar sesión nuevamente.';
@@ -165,7 +170,6 @@ export class EditProfilePage implements OnInit {
       },
       error: (err) => {
         this.isSaving = false;
-        // MENSAJE DE ERROR GRANDE
         this.securityStatus = 'error';
         this.securityMessage = 'La contraseña actual es incorrecta. Inténtalo de nuevo.';
       }

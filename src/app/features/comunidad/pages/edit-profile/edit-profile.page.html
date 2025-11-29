@@ -25,7 +25,6 @@
     </aside>
 
     <main class="content-area">
-
       @if (isLoading) {
         <div class="spinner-center">
           <mat-spinner diameter="40"></mat-spinner>
@@ -119,8 +118,7 @@
               </div>
             }
 
-            <form [formGroup]="securityForm" (ngSubmit)="onChangePassword()" class="security-fields">
-
+            <form [formGroup]="securityForm" #securityFormDir="ngForm" (ngSubmit)="onChangePassword()" class="security-fields">
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Contraseña Actual</mat-label>
                 <input matInput [type]="hideCurrent ? 'password' : 'text'" formControlName="currentPassword">
