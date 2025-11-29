@@ -95,7 +95,7 @@
               <div class="actividad-item">
                 <p class="actividad-fecha" style="margin-top: 10px;">{{ c.fecha | date:'mediumDate' }}</p>
                 <p class="actividad-texto">
-                  Comentaste en <a [routerLink]="['/comunidad/post', c.postId]">esta publicación</a>:
+                  Este usuario comentó en <a [routerLink]="['/comunidad/post', c.postId]">esta publicación</a>:
                 </p>
                 <app-comment-card
                   [comment]="c"
