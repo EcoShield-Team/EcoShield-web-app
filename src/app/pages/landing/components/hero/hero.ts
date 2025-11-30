@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject, OnInit} from '@angular/core';
 import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 import {NgOptimizedImage} from '@angular/common';
 import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
+import {Router} from '@angular/router';
 gsap.registerPlugin(TextPlugin);
 
 @Component({
@@ -12,6 +13,8 @@ gsap.registerPlugin(TextPlugin);
   styleUrl: './hero.css',
 })
 export class Hero implements OnInit, AfterViewInit {
+
+  private router = inject(Router);
 
   constructor(private el: ElementRef) {
   }
@@ -70,7 +73,9 @@ export class Hero implements OnInit, AfterViewInit {
     }, "-=1.0");
   }
 
-  onFileSelected(event: any) {
-    console.log('Archivo seleccionado:', event.target.files[0]);
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+    this.router.navigate(['/auth'], { queryParams: { view: 'register' } });
   }
 }
