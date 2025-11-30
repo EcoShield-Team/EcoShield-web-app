@@ -11,4 +11,17 @@ import {CommonModule} from '@angular/common';
 export class ResultadoCard {
   @Input() data: DeteccionResponse | null = null;
   tab: string = 'sintomas';
+  showImageModal = false;
+  selectedImage: string | null = null;
+
+  openImage(url: string, event: Event) {
+    event.stopPropagation();
+    this.selectedImage = url;
+    this.showImageModal = true;
+  }
+
+  closeImage() {
+    this.showImageModal = false;
+    this.selectedImage = null;
+  }
 }

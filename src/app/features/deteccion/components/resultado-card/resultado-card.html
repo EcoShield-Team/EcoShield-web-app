@@ -3,7 +3,7 @@
     <div class="alerta">¡Problema detectado!</div>
 
     <div class="imagen-wrapper">
-      <img [src]="data.fotoUrl" alt="Cultivo analizado" class="imagen-cultivo" />
+      <img [src]="data.fotoUrl" alt="Cultivo analizado" class="imagen-cultivo" (click)="openImage(data.fotoUrl, $event)" />
     </div>
 
     <div class="contenido-wrapper">
@@ -28,5 +28,14 @@
         }
       </div>
     </div>
+
+    @if (showImageModal) {
+      <div class="image-modal" (click)="closeImage()">
+        <img [src]="selectedImage"
+             class="modal-img"
+             (click)="$event.stopPropagation()"  alt="captura de la deteccion"/>
+      </div>
+    }
+
   </div>
 }
