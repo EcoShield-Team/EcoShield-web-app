@@ -22,21 +22,7 @@ import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [
-    Header,
-    SidebarLeft,
-    PostCard,
-    SidebarSearch,
-    SidebarRecomendaciones,
-    SidebarTendencias,
-    LowerCasePipe,
-    DatePipe,
-    RouterLink,
-    CommentModal,
-    CommentCard,
-    PostModal,
-    MATERIAL_IMPORTS
-  ],
+  imports: [Header, SidebarLeft, PostCard, SidebarSearch, SidebarRecomendaciones, SidebarTendencias, LowerCasePipe, DatePipe, RouterLink, CommentModal, CommentCard, PostModal, MATERIAL_IMPORTS],
   templateUrl: './perfil.page.html',
   styleUrl: './perfil.page.css',
 })
