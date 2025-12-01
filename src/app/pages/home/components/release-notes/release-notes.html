@@ -1,16 +1,19 @@
 <section class="release-notes-section">
   <div class="release-notes-header">
-    <h2 class="section-title">Notas de lanzamiento del {{ releaseNotes().date }}</h2>
-    <span class="release-version-badge">{{ releaseNotes().version }}</span>
+    <h2 class="section-title">Notas de lanzamiento del {{ latestNote().date }}</h2>
+    <span class="release-version-badge">{{ latestNote().version }}</span>
   </div>
-  <p class="release-notes-description">{{ releaseNotes().description }}</p>
+
+  <p class="release-notes-description">{{ latestNote().description }}</p>
+
   <ul class="release-notes-list">
-    @for (item of releaseNotes().items; track item) {
+    @for (item of latestNote().items; track item) {
       <li>{{ item }}</li>
     }
   </ul>
+
   <div class="release-notes-footer">
-    <button mat-button class="realese-notes-view-all-button">
+    <button mat-button class="realese-notes-view-all-button" (click)="openAllNotes()">
       Ver todas las notas de lanzamiento <mat-icon>arrow_forward</mat-icon>
     </button>
   </div>

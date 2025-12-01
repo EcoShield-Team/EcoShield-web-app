@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Todas las notas de lanzamiento</h2>
+
+<div mat-dialog-content>
+  <div class="notes-container">
+    @for (note of notes; track note.version) {
+      <div class="note-card">
+        <div class="note-header">
+          <strong>{{ note.version }}</strong>
+          <span class="note-date">{{ note.date }}</span>
+        </div>
+
+        <p>{{ note.description }}</p>
+
+        <ul>
+          @for (item of note.items; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</div>
