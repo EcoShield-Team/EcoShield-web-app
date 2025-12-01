@@ -300,3 +300,9 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 1200px) {
+  .page-header h2{
+    font-size: 2rem;
+  }
+}

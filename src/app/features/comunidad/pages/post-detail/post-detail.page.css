@@ -77,3 +77,53 @@ app-sidebar-left {
 .author-link:hover {
   text-decoration: none;
 }
+
+@media (max-width: 1200px){
+
+  .page-title {
+    padding-left: 240px;
+  }
+
+  .content-layout {
+    grid-template-columns: 240px 1fr;
+    gap: 1.5rem;
+  }
+
+  .sidebar-right-column {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .comunidad-container {
+    padding: 1rem 0.5rem 5rem;
+  }
+
+  .page-title {
+    padding-left: 0;
+    text-align: left;
+    font-size: 1.5rem;
+  }
+
+  .sidebar-right-column {
+    display: none;
+  }
+
+  .content-layout {
+    grid-template-columns: 1fr;
+    padding-bottom: 4.5rem;
+  }
+
+  .post-detail-column {
+    padding-bottom: 4.5rem;
+  }
+
+  .comments-container {
+    padding: 1rem;
+  }
+
+  .post-detail-column .titulo {
+    font-size: 1.2rem;
+  }
+}
