@@ -186,8 +186,13 @@
   max-width: 90%;
 }
 
+@media (max-width: 1200px) {
+  .card-recomendaciones{
+    width: 560px;
+  }
+}
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .features-row-1 {
     grid-template-columns: 1fr;
   }
@@ -200,6 +205,20 @@
   }
   .book-image {
     left: 50%;
+    top: -14%;
+    width: 360px;
     transform: translateX(-50%);
+  }
+  .features-row-2 {
+    grid-template-columns: 1fr;
+  }
+  .card-historial{
+    width: 358px;
+  }
+  .card-recomendaciones{
+    width: 358px;
+  }
+  .card-content h1{
+    font-size: 2.5rem;
   }
 }

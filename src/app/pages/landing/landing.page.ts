@@ -12,18 +12,7 @@ import {Faq} from './components/faq/faq';
 
 @Component({
   selector: 'app-landing',
-  imports: [
-    Navbar,
-    Hero,
-    Testimonial,
-    TicketBar,
-    Features,
-    FeatureBar,
-    Cta,
-    Footer,
-    Team,
-    Faq
-  ],
+  imports: [Navbar, Hero, Testimonial, TicketBar, Features, FeatureBar, Cta, Footer, Team, Faq],
   templateUrl: './landing.page.html',
   styleUrl: './landing.page.css',
 })

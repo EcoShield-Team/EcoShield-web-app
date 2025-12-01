@@ -26,29 +26,46 @@ export class Testimonial implements OnInit, AfterViewInit {
   }
 
   initAnimations(): void {
-    const context = this.el.nativeElement;
-    const triggerEl = context.querySelector('.testimonial-grid');
+    const ctx = this.el.nativeElement;
+    const triggerEl = ctx.querySelector('.testimonial-grid');
 
-    gsap.to(context.querySelector('#plant-col-1'), {
-      y: -1500,
+    const col1 = ctx.querySelector('#plant-col-1');
+    const col2 = ctx.querySelector('#plant-col-2');
+
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth < 1200;
+
+    const move1 = isMobile ? -600 : isTablet ? -1200 : -1500;
+    const move2 = isMobile ? -200 : isTablet ? -650 : -500;
+
+    const start = "top bottom";
+    const end = "bottom top";
+
+    gsap.to(col1, {
+      y: move1,
       ease: "none",
       scrollTrigger: {
         trigger: triggerEl,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true
+        start,
+        end,
+        scrub: true,
+        invalidateOnRefresh: true
       }
     });
 
-    gsap.to(context.querySelector('#plant-col-2'), {
-      y: -500,
+    gsap.to(col2, {
+      y: move2,
       ease: "none",
       scrollTrigger: {
         trigger: triggerEl,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true
+        start,
+        end,
+        scrub: true,
+        invalidateOnRefresh: true
       }
     });
+
+    ScrollTrigger.refresh();
   }
+
 }
