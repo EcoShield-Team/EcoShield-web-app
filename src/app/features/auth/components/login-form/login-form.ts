@@ -8,9 +8,9 @@ import {
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { MATERIAL_IMPORTS } from '../../../../shared/material/material.imports';
 import { Auth } from '../../services/auth';
 import { LoginRequest } from '../../../../core/models/auth.model';
+import {MATERIAL_IMPORTS} from '../../../../shared/material/material.imports';
 
 @Component({
   selector: 'app-login-form',
@@ -22,7 +22,7 @@ import { LoginRequest } from '../../../../core/models/auth.model';
 export class LoginForm {
   @Output() navigateToRegister = new EventEmitter<void>();
   @Output() navigateToForgot = new EventEmitter<void>();
-  @Output() loginSuccess = new EventEmitter<void>(); // para el modal / auth page
+  @Output() loginSuccess = new EventEmitter<void>();
 
   loginForm = new FormGroup({
     email: new FormControl<string>('', {

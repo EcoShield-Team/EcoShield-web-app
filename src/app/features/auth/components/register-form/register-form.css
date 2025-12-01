@@ -2,24 +2,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 460px; /* 🔹 antes 400: tarjeta un poco más ancha */
+  width: 460px;
   max-width: calc(100vw - 40px);
   padding: 0;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Tarjeta blanca interna */
 .register-card {
   width: 100%;
-  padding: 26px 36px 28px; /* un pelín más de aire horizontal */
+  padding: 26px 36px 28px;
   border-radius: 24px;
   background-color: #ffffff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
 }
 
-/* Error arriba */
 .form-error-slot {
   width: 100%;
   max-width: 420px;
@@ -41,7 +39,6 @@
   text-align: center;
 }
 
-/* Header: logo + título */
 .form-header {
   display: flex;
   flex-direction: column;
@@ -77,14 +74,13 @@
   margin: 0;
 }
 
-/* Form */
 .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   width: 100%;
-  max-width: 420px; /* 🔹 más ancho que antes */
+  max-width: 420px;
 }
 
 .form-row {
@@ -156,7 +152,6 @@ mat-icon:hover {
   color: #1b5e20;
 }
 
-/* Botón */
 .form-submit-button {
   width: 100%;
   max-width: 280px;
@@ -184,7 +179,6 @@ mat-icon:hover {
   cursor: default;
 }
 
-/* Footer links - mismo estilo que "Reenviar código" */
 .form-footer-links {
   width: 100%;
   margin-top: 24px;
@@ -196,7 +190,6 @@ mat-icon:hover {
   text-align: center;
 }
 
-/* Texto base */
 .form-text-small {
   color: #444;
   font-size: 12px;
@@ -204,10 +197,9 @@ mat-icon:hover {
   max-width: 380px;
 }
 
-/* Enlaces animados */
 .form-text-small .form-link {
   position: relative;
-  display: inline-block;   /* 👈 importante para que el ::after se comporte bien */
+  display: inline-block;
   font-size: 12px;
   color: #2e7d32;
   text-decoration: none;
@@ -234,7 +226,6 @@ mat-icon:hover {
   width: 100%;
 }
 
-/* Responsivo */
 @media (max-width: 480px) {
   .form-text-small {
     font-size: 0.85rem;

@@ -4,7 +4,7 @@
   align-items: center;
   width: 380px;
   max-width: calc(100vw - 40px);
-  padding: 26px 36px 34px; /* 🔹 más aire vertical y horizontal */
+  padding: 26px 36px 34px;
   border-radius: 24px;
   background-color: #ffffff;
   box-sizing: border-box;
@@ -19,7 +19,6 @@
   }
 }
 
-/* Error arriba */
 .form-error-slot {
   width: 100%;
   height: 40px;
@@ -40,12 +39,11 @@
   text-align: center;
 }
 
-/* Logo + título */
 .form-logo-wrapper {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 16px; /* 🔹 antes 12px */
+  margin-bottom: 16px;
 }
 
 .form-logo-wrapper img {
@@ -60,12 +58,11 @@
   color: #2e7d32;
 }
 
-/* Título y subtítulo */
 .form-title {
   font-size: 1.3rem;
   font-weight: 700;
   color: #333;
-  margin: 12px 0 12px; /* 🔹 más espacio entre logo y subtítulo */
+  margin: 12px 0 12px;
   text-align: left;
   width: 100%;
 }
@@ -73,18 +70,17 @@
 .form-subtitle {
   font-size: 0.93rem;
   color: #666;
-  margin: 0 0 26px; /* 🔹 antes 14px */
+  margin: 0 0 26px;
   line-height: 1.55;
   text-align: left;
   width: 100%;
 }
 
-/* Form */
 .form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 22px; /* 🔹 separa campo y botón */
+  gap: 22px;
 }
 
 .full-width {
@@ -93,17 +89,16 @@
 
 button.btn {
   width: 100%;
-  margin-top: 10px; /* 🔹 más separación visual desde el input */
+  margin-top: 10px;
 }
 
-/* Footer links */
 .form-footer-links {
   width: 100%;
-  margin-top: 26px; /* 🔹 más aire antes del footer */
+  margin-top: 26px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px 12px; /* 🔹 espaciado más natural entre textos */
+  gap: 6px 12px;
   text-align: center;
 }
 

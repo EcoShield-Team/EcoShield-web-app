@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px; /* 🔹 un pelín más ancho que antes */
+  width: 400px;
   max-width: calc(100vw - 40px);
-  padding: 0; /* el padding lo maneja la tarjeta interna */
+  padding: 0;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -15,17 +15,15 @@
   }
 }
 
-/* Tarjeta blanca interna */
 .login-card {
   width: 100%;
-  padding: 26px 32px 28px; /* 🔹 un poco más de vertical, sin robar tanto horizontal */
+  padding: 26px 32px 28px;
   border-radius: 24px;
   background-color: #ffffff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
 }
 
-/* Error arriba */
 .form-error-slot {
   width: 100%;
   height: 40px;
@@ -52,7 +50,6 @@
   to { opacity: 1; }
 }
 
-/* Logo + título */
 .form-logo-wrapper {
   display: flex;
   align-items: center;
@@ -81,12 +78,11 @@
   text-align: center;
 }
 
-/* Form */
 .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px; /* 🔹 algo de separación vertical entre campos */
+  gap: 12px;
 }
 
 .form-input-field {
@@ -94,14 +90,12 @@
   max-width: 340px;
 }
 
-/* Deja que el mat-field use todo el ancho disponible */
 :host ::ng-deep .mat-mdc-form-field-infix {
   padding-top: 10px;
   padding-bottom: 10px;
-  width: 100%; /* 🔹 antes 300px, eso comprimía más el input */
+  width: 100%;
 }
 
-/* Botón */
 .form-submit-button {
   width: 100%;
   max-width: 280px;
@@ -128,7 +122,6 @@
   cursor: default;
 }
 
-/* Footer */
 .form-footer-links {
   display: flex;
   justify-content: space-between;

@@ -223,21 +223,14 @@ app-breadcrumb {
   font-size: 1.2rem;
 }
 
-
-
-
-
-/* --- Mejor alineación general --- */
-
 .detail-content-wrapper {
   display: flex;
   gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: flex-start; /* izquierda alineada con derecha */
+  align-items: flex-start;
 }
 
-/* --- Tarjetas relacionadas --- */
 
 .related-cards-grid {
   display: grid;
@@ -245,7 +238,6 @@ app-breadcrumb {
   gap: 15px;
 }
 
-/* Caja completa clickeable */
 .related-card {
   display: flex;
   flex-direction: column;
@@ -261,7 +253,6 @@ app-breadcrumb {
   box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
-/* Imagen */
 .related-card img {
   width: 100%;
   height: 80px;
@@ -269,7 +260,6 @@ app-breadcrumb {
   border-radius: 8px;
 }
 
-/* Nombre alineado, bonito */
 .related-name {
   margin-top: 8px;
   font-size: 0.85rem;
@@ -278,8 +268,6 @@ app-breadcrumb {
   color: #333;
   line-height: 1.2;
 }
-
-/* --- Ajustes columna izquierda --- */
 
 .left-column {
   flex-basis: 38%;
