@@ -9,90 +9,90 @@ import {environment} from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class AlmanaqueService {
-  private readonly apiUrl = `${environment.apiURl}/almanaque`;
+  private readonly apiURl = `${environment.apiURl}/almanaque`;
   private readonly http = inject(HttpClient);
 
   constructor() {}
 
 
   getEnfermedades(): Observable<EnfermedadList[]> {
-    return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades`);
+    return this.http.get<EnfermedadList[]>(`${this.apiURl}/enfermedades`);
   }
 
   getEnfermedadById(id: number): Observable<EnfermedadDetail> {
-    return this.http.get<EnfermedadDetail>(`${this.apiUrl}/enfermedades/${id}`);
+    return this.http.get<EnfermedadDetail>(`${this.apiURl}/enfermedades/${id}`);
   }
 
   getEnfermedadesRelacionadas(id: number): Observable<EnfermedadList[]> {
-    return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades/${id}/relacionadas`);
+    return this.http.get<EnfermedadList[]>(`${this.apiURl}/enfermedades/${id}/relacionadas`);
   }
 
   getEnfermedadesTipo(tipo: string): Observable<EnfermedadList[]> {
-    return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades/filtro/tipo`, {params: {tipo}});
+    return this.http.get<EnfermedadList[]>(`${this.apiURl}/enfermedades/filtro/tipo`, {params: {tipo}});
   }
 
   getEnfermedadesTemporada(temporada: string): Observable<EnfermedadList[]> {
-    return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades/filtro/temporada`, {
+    return this.http.get<EnfermedadList[]>(`${this.apiURl}/enfermedades/filtro/temporada`, {
       params: { temporada }
     });
   }
 
   getEnfermedadesSeveridad(severidad: string): Observable<EnfermedadList[]> {
-    return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades/filtro/severidad`, {
+    return this.http.get<EnfermedadList[]>(`${this.apiURl}/enfermedades/filtro/severidad`, {
       params: { severidad }
     });
   }
 
   getEnfermedadesPorNombre(nombre: string): Observable<EnfermedadList[]> {
-    return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades/buscar`, {
+    return this.http.get<EnfermedadList[]>(`${this.apiURl}/enfermedades/buscar`, {
       params: { nombre }
     });
   }
 
   getEnfermedadesOrdenadasASC():Observable<EnfermedadList[]> {
-    return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades/ordenadas/nombre-asc`);
+    return this.http.get<EnfermedadList[]>(`${this.apiURl}/enfermedades/ordenadas/nombre-asc`);
   }
 
   getEnfermedadesOrdenadasDESC():Observable<EnfermedadList[]> {
-    return this.http.get<EnfermedadList[]>(`${this.apiUrl}/enfermedades/ordenadas/nombre-desc`);
+    return this.http.get<EnfermedadList[]>(`${this.apiURl}/enfermedades/ordenadas/nombre-desc`);
   }
 
 
   getPlagas(): Observable<PlagaList[]> {
-    return this.http.get<PlagaList[]>(`${this.apiUrl}/plagas`);
+    return this.http.get<PlagaList[]>(`${this.apiURl}/plagas`);
   }
 
   getPlagaById(id: number): Observable<PlagaDetail> {
-    return this.http.get<PlagaDetail>(`${this.apiUrl}/plagas/${id}`);
+    return this.http.get<PlagaDetail>(`${this.apiURl}/plagas/${id}`);
   }
 
   getPlagasRelacionadas(id: number): Observable<PlagaList[]> {
-    return this.http.get<PlagaList[]>(`${this.apiUrl}/plagas/${id}/relacionadas`);
+    return this.http.get<PlagaList[]>(`${this.apiURl}/plagas/${id}/relacionadas`);
   }
 
   getPlagasTipo(tipo: string): Observable<PlagaList[]> {
-    return this.http.get<PlagaList[]>(`${this.apiUrl}/plagas/filtro/tipo`, {params: {tipo}});
+    return this.http.get<PlagaList[]>(`${this.apiURl}/plagas/filtro/tipo`, {params: {tipo}});
   }
 
   getPlagasTemporada(temporada: string): Observable<PlagaList[]> {
-    return this.http.get<PlagaList[]>(`${this.apiUrl}/plagas/filtro/temporada`, {params: {temporada}});
+    return this.http.get<PlagaList[]>(`${this.apiURl}/plagas/filtro/temporada`, {params: {temporada}});
   }
 
   getPlagasSeveridad(severidad: string): Observable<PlagaList[]> {
-    return this.http.get<PlagaList[]>(`${this.apiUrl}/plagas/filtro/severidad`, {params: {severidad}});
+    return this.http.get<PlagaList[]>(`${this.apiURl}/plagas/filtro/severidad`, {params: {severidad}});
   }
 
   getPlagasPorNombre(nombre: string): Observable<PlagaList[]> {
-    return this.http.get<PlagaList[]>(`${this.apiUrl}/plagas/buscar`, {
+    return this.http.get<PlagaList[]>(`${this.apiURl}/plagas/buscar`, {
       params: { nombre }
     });
   }
 
   getPlagasOrdenadasASC():Observable<PlagaList[]> {
-    return this.http.get<PlagaList[]>(`${this.apiUrl}/plagas/ordenadas/nombre-asc`);
+    return this.http.get<PlagaList[]>(`${this.apiURl}/plagas/ordenadas/nombre-asc`);
   }
 
   getPlagasOrdenadasDESC():Observable<PlagaList[]> {
-    return this.http.get<PlagaList[]>(`${this.apiUrl}/plagas/ordenadas/nombre-desc`);
+    return this.http.get<PlagaList[]>(`${this.apiURl}/plagas/ordenadas/nombre-desc`);
   }
 }

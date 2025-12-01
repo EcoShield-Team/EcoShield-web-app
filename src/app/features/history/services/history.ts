@@ -10,15 +10,15 @@ import { environment } from '../../../../environments/environment';
 })
 export class History {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiURl}/deteccion`;
+  private readonly apiURl = `${environment.apiURl}/deteccion`;
 
   constructor() {}
 
   getHistorial(): Observable<DeteccionResponse[]> {
-    return this.http.get<DeteccionResponse[]>(`${this.apiUrl}/historial`);
+    return this.http.get<DeteccionResponse[]>(`${this.apiURl}/historial`);
   }
 
   getById(id: number): Observable<DeteccionResponse> {
-    return this.http.get<DeteccionResponse>(`${this.apiUrl}/${id}`);
+    return this.http.get<DeteccionResponse>(`${this.apiURl}/${id}`);
   }
 }

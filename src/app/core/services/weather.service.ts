@@ -9,7 +9,7 @@ import { WeatherResponse } from '../models/weather.model';
   providedIn: 'root',
 })
 export class WeatherService {
-  private readonly apiUrl = `${environment.apiURl}/weather`;
+  private readonly apiURl = `${environment.apiURl}/weather`;
   private readonly http = inject(HttpClient);
 
   private cachedWeather = signal<WeatherResponse | null>(null);
@@ -27,11 +27,11 @@ export class WeatherService {
     let request$: Observable<WeatherResponse>;
 
     if (lat != null && lon != null) {
-      request$ = this.http.get<WeatherResponse>(`${this.apiUrl}`, {
+      request$ = this.http.get<WeatherResponse>(`${this.apiURl}`, {
         params: { lat, lon },
       });
     } else {
-      request$ = this.http.get<WeatherResponse>(`${this.apiUrl}`, {
+      request$ = this.http.get<WeatherResponse>(`${this.apiURl}`, {
         params: { city },
       });
     }
