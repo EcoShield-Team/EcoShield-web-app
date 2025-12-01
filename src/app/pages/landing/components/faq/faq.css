@@ -58,3 +58,15 @@
   line-height: 1.6;
   font-size: 1.05rem;
 }
+
+@media (max-width: 1200px) {
+  .faq-section {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq-section {
+    padding: 0;
+  }
+}

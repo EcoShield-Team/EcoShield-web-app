@@ -40,3 +40,30 @@
 .ticker-bar-container:hover .ticker-content {
   animation-play-state: paused;
 }
+
+@media (max-width: 1200px) {
+  .ticker-content span {
+    font-size: 2rem;
+    padding: 0 1.2rem;
+  }
+
+  .ticker-content {
+    animation: scroll-x 22s linear infinite;
+  }
+}
+
+@media (max-width: 768px) {
+  .ticker-bar-container {
+    padding: 0.8rem 0;
+  }
+
+  .ticker-content span {
+    font-size: 1.6rem;
+    padding: 0 1rem;
+  }
+
+  .ticker-content {
+    animation: scroll-x 20s linear infinite;
+  }
+}
+
