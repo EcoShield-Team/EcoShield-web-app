@@ -1,13 +1,13 @@
 <div class="comment-card">
 
   <div class="comment-header">
-    <a [routerLink]="['/perfil', comment.usuario.usuarioId]"
+    <a [routerLink]="['/comunidad/perfil', comment.usuario.usuarioId]"
        (click)="$event.stopPropagation()">
-      <img [src]="comment.usuario.usuarioFotoPerfil" alt="perfil" />
+      <img [src]="comment.usuario.usuarioFotoPerfil || '/assets/images/usuario/user_placeholder.jpg'" alt="perfil" />
     </a>
 
     <div class="comment-meta">
-      <a [routerLink]="['/perfil', comment.usuario.usuarioId]"
+      <a [routerLink]="['/comunidad/perfil', comment.usuario.usuarioId]"
          (click)="$event.stopPropagation()"
          class="comment-author">
         {{ comment.usuario.usuarioNombre }}
