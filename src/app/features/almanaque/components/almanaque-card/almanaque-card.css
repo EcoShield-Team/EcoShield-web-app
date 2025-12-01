@@ -62,3 +62,17 @@
   font-weight: 700;
   color: #333;
 }
+
+@media (max-width: 768px) {
+  .almanaque-card {
+    border-radius: 6px;
+  }
+
+  .card-image-container {
+    height: 100px;
+  }
+
+  .card-name {
+    font-size: 0.9rem;
+  }
+}

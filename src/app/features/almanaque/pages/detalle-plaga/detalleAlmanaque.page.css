@@ -282,3 +282,70 @@ app-breadcrumb {
   margin-top: 20px;
 }
 
+@media (max-width: 1200px) {
+
+  .detail-content-wrapper {
+    gap: 25px;
+  }
+
+  .related-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+
+  .detail-content-wrapper {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .left-column,
+  .right-column {
+    flex-basis: 100%;
+    min-width: unset;
+  }
+  .right-column{
+    margin-bottom: 20px;
+  }
+
+  .main-image-box {
+    margin-bottom: 15px;
+  }
+
+  .related-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .disease-title {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .scientific-name {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .tabs-navigation {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .tab-button {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+
+  .description-block {
+    padding: 15px;
+  }
+
+  .action-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

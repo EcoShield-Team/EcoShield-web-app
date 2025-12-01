@@ -113,3 +113,26 @@ hr {
 .reset-filters-button:hover {
   background-color: #5a8a3e;
 }
+
+@media (max-width: 768px) {
+
+  .filter-container {
+    min-width: 100%;
+    border-right: none;
+    padding: 0;
+  }
+
+  .filter-header {
+    padding: 12px 15px;
+  }
+
+  .filter-content {
+    padding: 0 15px;
+  }
+
+  .reset-button-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}
