@@ -44,10 +44,10 @@ Frontend oficial del ecosistema **EcoShield**, desarrollado en **Angular 20**, c
 - UI moderna con loaders y tarjetas
 
 ### 📝 Comunidad (Posts, Comentarios, Likes)
-- CRUD de posts con imagen  
+- CRUD de posts con imagenes
 - Likes y comentarios  
 - Perfiles y posts por usuario  
-- Buscador global con tabs: `destacados | recientes | personas`
+- Buscador global
 
 ### 📰 Blogs agrícolas
 - Noticias y tips  
@@ -75,7 +75,6 @@ Frontend oficial del ecosistema **EcoShield**, desarrollado en **Angular 20**, c
 | **Angular Material** | Componentes UI |
 | **RxJS** | Programación reactiva |
 | **REST API EcoShield** | Conexión con backend |
-| **Cloudinary** | Manejo de imágenes |
 | **Swagger API** | Referencia de endpoints |
 | **JWT Interceptor** | Seguridad en front |
 
@@ -111,7 +110,7 @@ src/
 El frontend consume la API desde:
 
 ```
-https://ecoshieldwebservice.onrender.com/api/v1
+http://localhost:8080
 ```
 
 Todos los requests usan:
@@ -147,7 +146,6 @@ Editar:
 
 ```
 src/environments/environment.ts
-src/environments/environment.prod.ts
 ```
 
 Con valores similares a:
@@ -155,9 +153,7 @@ Con valores similares a:
 ```ts
 export const environment = {
   production: false,
-  apiUrl: 'https://ecoshieldwebservice.onrender.com/api/v1',
-  cloudinaryUploadPreset: '<preset>',
-  cloudinaryCloudName: '<cloud_name>'
+  apiUrl: 'http://localhost:8080',
 };
 ```
 
