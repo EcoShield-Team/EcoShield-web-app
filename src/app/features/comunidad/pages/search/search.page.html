@@ -54,7 +54,7 @@
               @for (u of usuarios; track u.usuarioId) {
                 <div class="usuario-card">
                   <img
-                    [src]="u.usuarioFotoPerfil"
+                    [src]="u.usuarioFotoPerfil || '/assets/images/usuario/user_placeholder.jpg'"
                     class="avatar"
                     alt="foto_perfil"
                   />

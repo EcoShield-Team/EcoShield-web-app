@@ -14,13 +14,27 @@
 }
 
 .alerta {
-  background-color: #d32f2f;
-  color: white;
-  padding: 1rem;
-  font-weight: 600;
-  font-size: 1.25rem;
+  padding: 12px;
+  border-radius: 8px 8px 0 0;
+  font-weight: bold;
   text-align: center;
 }
+
+.alerta-problema {
+  background: #ffd4d4;
+  color: #a30000;
+}
+
+.alerta-sano {
+  background: #d8f8d8;
+  color: #0b6e0b;
+}
+
+.alerta-error {
+  background: #fff2c6;
+  color: #8a6d00;
+}
+
 
 .imagen-wrapper {
   width: 100%;

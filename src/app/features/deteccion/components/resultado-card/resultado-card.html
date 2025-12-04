@@ -1,6 +1,16 @@
 @if (data) {
   <div class="resultado-card">
-    <div class="alerta">¡Problema detectado!</div>
+    @if (estadoDeteccion === 'problema') {
+      <div class="alerta alerta-problema">¡Problema detectado!</div>
+    }
+
+    @if (estadoDeteccion === 'sano') {
+      <div class="alerta alerta-sano">Planta saludable</div>
+    }
+
+    @if (estadoDeteccion === 'error') {
+      <div class="alerta alerta-error">La imagen no corresponde a una planta</div>
+    }
 
     <div class="imagen-wrapper">
       <img [src]="data.fotoUrl" alt="Cultivo analizado" class="imagen-cultivo" (click)="openImage(data.fotoUrl, $event)" />
