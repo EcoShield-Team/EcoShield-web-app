@@ -51,8 +51,32 @@ export class TipDelDia implements OnInit {
   }
 
   compartir() {
-    console.log('Compartir Tip:', this.tipDelDia?.blogTitulo);
+    if (!this.tipDelDia) return;
+
+    const title = this.tipDelDia.blogTitulo;
+    const text = this.tipDelDia.blogDescripcion;
+
+    const url = `${window.location.origin}/recomendaciones/detalle/${this.tipDelDia.blogId}`;
+
+    if (navigator.share) {
+      navigator.share({
+        title,
+        text,
+        url
+      }).catch(err => {
+        console.warn('Error al compartir:', err);
+      });
+
+      return;
+    }
+
+    navigator.clipboard.writeText(url).then(() => {
+      alert('Enlace copiado al portapapeles');
+    }).catch(() => {
+      alert('No se pudo copiar el enlace');
+    });
   }
+
   guardar() {
     console.log('Guardar Tip:', this.tipDelDia?.blogTitulo);
   }

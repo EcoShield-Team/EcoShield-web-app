@@ -105,4 +105,28 @@ export class PostCard {
       }
     });
   }
+
+  sharePost(event: Event) {
+    event.stopPropagation();
+
+    const url = `${window.location.origin}/comunidad/post/${this.post.postId}`;
+    const title = this.post.postTitulo || 'Mira este post en EcoShield!';
+    const text = this.post.postDescripcion || 'Te comparto esta publicación.';
+
+    if (navigator.share) {
+      navigator.share({
+        title,
+        text,
+        url
+      }).catch(err => {
+        console.warn('Sharing failed:', err);
+      });
+      return;
+    }
+
+    navigator.clipboard.writeText(url).then(() => {
+      alert('Enlace copiado al portapapeles');
+    });
+  }
+
 }

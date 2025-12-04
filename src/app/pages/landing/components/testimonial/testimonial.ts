@@ -35,7 +35,7 @@ export class Testimonial implements OnInit, AfterViewInit {
     const isMobile = window.innerWidth < 768;
     const isTablet = window.innerWidth < 1200;
 
-    const move1 = isMobile ? -600 : isTablet ? -1200 : -1500;
+    const move1 = isMobile ? -350 : isTablet ? -1200 : -1500;
     const move2 = isMobile ? -200 : isTablet ? -650 : -500;
 
     const start = "top bottom";
