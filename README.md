@@ -75,7 +75,6 @@ Frontend oficial del ecosistema **EcoShield**, desarrollado en **Angular 20**, c
 | **Angular Material** | Componentes UI |
 | **RxJS** | Programación reactiva |
 | **REST API EcoShield** | Conexión con backend |
-| **Swagger API** | Referencia de endpoints |
 | **JWT Interceptor** | Seguridad en front |
 
 ---
